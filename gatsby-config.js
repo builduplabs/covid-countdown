@@ -1,13 +1,13 @@
-const resolveConfig = require("tailwindcss/resolveConfig");
-const tailwindConfig = require("./tailwind.config.js");
+const resolveConfig = require('tailwindcss/resolveConfig');
+const tailwindConfig = require('./tailwind.config.js');
 
 const fullConfig = resolveConfig(tailwindConfig);
 
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Starter Tailwind`,
-    description: `Gatsby starter styled with Tailwind`,
-    author: `@taylorbryant`,
+    title: `Covid Countdown`,
+    description: `Contador de Covid-19 Portugal`,
+    author: `COMON Group`,
   },
   plugins: [
     `gatsby-plugin-eslint`,
@@ -19,9 +19,9 @@ module.exports = {
         short_name: `starter`,
         start_url: `/`,
         background_color: fullConfig.theme.colors.white,
-        theme_color: fullConfig.theme.colors.teal["400"],
+        theme_color: fullConfig.theme.colors.gray['400'],
         display: `minimal-ui`,
-        icon: `src/images/tailwind-icon.png`,
+        // icon: `src/images/tailwind-icon.png`,
       },
     },
     {
@@ -36,6 +36,14 @@ module.exports = {
         ],
       },
     },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `data`,
+        path: `${__dirname}/src/data/`,
+      },
+    },
+    `gatsby-transformer-csv`,
     `gatsby-plugin-offline`,
   ],
 };

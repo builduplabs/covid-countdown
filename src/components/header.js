@@ -1,5 +1,5 @@
-import { graphql, useStaticQuery, Link } from "gatsby";
-import React, { useState } from "react";
+import { graphql, useStaticQuery, Link } from 'gatsby';
+import React, { useState } from 'react';
 
 function Header() {
   const [isExpanded, toggleExpansion] = useState(false);
@@ -14,19 +14,10 @@ function Header() {
   `);
 
   return (
-    <header className="bg-teal-700">
-      <div className="flex flex-wrap items-center justify-between max-w-4xl p-4 mx-auto md:p-8">
+    <header className="bg-gray-700">
+      <div className="flex flex-wrap items-center justify-between max-w-5xl p-2 mx-auto sm:py-6">
         <Link to="/">
           <h1 className="flex items-center text-white no-underline">
-            <svg
-              className="w-8 h-8 mr-2 fill-current"
-              height="54"
-              viewBox="0 0 54 54"
-              width="54"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M13.5 22.1c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05zM0 38.3c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05z" />
-            </svg>
             <span className="text-xl font-bold tracking-tight">
               {site.siteMetadata.title}
             </span>
@@ -34,7 +25,7 @@ function Header() {
         </Link>
 
         <button
-          className="flex items-center block px-3 py-2 text-white border border-white rounded md:hidden"
+          className="flex items-center block px-3 py-2 text-white border border-white rounded sm:hidden"
           onClick={() => toggleExpansion(!isExpanded)}
         >
           <svg
@@ -49,21 +40,21 @@ function Header() {
 
         <nav
           className={`${
-            isExpanded ? `block` : `hidden`
-          } md:block md:flex md:items-center w-full md:w-auto`}
+            isExpanded ? `block absolute mt-10 py-5 inset-x-0 top-0` : `hidden`
+          } bg-gray-700 px-3 sm:flex md:block md:flex md:items-center w-full sm:w-auto`}
         >
           {[
             {
               route: `/about`,
-              title: `About`,
+              title: `Sobre`,
             },
             {
-              route: `/contact`,
-              title: `Contact`,
+              route: `/graphs`,
+              title: `Gráficos`,
             },
           ].map((link) => (
             <Link
-              className="block mt-4 text-white no-underline md:inline-block md:mt-0 md:ml-6"
+              className="block mt-4 sm:mt-0 text-white no-underline md:inline-block md:mt-0 md:ml-6"
               key={link.title}
               to={link.route}
             >
