@@ -33,7 +33,7 @@ function Footer() {
         <p className="text-gray-400 hover:text-gray-100">
           <a
             className="font-bold no-underline text-xs"
-            href="https://github.com/taylorbryant/gatsby-starter-tailwind"
+            href="https://github.com/builduplabs/covid-countdown"
             target="_blank"
             rel="noopener noreferrer"
           >
