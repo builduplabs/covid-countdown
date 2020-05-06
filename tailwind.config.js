@@ -29,6 +29,22 @@ module.exports = {
       '7xl': '5rem',
       '8xl': '6rem',
     },
+    maxHeight: {
+      '0': '0',
+      '1/4': '25vh',
+      '1/2': '50vh',
+      '3/4': '75vh',
+      full: '100%',
+      screen: '100vh',
+    },
+    minHeight: {
+      '0': '0',
+      '1/4': '25vh',
+      '1/2': '50vh',
+      '3/4': '75vh',
+      full: '100%',
+      screen: '100vh',
+    },
   },
   variants: {},
   // https://github.com/tailwindcss/custom-forms

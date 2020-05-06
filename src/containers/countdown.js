@@ -4,22 +4,21 @@ import { StaticQuery, graphql } from 'gatsby';
 import moment from 'moment';
 import Countdown from '../components/countdown';
 
-const CountdownContainer = ({ data }) => {
-  const [state, setTimeLeft] = useState({
-    loading: true,
-    timeLeft: [],
-  });
+const CountdownContainer = ({ csvData }) => {
+  const [timeLeft, setTimeLeft] = useState([]);
+  const [endDate, setEndDate] = useState('');
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const {
-      allPrevisaoCovidPortugalCsv: { nodes },
-    } = data;
-    const { prevista } = nodes[0];
+      global: { entries },
+    } = csvData;
+    const { date } = entries[0];
+    const end = moment(date);
 
     const interval = setInterval(() => {
       setTimeLeft(() => {
         const now = moment();
-        const end = moment(prevista);
         const ended = now.isSameOrAfter(end);
 
         if (ended) {
@@ -59,26 +58,24 @@ const CountdownContainer = ({ data }) => {
           type: 'segundos',
         });
 
-        return {
-          loading: false,
-          timeLeft,
-        };
+        return timeLeft;
       });
     }, 1000);
+    setLoading(false);
+    setEndDate(moment(date).format('DD [de] MMMM [de] YYYY'));
 
     return () => clearInterval(interval);
-  }, [state]);
+  }, [timeLeft]);
 
-  const { loading, timeLeft } = state;
-  return <Countdown timeLeft={timeLeft} loading={loading} />;
+  return <Countdown timeLeft={timeLeft} loading={loading} endDate={endDate} />;
 };
 
 CountdownContainer.propTypes = {
-  data: PropTypes.shape({
-    allPrevisaoCovidPortugalCsv: PropTypes.shape({
-      nodes: PropTypes.arrayOf(
+  csvData: PropTypes.shape({
+    global: PropTypes.shape({
+      entries: PropTypes.arrayOf(
         PropTypes.shape({
-          prevista: PropTypes.string,
+          date: PropTypes.string,
         })
       ),
     }),
@@ -90,20 +87,18 @@ export default function Timer(props) {
     <StaticQuery
       query={graphql`
         query {
-          allPrevisaoCovidPortugalCsv(
+          global: allPredictionCsv(
             sort: { order: DESC, fields: Date }
+            filter: { Regions: { eq: "Portugal" } }
             limit: 1
           ) {
-            nodes {
-              ML
-              Country
-              Date
-              prevista
+            entries: nodes {
+              date: Predicion_Date
             }
           }
         }
       `}
-      render={(data) => <CountdownContainer data={data} {...props} />}
+      render={(data) => <CountdownContainer csvData={data} {...props} />}
     />
   );
 }

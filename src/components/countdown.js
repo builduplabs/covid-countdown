@@ -28,19 +28,27 @@ Block.propTypes = {
   type: PropTypes.string,
 };
 
-const Countdown = ({ loading, timeLeft }) => {
+const Countdown = ({ loading, timeLeft, endDate }) => {
   if (loading) return null;
 
   return (
-    <div className="w-full flex flex-col sm:flex-row md:flex-row lg:flex-row justify-center sm:justify-around items-start sm:items-center">
-      {timeLeft.map(({ type, value }) => (
-        <Block key={type} value={value} type={type} />
-      ))}
+    <div className="w-full flex flex-col h-full">
+      <div className="w-full flex flex-1 flex-col sm:flex-row md:flex-row lg:flex-row justify-center sm:justify-around items-start sm:items-end">
+        {timeLeft.map(({ type, value }) => (
+          <Block key={type} value={value} type={type} />
+        ))}
+      </div>
+      <div className="sm:w-full flex flex-1 items-center sm:items-start justify-center absolute sm:relative inset-y-0 sm:inset-auto right-0">
+        <div className="w-full flex flex-1 justify-end px-2 sm:px-8 py-12">
+          <p className="text-gray-600 text-xl">{endDate}</p>
+        </div>
+      </div>
     </div>
   );
 };
 
 Countdown.propTypes = {
+  endDate: PropTypes.string.isRequired,
   loading: PropTypes.bool.isRequired,
   timeLeft: PropTypes.arrayOf(PropTypes.shape({})),
 };

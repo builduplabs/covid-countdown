@@ -22,15 +22,15 @@ function Footer() {
 
   return (
     <footer className="bg-gray-700">
-      <nav className="flex justify-between max-w-5xl p-1 mx-auto text-sm">
-        <p className="flex text-gray-400 hover:text-gray-100 text-xs items-center">
+      <nav className="flex justify-between max-w-5xl py-6 px-12 mx-auto text-sm">
+        <div className="flex text-gray-400 text-xs items-center">
           Última atualização:
-          <p className="font-bold inline ml-1">
+          <div className="font-bold inline ml-1">
             {` ${moment(lastUpdateDate).format('HH:mm DD/MM')}`}
-          </p>
-        </p>
+          </div>
+        </div>
 
-        <p className="text-gray-400 hover:text-gray-100">
+        <p className="text-gray-400">
           <a
             className="font-bold no-underline text-xs"
             href="https://github.com/builduplabs/covid-countdown"
