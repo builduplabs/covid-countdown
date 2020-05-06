@@ -7,7 +7,7 @@ function Footer() {
     allFile: { edges },
   } = useStaticQuery(graphql`
     query {
-      allFile(filter: { name: { eq: "previsao_covid_portugal" } }) {
+      allFile(filter: { name: { eq: "prediction" } }) {
         edges {
           node {
             modifiedTime
