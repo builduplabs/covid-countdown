@@ -93,7 +93,7 @@ export default function Timer(props) {
             limit: 1
           ) {
             entries: nodes {
-              date: Predicion_Date
+              date: Prediction_Date
             }
           }
         }
