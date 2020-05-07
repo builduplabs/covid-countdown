@@ -78,6 +78,13 @@ const Graph = ({ loading, graphData, xAxisLegend, toggleLegend }) => {
             legendPosition: 'middle',
           }}
           enableGridX={false}
+          markers={[
+            {
+              axis: 'y',
+              value: 1,
+              lineStyle: { stroke: 'black', strokeWidth: 2 },
+            },
+          ]}
           legends={[
             {
               onClick: (d) => {
