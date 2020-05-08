@@ -47,7 +47,6 @@ const Graph = ({ loading, graphData, xAxisLegend, toggleLegend, maxValue }) => {
   if (loading || !graphData.length) return null;
 
   const mobile = window.innerWidth <= 640;
-  console.log('mobile: ', mobile);
   const legend = {
     anchor: mobile ? 'right' : 'top',
     direction: mobile ? 'column' : 'row',
@@ -55,8 +54,6 @@ const Graph = ({ loading, graphData, xAxisLegend, toggleLegend, maxValue }) => {
     translateX: mobile ? 70 : 0,
     itemHeight: mobile ? 35 : 20,
   };
-
-  console.log(legend);
 
   return (
     <div className="w-full flex-1 sm:h-screen flex flex-col h-full justify-center">
