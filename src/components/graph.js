@@ -61,7 +61,7 @@ const Graph = ({ loading, graphData, xAxisLegend, toggleLegend }) => {
           yScale={{
             type: 'linear',
             min: 0,
-            max: 4,
+            max: 6,
           }}
           enableSlices="x"
           sliceTooltip={Tooltip}

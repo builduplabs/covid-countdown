@@ -5,6 +5,8 @@ import Graph from '../components/graph';
 
 const INITIAL_FILTER = ['Portugal'];
 
+const reset = (data) => data.map(({ x }) => ({ x, y: null }));
+
 const GraphContainer = ({ csvData }) => {
   const [graph, setData] = useState({
     all: [],
@@ -25,7 +27,7 @@ const GraphContainer = ({ csvData }) => {
         if (shouldShow) {
           return { ...d };
         }
-        return { ...d, data: d.data.map(({ x }) => ({ x, y: null })) };
+        return { ...d, data: reset(d.data) };
       });
       return {
         ...graph,
@@ -38,21 +40,30 @@ const GraphContainer = ({ csvData }) => {
   useEffect(() => {
     const {
       data: { grouped },
+      dates: { values },
     } = csvData;
 
     const all = grouped.map(({ region, values }) => ({
       id: region,
-      data: values.map(({ r, date }) => ({ x: date, y: Number(r) || null })),
+      data: values.map(({ r, date }) => ({
+        x: date,
+        y: isNaN(r) ? null : Number(r).toFixed(2),
+      })),
     }));
 
-    const selected = all.filter(({ region }) =>
-      INITIAL_FILTER.indexOf(region !== -1)
-    );
+    const selected = all.map(({ id, data }) => {
+      if (INITIAL_FILTER.indexOf(id) !== -1) {
+        return { id, data };
+      }
+
+      return { id, data: reset(data) };
+    });
+
     const regions = INITIAL_FILTER;
 
-    const xAxisLegend = selected[0].data
-      .map(({ x }, index) => {
-        if (index % Math.floor(selected[0].data.length / 10) === 0) return x;
+    const xAxisLegend = values
+      .map(({ date }, index) => {
+        if (index % Math.floor(selected[0].data.length / 10) === 0) return date;
 
         return null;
       })
@@ -94,6 +105,13 @@ GraphContainer.propTypes = {
         })
       ),
     }),
+    dates: PropTypes.shape({
+      values: PropTypes.arrayOf(
+        PropTypes.shape({
+          date: PropTypes.string,
+        })
+      ),
+    }),
   }).isRequired,
 };
 
@@ -109,6 +127,14 @@ export default function GraphData(props) {
                 r: ML
                 date: Date(locale: "pt", formatString: "MMMM DD")
               }
+            }
+          }
+          dates: allPredictionCsv(
+            sort: { fields: Date, order: ASC }
+            filter: { Regions: { eq: "Portugal" } }
+          ) {
+            values: nodes {
+              date: Date(locale: "pt", formatString: "MMMM DD")
             }
           }
         }
