@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { StaticQuery, graphql } from 'gatsby';
 import Graph from '../components/graph';
 
+const INITIAL_FILTER = ['Portugal'];
+
 const GraphContainer = ({ csvData }) => {
   const [graph, setData] = useState({
     all: [],
@@ -35,17 +37,22 @@ const GraphContainer = ({ csvData }) => {
 
   useEffect(() => {
     const {
-      global: { entries: countryData },
-      regions: { entries: localData },
+      data: { grouped },
     } = csvData;
 
-    const selected = countryData;
-    const all = [...countryData, ...localData];
-    const regions = [countryData[0].id];
+    const all = grouped.map(({ region, values }) => ({
+      id: region,
+      data: values.map(({ r, date }) => ({ x: date, y: Number(r) || null })),
+    }));
 
-    const xAxisLegend = countryData[0].data
+    const selected = all.filter(({ region }) =>
+      INITIAL_FILTER.indexOf(region !== -1)
+    );
+    const regions = INITIAL_FILTER;
+
+    const xAxisLegend = selected[0].data
       .map(({ x }, index) => {
-        if (index % Math.floor(countryData[0].data.length / 10) === 0) return x;
+        if (index % Math.floor(selected[0].data.length / 10) === 0) return x;
 
         return null;
       })
@@ -74,27 +81,14 @@ const GraphContainer = ({ csvData }) => {
 
 GraphContainer.propTypes = {
   csvData: PropTypes.shape({
-    global: PropTypes.shape({
-      entries: PropTypes.arrayOf(
+    data: PropTypes.shape({
+      grouped: PropTypes.arrayOf(
         PropTypes.shape({
-          id: PropTypes.string,
-          data: PropTypes.arrayOf(
+          region: PropTypes.string,
+          values: PropTypes.arrayOf(
             PropTypes.shape({
-              x: PropTypes.string,
-              y: PropTypes.string,
-            })
-          ),
-        })
-      ),
-    }),
-    regions: PropTypes.shape({
-      entries: PropTypes.arrayOf(
-        PropTypes.shape({
-          id: PropTypes.string,
-          data: PropTypes.arrayOf(
-            PropTypes.shape({
-              x: PropTypes.string,
-              y: PropTypes.string,
+              r: PropTypes.string,
+              date: PropTypes.string,
             })
           ),
         })
@@ -108,27 +102,12 @@ export default function GraphData(props) {
     <StaticQuery
       query={graphql`
         query {
-          global: allPredictionCsv(
-            sort: { fields: Date, order: ASC }
-            filter: { Regions: { eq: "Portugal" } }
-          ) {
-            entries: group(field: Regions) {
-              id: fieldValue
-              data: nodes {
-                y: ML
-                x: Date(locale: "pt", formatString: "MMMM DD")
-              }
-            }
-          }
-          regions: allPredictionCsv(
-            sort: { fields: Date, order: ASC }
-            filter: { Regions: { ne: "Portugal" } }
-          ) {
-            entries: group(field: Regions) {
-              id: fieldValue
-              data: nodes {
-                y: ML
-                x: Date(locale: "pt", formatString: "MMMM DD")
+          data: allPredictionCsv(sort: { fields: Date, order: ASC }) {
+            grouped: group(field: Regions) {
+              region: fieldValue
+              values: nodes {
+                r: ML
+                date: Date(locale: "pt", formatString: "MMMM DD")
               }
             }
           }
