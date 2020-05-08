@@ -46,6 +46,18 @@ Tooltip.propTypes = {
 const Graph = ({ loading, graphData, xAxisLegend, toggleLegend, maxValue }) => {
   if (loading || !graphData.length) return null;
 
+  const mobile = window.innerWidth <= 640;
+  console.log('mobile: ', mobile);
+  const legend = {
+    anchor: mobile ? 'right' : 'top',
+    direction: mobile ? 'column' : 'row',
+    translateY: mobile ? 0 : -50,
+    translateX: mobile ? 70 : 0,
+    itemHeight: mobile ? 35 : 20,
+  };
+
+  console.log(legend);
+
   return (
     <div className="w-full flex-1 sm:h-screen flex flex-col h-full justify-center">
       <h2 className="flex w-full text-3xl text-gray-600 text-center px-4">
@@ -55,7 +67,12 @@ const Graph = ({ loading, graphData, xAxisLegend, toggleLegend, maxValue }) => {
         <ResponsiveLine
           colors={{ scheme: 'category10' }}
           data={graphData}
-          margin={{ top: 60, right: 10, bottom: 50, left: 50 }}
+          margin={{
+            top: mobile ? 50 : 60,
+            right: mobile ? 70 : 10,
+            bottom: 50,
+            left: 50,
+          }}
           axisTop={null}
           axisRight={null}
           yScale={{
@@ -95,15 +112,11 @@ const Graph = ({ loading, graphData, xAxisLegend, toggleLegend, maxValue }) => {
               onClick: (d) => {
                 toggleLegend(d.id);
               },
-              anchor: 'top',
-              direction: 'row',
+              ...legend,
               justify: false,
-              translateX: 0,
-              translateY: -50,
               itemsSpacing: 0,
               itemDirection: 'right-to-left',
-              itemWidth: 80,
-              itemHeight: 20,
+              itemWidth: 70,
               itemOpacity: 0.75,
               symbolSize: 12,
               symbolShape: 'circle',
