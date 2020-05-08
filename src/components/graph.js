@@ -2,14 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ResponsiveLine } from '@nivo/line';
 
-const COLORS = [
-  '#1A202C',
-  '#2D3748',
-  '#4A5568',
-  '#718096',
-  '#A0AEC0',
-  '#CBD5E0',
-];
+// const COLORS = [
+//   '#1A202C',
+//   '#2D3748',
+//   '#4A5568',
+//   '#718096',
+//   '#A0AEC0',
+//   '#CBD5E0',
+// ];
 
 const Tooltip = ({ slice }) => {
   const { points } = slice;
@@ -43,7 +43,7 @@ Tooltip.propTypes = {
   }).isRequired,
 };
 
-const Graph = ({ loading, graphData, xAxisLegend, toggleLegend }) => {
+const Graph = ({ loading, graphData, xAxisLegend, toggleLegend, maxValue }) => {
   if (loading || !graphData.length) return null;
 
   return (
@@ -53,7 +53,7 @@ const Graph = ({ loading, graphData, xAxisLegend, toggleLegend }) => {
       </h2>
       <div className="w-full flex h-px min-h-1/2 max-h-1/2 sm:max-h-3/4">
         <ResponsiveLine
-          colors={COLORS}
+          colors={{ scheme: 'category10' }}
           data={graphData}
           margin={{ top: 60, right: 10, bottom: 50, left: 50 }}
           axisTop={null}
@@ -61,7 +61,7 @@ const Graph = ({ loading, graphData, xAxisLegend, toggleLegend }) => {
           yScale={{
             type: 'linear',
             min: 0,
-            max: 6,
+            max: maxValue,
           }}
           enableSlices="x"
           sliceTooltip={Tooltip}
@@ -118,6 +118,7 @@ const Graph = ({ loading, graphData, xAxisLegend, toggleLegend }) => {
 Graph.defaultProps = {
   graphData: [],
   xAxisLegend: [],
+  maxValue: 5,
 };
 
 Graph.propTypes = {
@@ -125,6 +126,7 @@ Graph.propTypes = {
   xAxisLegend: PropTypes.arrayOf(PropTypes.string),
   graphData: PropTypes.arrayOf(PropTypes.shape({})),
   loading: PropTypes.bool.isRequired,
+  maxValue: PropTypes.number,
 };
 
 export default Graph;
