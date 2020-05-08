@@ -58,6 +58,11 @@ const Graph = ({ loading, graphData, xAxisLegend, toggleLegend }) => {
           margin={{ top: 60, right: 10, bottom: 50, left: 50 }}
           axisTop={null}
           axisRight={null}
+          yScale={{
+            type: 'linear',
+            min: 0,
+            max: 4,
+          }}
           enableSlices="x"
           sliceTooltip={Tooltip}
           useMesh
