@@ -60,8 +60,10 @@ const CountdownContainer = ({ csvData }) => {
 
         return timeLeft;
       });
+      if (loading) {
+        setLoading(false);
+      }
     }, 1000);
-    setLoading(false);
     setEndDate(moment(date).format('DD [de] MMMM [de] YYYY'));
 
     return () => clearInterval(interval);

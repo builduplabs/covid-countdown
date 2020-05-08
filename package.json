@@ -6,6 +6,7 @@
   "dependencies": {
     "@nivo/bar": "^0.61.1",
     "@nivo/line": "^0.61.1",
+    "animate.css": "^4.0.0",
     "gatsby": "2.21.7",
     "gatsby-plugin-manifest": "2.4.1",
     "gatsby-plugin-offline": "3.2.0",

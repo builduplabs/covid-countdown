@@ -1,6 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import 'moment/locale/pt';
+import 'animate.css';
 
 import Layout from '../components/layout';
 import SEO from '../components/seo';

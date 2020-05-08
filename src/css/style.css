@@ -3,3 +3,7 @@
 @tailwind components;
 /*! purgecss end ignore */
 @tailwind utilities;
+
+:root {
+  --animate-delay: 0.5s !important;
+}
