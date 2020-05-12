@@ -9,7 +9,10 @@ import Countdown from '../containers/countdown';
 
 function Share() {
   moment.locale('pt');
-  const urlParams = new URLSearchParams(window.location.search);
+  let urlParams = null;
+  if (typeof window !== 'undefined') {
+    urlParams = new URLSearchParams(window.location.search);
+  }
   const color = urlParams.get('color') || 'gray';
   const background = urlParams.get('bg') || 'white';
   const urlTitle = urlParams.get('title') || null;
