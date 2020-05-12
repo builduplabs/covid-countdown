@@ -10,13 +10,17 @@ import Countdown from '../containers/countdown';
 function Share() {
   moment.locale('pt');
   let urlParams = null;
+  let color = null;
+  let background = null;
+  let urlTitle = null;
+  let title = 'Covid Countdown';
   if (typeof window !== 'undefined') {
     urlParams = new URLSearchParams(window.location.search);
+    color = urlParams.get('color') || 'gray';
+    background = urlParams.get('bg') || 'white';
+    urlTitle = urlParams.get('title') || null;
+    title = urlTitle ? `Covid Countdown | ${urlTitle}` : 'Covid Countdown';
   }
-  const color = urlParams.get('color') || 'gray';
-  const background = urlParams.get('bg') || 'white';
-  const urlTitle = urlParams.get('title') || null;
-  const title = urlTitle ? `Covid Countdown | ${urlTitle}` : 'Covid Countdown';
   return (
     <Layout share color={color} background={background}>
       <SEO
