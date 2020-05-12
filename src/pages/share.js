@@ -33,7 +33,6 @@ class Share extends Component {
 
   render() {
     const { color, background, title, urlTitle } = this.state;
-    console.log(this.state);
 
     return (
       <Layout key={title} share color={color} background={background}>
