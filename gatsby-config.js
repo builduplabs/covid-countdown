@@ -27,7 +27,6 @@ module.exports = {
     {
       resolve: `gatsby-plugin-postcss`,
       options: {
-        whitelist: ['bg-*', 'text-*'],
         postCssPlugins: [
           require(`tailwindcss`)(tailwindConfig),
           require(`autoprefixer`),
