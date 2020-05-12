@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import { StaticQuery, graphql } from 'gatsby';
 import moment from 'moment';
 import Countdown from '../components/countdown';
+import Share from '../components/share';
 
-const CountdownContainer = ({ csvData, title, color }) => {
+const CountdownContainer = ({ csvData, title, color, share }) => {
   const [timeLeft, setTimeLeft] = useState([]);
   const [endDate, setEndDate] = useState('');
   const [loading, setLoading] = useState(true);
@@ -69,6 +70,19 @@ const CountdownContainer = ({ csvData, title, color }) => {
     return () => clearInterval(interval);
   }, [timeLeft]);
 
+  if (share) {
+    return (
+      <Share
+        title={title}
+        color={color}
+        animate
+        timeLeft={timeLeft}
+        loading={loading}
+        endDate={endDate}
+      />
+    );
+  }
+
   return (
     <Countdown
       title={title}
@@ -82,10 +96,12 @@ const CountdownContainer = ({ csvData, title, color }) => {
 };
 
 CountdownContainer.defaultProps = {
+  share: false,
   color: 'gray',
 };
 
 CountdownContainer.propTypes = {
+  share: PropTypes.bool,
   title: PropTypes.string,
   color: PropTypes.string,
   csvData: PropTypes.shape({

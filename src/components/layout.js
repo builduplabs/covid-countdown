@@ -11,30 +11,39 @@ function Layout({ children, share, color, background }) {
   const backgroundColor =
     INDIVIDUAL_COLORS.indexOf(background) !== -1
       ? `bg-${background}`
-      : `bg-${background}-200`;
+      : `bg-${background}-500`;
+  const textColor =
+    INDIVIDUAL_COLORS.indexOf(color) !== -1
+      ? `text-${color}`
+      : `text-${color}-700`;
   return (
     <div
       className={`flex flex-col min-h-screen font-sans text-gray-900 ${backgroundColor}`}
     >
       {/* <Header /> */}
 
-      <main className="flex flex-1 flex-col w-full h-full max-w-5xl px-4 mx-auto md:px-8">
+      <main
+        className={`flex flex-1 flex-col w-full h-full max-w-5xl mx-auto md:px-8 ${
+          !share && 'px-4'
+        }`}
+      >
         {children}
       </main>
 
-      {share ? <MinimalFooter color={color} /> : <Footer />}
+      {share ? <MinimalFooter color={textColor} /> : <Footer />}
     </div>
   );
 }
 
 Layout.defaultProps = {
+  share: false,
   background: 'white',
 };
 
 Layout.propTypes = {
   background: PropTypes.string,
   color: PropTypes.string,
-  share: PropTypes.bool.isRequired,
+  share: PropTypes.bool,
   children: PropTypes.node.isRequired,
 };
 

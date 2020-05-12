@@ -41,7 +41,7 @@ class Share extends Component {
           keywords={[`gatsby`, `tailwind`, `react`, `tailwindcss`]}
         />
         <div className="h-screen w-full flex flex-col justify-center">
-          <Countdown key={title} title={urlTitle} color={color} />
+          <Countdown key={title} title={urlTitle} color={color} share />
         </div>
       </Layout>
     );

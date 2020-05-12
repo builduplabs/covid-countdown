@@ -24,16 +24,19 @@ function Footer({ color }) {
   return (
     <footer className="absolute inset-x-0 bottom-0">
       <nav className="flex justify-between max-w-5xl py-2 px-2 mx-auto text-sm">
-        <div className={`flex text-${color}-700 text-xs items-center`}>
+        <div
+          style={{ fontSize: 'min(2.5vw, 4vh, 12px)' }}
+          className={`flex ${color} items-center`}
+        >
           Atualização:
           <div className="font-bold inline ml-1">
             {` ${moment(lastUpdateDate).format('HH:mm DD/MM')}`}
           </div>
         </div>
 
-        <p className={`text-${color}-700`}>
+        <p style={{ fontSize: 'min(2.5vw, 4vh, 12px)' }} className={`${color}`}>
           <a
-            className="font-bold no-underline text-xs"
+            className={`font-bold no-underline`}
             href="https://github.com/builduplabs/covid-countdown"
             target="_blank"
             rel="noopener noreferrer"
