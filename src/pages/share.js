@@ -36,13 +36,13 @@ class Share extends Component {
     console.log(this.state);
 
     return (
-      <Layout share color={color} background={background}>
+      <Layout key={title} share color={color} background={background}>
         <SEO
           title={title}
           keywords={[`gatsby`, `tailwind`, `react`, `tailwindcss`]}
         />
         <div className="h-screen w-full flex flex-col justify-center">
-          <Countdown title={urlTitle} color={color} />
+          <Countdown key={title} title={urlTitle} color={color} />
         </div>
       </Layout>
     );
