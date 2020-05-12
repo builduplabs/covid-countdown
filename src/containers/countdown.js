@@ -4,7 +4,7 @@ import { StaticQuery, graphql } from 'gatsby';
 import moment from 'moment';
 import Countdown from '../components/countdown';
 
-const CountdownContainer = ({ csvData }) => {
+const CountdownContainer = ({ csvData, title, color }) => {
   const [timeLeft, setTimeLeft] = useState([]);
   const [endDate, setEndDate] = useState('');
   const [loading, setLoading] = useState(true);
@@ -69,10 +69,25 @@ const CountdownContainer = ({ csvData }) => {
     return () => clearInterval(interval);
   }, [timeLeft]);
 
-  return <Countdown timeLeft={timeLeft} loading={loading} endDate={endDate} />;
+  return (
+    <Countdown
+      title={title}
+      color={color}
+      animate
+      timeLeft={timeLeft}
+      loading={loading}
+      endDate={endDate}
+    />
+  );
+};
+
+CountdownContainer.defaultProps = {
+  color: 'gray',
 };
 
 CountdownContainer.propTypes = {
+  title: PropTypes.string,
+  color: PropTypes.string,
   csvData: PropTypes.shape({
     global: PropTypes.shape({
       entries: PropTypes.arrayOf(
@@ -91,7 +106,7 @@ export default function Timer(props) {
         query {
           global: allPredictionCsv(
             sort: { order: DESC, fields: Date }
-            filter: { Regions: { eq: "Portugal" } }
+            filter: { Region: { eq: "Portugal" }, Prediction_Date: { nin: "" } }
             limit: 1
           ) {
             entries: nodes {

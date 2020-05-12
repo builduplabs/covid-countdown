@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Helmet } from 'react-helmet';
 
-function SEO({ description, lang, meta, keywords }) {
+function SEO({ description, lang, meta, keywords, title }) {
   const { site } = useStaticQuery(graphql`
     query DefaultSEOQuery {
       site {
@@ -17,6 +17,7 @@ function SEO({ description, lang, meta, keywords }) {
   `);
 
   const metaDescription = description || site.siteMetadata.description;
+  const metaTitle = title || site.siteMetadata.title;
 
   return (
     <Helmet
@@ -30,7 +31,7 @@ function SEO({ description, lang, meta, keywords }) {
         },
         {
           property: `og:title`,
-          content: site.siteMetadata.title,
+          content: metaTitle,
         },
         {
           property: `og:description`,
@@ -50,7 +51,7 @@ function SEO({ description, lang, meta, keywords }) {
         },
         {
           name: `twitter:title`,
-          content: site.siteMetadata.title,
+          content: metaTitle,
         },
         {
           name: `twitter:description`,
@@ -66,8 +67,8 @@ function SEO({ description, lang, meta, keywords }) {
             : []
         )
         .concat(meta)}
-      title={site.siteMetadata.title}
-      titleTemplate={site.siteMetadata.title}
+      title={metaTitle}
+      titleTemplate={metaTitle}
     />
   );
 }

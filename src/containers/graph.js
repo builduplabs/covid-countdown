@@ -121,7 +121,7 @@ export default function GraphData(props) {
       query={graphql`
         query {
           data: allPredictionCsv(sort: { fields: Date, order: ASC }) {
-            grouped: group(field: Regions) {
+            grouped: group(field: Region) {
               region: fieldValue
               values: nodes {
                 r: ML
@@ -131,7 +131,7 @@ export default function GraphData(props) {
           }
           dates: allPredictionCsv(
             sort: { fields: Date, order: ASC }
-            filter: { Regions: { eq: "Portugal" } }
+            filter: { Region: { eq: "Portugal" } }
           ) {
             values: nodes {
               date: Date(locale: "pt", formatString: "MMMM DD")
