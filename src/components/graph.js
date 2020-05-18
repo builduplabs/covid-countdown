@@ -46,27 +46,25 @@ Tooltip.propTypes = {
 const Graph = ({ loading, graphData, xAxisLegend, toggleLegend, maxValue }) => {
   if (loading || !graphData.length) return null;
 
-  const mobile = window.innerWidth <= 640;
+  // const mobile = window.innerWidth <= 640;
+  const mobile = true;
   const legend = {
     anchor: mobile ? 'right' : 'top',
     direction: mobile ? 'column' : 'row',
     translateY: mobile ? 0 : -50,
-    translateX: mobile ? 70 : 0,
+    translateX: mobile ? 80 : 0,
     itemHeight: mobile ? 35 : 20,
   };
 
   return (
     <div className="w-full flex-1 sm:h-screen flex flex-col h-full justify-center">
-      <h2 className="flex w-full text-3xl text-gray-600 text-center px-4">
-        Evolução Rt
-      </h2>
       <div className="w-full flex h-px min-h-1/2 max-h-1/2 sm:max-h-3/4">
         <ResponsiveLine
           colors={{ scheme: 'category10' }}
           data={graphData}
           margin={{
             top: mobile ? 50 : 60,
-            right: mobile ? 70 : 10,
+            right: mobile ? 80 : 10,
             bottom: 50,
             left: 50,
           }}
