@@ -1,9 +1,54 @@
 /*! purgecss start ignore */
 @tailwind base;
 @tailwind components;
+
+@font-face {
+  font-family: 'SpaceGrotesk';
+  src: local('SpaceGrotesk'),
+    url(./fonts/SpaceGrotesk-Regular.otf) format('opentype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'SpaceGrotesk';
+  src: local('SpaceGrotesk'),
+    url(./fonts/SpaceGrotesk-Light.otf) format('opentype');
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'SpaceGrotesk';
+  src: local('SpaceGrotesk'),
+    url(./fonts/SpaceGrotesk-Bold.otf) format('opentype');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'SpaceGrotesk';
+  src: local('SpaceGrotesk'),
+    url(./fonts/SpaceGrotesk-SemiBold.otf) format('opentype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'SpaceGrotesk';
+  src: local('SpaceGrotesk'),
+    url(./fonts/SpaceGrotesk-Medium.otf) format('opentype');
+  font-weight: 600;
+  font-style: normal;
+}
+
 /*! purgecss end ignore */
 @tailwind utilities;
 
 :root {
   --animate-delay: 0.5s !important;
+}
+
+body {
+  transition: filter 1s;
 }

@@ -9,7 +9,7 @@ import Countdown from '../containers/countdown';
 
 class Share extends Component {
   state = {
-    color: 'gray',
+    color: 'black',
     background: 'white',
     title: '',
     urlTitle: 'Covid Countdown',
@@ -20,7 +20,7 @@ class Share extends Component {
 
     if (typeof window !== 'undefined') {
       const urlParams = new URLSearchParams(window.location.search);
-      const color = urlParams.get('color') || 'gray';
+      const color = urlParams.get('color') || 'black';
       const background = urlParams.get('bg') || 'white';
       const urlTitle = urlParams.get('title') || null;
       const title = urlTitle

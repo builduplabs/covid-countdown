@@ -18,7 +18,7 @@ function Layout({ children, share, color, background }) {
       : `text-${color}-700`;
   return (
     <div
-      className={`flex flex-col min-h-screen font-sans text-gray-900 ${backgroundColor}`}
+      className={`flex flex-col min-h-screen font-grotesk text-gray-900 ${backgroundColor}`}
     >
       {/* <Header /> */}
 

@@ -97,7 +97,7 @@ const CountdownContainer = ({ csvData, title, color, share }) => {
 
 CountdownContainer.defaultProps = {
   share: false,
-  color: 'gray',
+  color: 'black',
 };
 
 CountdownContainer.propTypes = {
