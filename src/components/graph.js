@@ -17,15 +17,15 @@ const Tooltip = ({ slice }) => {
   return (
     <div className="bg-white p-2 border">
       <div className="text-sm text-center">{date}</div>
-      {date === 'Maio 04' && (
+      {(date === 'Maio 04' || date === 'maio 04') && (
         <div className="text-xs font-bold mb-2 text-center">
           1ª fase de desconfinamento
         </div>
       )}
-      {date === 'Maio 07' && (
+      {(date === 'Maio 07' || date === 'maio 07') && (
         <div className="text-xs font-bold mb-2 text-center">Data baseline</div>
       )}
-      {date === 'Maio 18' && (
+      {(date === 'Maio 18' || date === 'maio 18') && (
         <div className="text-xs font-bold mb-2 text-center">
           2ª fase de desconfinamento
         </div>
@@ -114,6 +114,21 @@ const Graph = ({ loading, graphData, xAxisLegend, toggleLegend, maxValue }) => {
               axis: 'y',
               value: 1,
               lineStyle: { stroke: 'black', strokeWidth: 2 },
+            },
+            {
+              axis: 'x',
+              value: 'maio 04',
+              lineStyle: { stroke: 'black', strokeWidth: 1 },
+            },
+            {
+              axis: 'x',
+              value: 'maio 07',
+              lineStyle: { stroke: '#bdbdbd', strokeWidth: 1 },
+            },
+            {
+              axis: 'x',
+              value: 'maio 18',
+              lineStyle: { stroke: 'black', strokeWidth: 1 },
             },
             {
               axis: 'x',
