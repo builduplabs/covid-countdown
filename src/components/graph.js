@@ -13,9 +13,23 @@ import { ResponsiveLine } from '@nivo/line';
 
 const Tooltip = ({ slice }) => {
   const { points } = slice;
+  const date = points[0].data.x;
   return (
     <div className="bg-white p-2 border">
-      <div className="text-sm mb-2 text-center">{points[0].data.x}</div>
+      <div className="text-sm text-center">{date}</div>
+      {date === 'Maio 04' && (
+        <div className="text-xs font-bold mb-2 text-center">
+          1ª fase de desconfinamento
+        </div>
+      )}
+      {date === 'Maio 07' && (
+        <div className="text-xs font-bold mb-2 text-center">Data baseline</div>
+      )}
+      {date === 'Maio 18' && (
+        <div className="text-xs font-bold mb-2 text-center">
+          2ª fase de desconfinamento
+        </div>
+      )}
       {slice.points.map((point) => (
         <div
           key={point.id}
@@ -100,6 +114,21 @@ const Graph = ({ loading, graphData, xAxisLegend, toggleLegend, maxValue }) => {
               axis: 'y',
               value: 1,
               lineStyle: { stroke: 'black', strokeWidth: 2 },
+            },
+            {
+              axis: 'x',
+              value: 'Maio 04',
+              lineStyle: { stroke: 'black', strokeWidth: 1 },
+            },
+            {
+              axis: 'x',
+              value: 'Maio 07',
+              lineStyle: { stroke: '#bdbdbd', strokeWidth: 1 },
+            },
+            {
+              axis: 'x',
+              value: 'Maio 18',
+              lineStyle: { stroke: 'black', strokeWidth: 1 },
             },
           ]}
           legends={[
