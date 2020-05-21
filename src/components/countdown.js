@@ -82,7 +82,7 @@ const Countdown = ({
         ))}
       </div>
       <div className="sm:w-full flex flex-1 items-end xs:items-center sm:items-start justify-center absolute sm:relative inset-y-0 sm:inset-auto right-0">
-        <div className="w-full max-w-vw60 sm:max-w-full flex flex-1 justify-end sm:px-8 py-12 flex-col sm:flex-row">
+        <div className="w-full max-w-vw60 sm:max-w-full flex flex-1 justify-end sm:px-8 py-16 flex-col sm:flex-row">
           {title && (
             <h1
               className={`block sm:hidden text-4xl text-${color}-600 text-right animate__fadeIn animate__delay-${
