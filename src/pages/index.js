@@ -57,11 +57,11 @@ function IndexPage() {
     <Layout>
       <SEO />
       {/* <ModeToggle /> */}
-      <div className="absolute right-0 sm:right-auto w-3/4 sm:w-full text-right sm:text-center p-4 sm:left-0">
+      <div className="absolute xxs:pt-32 right-0 sm:right-auto w-3/4 sm:w-full text-right sm:text-center p-4 sm:left-0">
         <h1 className="animate__animated animate__fadeIn animate__delay-5s text-3xl xs:text-4xl uppercase font-bold sm:text-6xl text-accent-blue">
           Covid Countdown
         </h1>
-        <h2 className="text-base hidden xs:block xs:text-xl sm:text-2xl animate__animated animate__fadeIn animate__delay-5s">
+        <h2 className="text-base hidden xxs:block xs:text-xl sm:text-2xl animate__animated animate__fadeIn animate__delay-5s">
           Quanto tempo falta para isto acabar?
         </h2>
       </div>
@@ -250,8 +250,8 @@ function IndexPage() {
           </li>
           <li className="text-xs text-grey-dark pr-4 py-1">
             Por cada variação do Rt, a data de regresso é ajustada, de forma
-            positiva ou negativa, por cada variação do Rt, sendo que por cada
-            0,01 que o valor do Rt aumenta ou diminui, a data varia 5h.
+            positiva ou negativa, sendo que por cada 0,01 que o valor aumenta ou
+            diminui, a data varia 5h.
           </li>
         </ul>
         <h2 className="text-sm font-bold font-black text-left pt-3 px-1 sm:px-4">

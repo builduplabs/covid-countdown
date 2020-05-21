@@ -82,7 +82,7 @@ const Countdown = ({
         ))}
       </div>
       <div className="sm:w-full flex flex-1 items-end xs:items-center sm:items-start justify-center absolute sm:relative inset-y-0 sm:inset-auto right-0">
-        <div className="w-full max-w-vw60 sm:max-w-full flex flex-1 justify-end sm:px-8 py-16 pb-12 flex-col sm:flex-row">
+        <div className="w-full max-w-vw60 xxs:max-w-vw70 sm:max-w-full flex flex-1 justify-end sm:px-8 pb-8 xxs:py-16 xxs:pb-20 flex-col sm:flex-row">
           {title && (
             <h1
               className={`block sm:hidden text-4xl text-${color}-600 text-right animate__fadeIn animate__delay-${
@@ -104,13 +104,13 @@ const Countdown = ({
               <p className="text-sm w-full">
                 O que vais fazer quando este dia chegar?
               </p>
-              <p className="text-sm w-full pb-1">
+              <p className="text-sm w-full pb-3">
                 Personaliza o contador com o teu objetivo pós-pandemia e
                 partilha-o.
               </p>
               <button
                 onClick={() => setShowModal(true)}
-                className="text-xs focus:outline-none w-auto border border-black bg-accent-blue text-white hover:border-white hover:text-white hover:bg-black py-1 px-3"
+                className="text-sm focus:outline-none w-auto border border-black bg-accent-blue text-white hover:border-white hover:text-white hover:bg-black py-1 px-3"
               >
                 Personalizar Contador
               </button>
