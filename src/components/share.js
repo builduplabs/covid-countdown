@@ -57,7 +57,7 @@ const Iframe = ({ animate, loading, timeLeft, endDate, title, color }) => {
         animate && 'animate__animated'
       }`}
     >
-      {title && (
+      {title ? (
         <div className="flex w-full flex-1 justify-around items-end">
           <h1
             style={{ fontSize: 'min(7vw, 12vh, 55px)' }}
@@ -66,6 +66,8 @@ const Iframe = ({ animate, loading, timeLeft, endDate, title, color }) => {
             {title}
           </h1>
         </div>
+      ) : (
+        <div className="flex w-full flex-1" />
       )}
       <div
         className={`w-full flex flex-row justify-around items-end ${

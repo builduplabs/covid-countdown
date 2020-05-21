@@ -55,13 +55,13 @@ function IndexPage() {
   moment.locale('pt');
   return (
     <Layout>
-      <SEO keywords={[`gatsby`, `tailwind`, `react`, `tailwindcss`]} />
+      <SEO />
       {/* <ModeToggle /> */}
       <div className="absolute right-0 sm:right-auto w-3/4 sm:w-full text-right sm:text-center p-4 sm:left-0">
-        <h1 className="animate__animated animate__fadeIn animate__delay-5s text-4xl uppercase font-bold sm:text-6xl text-accent-blue">
+        <h1 className="animate__animated animate__fadeIn animate__delay-5s text-3xl xs:text-4xl uppercase font-bold sm:text-6xl text-accent-blue">
           Covid Countdown
         </h1>
-        <h2 className="text-lg sm:text-2xl animate__animated animate__fadeIn animate__delay-5s">
+        <h2 className="text-base hidden xs:block xs:text-xl sm:text-2xl animate__animated animate__fadeIn animate__delay-5s">
           Quanto tempo falta para isto acabar?
         </h2>
       </div>
@@ -255,29 +255,38 @@ function IndexPage() {
           </li>
         </ul>
         <h2 className="text-sm font-bold font-black text-left pt-3 px-1 sm:px-4">
-          Transparência e contribuições:{' '}
-          <span className="font-normal text-xs">
-            (links para repositórios, notebook, csv, etc)
-          </span>
+          Ficheiros de dados
         </h2>
         <ul className="list-disc ml-6 sm:ml-12 pb-8">
           <li className="text-xs text-grey-dark pr-4 py-1">
-            Proident esse quis eu qui aliquip non pariatur id aute incididunt.
-            Laboris dolor eiusmod ullamco quis. Consequat occaecat in aliquip
-            voluptate nulla reprehenderit.
+            <a
+              className="underline"
+              href="https://github.com/builduplabs/covid-countdown/blob/master/src/data/notebook.ipynb"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Jupyter Notebook
+            </a>
           </li>
           <li className="text-xs text-grey-dark pr-4 py-1">
-            Velit tempor ut sit elit eiusmod dolor Lorem anim velit proident
-            nisi reprehenderit. Dolor adipisicing qui incididunt laborum eu elit
-            ut non laborum ullamco amet mollit commodo ea. Proident labore
-            consequat enim nisi et duis et commodo pariatur.
+            <a
+              className="underline"
+              href="https://github.com/builduplabs/covid-countdown/blob/master/src/data/cases.csv"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              CSV com número de casos por região
+            </a>
           </li>
           <li className="text-xs text-grey-dark pr-4 py-1">
-            Veniam amet sit proident magna velit exercitation anim id in dolor
-            quis adipisicing. Elit do sint aliquip ut enim veniam magna quis
-            labore cupidatat nulla consequat irure. Pariatur excepteur eu dolore
-            mollit eu amet officia Lorem. Amet consectetur consectetur ullamco
-            qui aliquip ad cupidatat occaecat.
+            <a
+              className="underline"
+              href="https://github.com/builduplabs/covid-countdown/blob/master/src/data/prediction.csv"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              CSV com Rt por região
+            </a>
           </li>
         </ul>
       </div>

@@ -82,7 +82,7 @@ const Countdown = ({
         ))}
       </div>
       <div className="sm:w-full flex flex-1 items-end xs:items-center sm:items-start justify-center absolute sm:relative inset-y-0 sm:inset-auto right-0">
-        <div className="w-full max-w-vw60 sm:max-w-full flex flex-1 justify-end sm:px-8 py-16 flex-col sm:flex-row">
+        <div className="w-full max-w-vw60 sm:max-w-full flex flex-1 justify-end sm:px-8 py-16 pb-8 flex-col sm:flex-row">
           {title && (
             <h1
               className={`block sm:hidden text-4xl text-${color}-600 text-right animate__fadeIn animate__delay-${
@@ -100,6 +100,21 @@ const Countdown = ({
             Com base nos dados oficiais de hoje, calculamos que o fim das
             medidas de distanciamento físico e social acontecerá no dia{' '}
             <span className="font-bold">{endDate}</span>
+            <div className="xs:hidden mt-4 flex-col items-center flex-none text-right">
+              <p className="text-sm w-full">
+                O que vais fazer quando este dia chegar?
+              </p>
+              <p className="text-sm w-full pb-1">
+                Personaliza o contador com o teu objetivo pós-pandemia e
+                partilha-o.
+              </p>
+              <button
+                onClick={() => setShowModal(true)}
+                className="text-xs focus:outline-none w-auto border border-black bg-accent-blue text-white hover:border-white hover:text-white hover:bg-black py-1 px-3"
+              >
+                Personalizar Contador
+              </button>
+            </div>
           </p>
         </div>
         <div className="hidden absolute inset-x-0 bottom-0 pb-8 xs:flex sm:hidden flex-col items-center flex-none text-right">
@@ -117,7 +132,11 @@ const Countdown = ({
           </button>
         </div>
       </div>
-      <div className="hidden absolute inset-x-0 bottom-0 pb-8 sm:flex flex-col items-center flex-none">
+      <div
+        className={`hidden absolute inset-x-0 bottom-0 pb-8 sm:flex flex-col items-center flex-none animate__fadeIn animate__delay-${
+          SEQUENCE ? timeLeft.length - 1 : 1
+        }s ${animate && 'animate__animated'}`}
+      >
         <p className="text-lg">O que vais fazer quando este dia chegar?</p>
         <p className="text-lg pb-4">
           Personaliza o contador com o teu objetivo pós-pandemia e partilha-o.
