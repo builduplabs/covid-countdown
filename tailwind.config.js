@@ -62,6 +62,8 @@ module.exports = {
       full: '100%',
       vw75: '75vw',
       vw70: '70vw',
+      vw65: '65vw',
+      vw60: '60vw',
     },
     maxHeight: {
       '0': '0',

@@ -37,7 +37,15 @@ Block.propTypes = {
   animate: PropTypes.bool,
 };
 
-const Countdown = ({ animate, loading, timeLeft, endDate, title, color }) => {
+const Countdown = ({
+  animate,
+  loading,
+  timeLeft,
+  endDate,
+  title,
+  color,
+  setShowModal,
+}) => {
   if (loading) return null;
 
   return (
@@ -74,10 +82,10 @@ const Countdown = ({ animate, loading, timeLeft, endDate, title, color }) => {
         ))}
       </div>
       <div className="sm:w-full flex flex-1 items-end xs:items-center sm:items-start justify-center absolute sm:relative inset-y-0 sm:inset-auto right-0">
-        <div className="w-full max-w-vw70 flex flex-1 justify-end px-2 sm:px-8 py-2 sm:py-12 flex-col sm:flex-row">
+        <div className="w-full max-w-vw60 sm:max-w-full flex flex-1 justify-end sm:px-8 py-12 flex-col sm:flex-row">
           {title && (
             <h1
-              className={`block sm:hidden text-4xl text-${color}-600 text-center text-right animate__fadeIn animate__delay-${
+              className={`block sm:hidden text-4xl text-${color}-600 text-right animate__fadeIn animate__delay-${
                 SEQUENCE ? timeLeft.length - 1 : 1
               }s ${animate && 'animate__animated'}`}
             >
@@ -85,7 +93,7 @@ const Countdown = ({ animate, loading, timeLeft, endDate, title, color }) => {
             </h1>
           )}
           <p
-            className={`text-${color}-600 text-lg xs:text-xl text-right md:text-center animate__fadeIn animate__delay-${
+            className={`text-${color}-600 text-base xs:text-xl text-right sm:text-center animate__fadeIn animate__delay-${
               SEQUENCE ? timeLeft.length - 1 : 1
             }s ${animate && 'animate__animated'}`}
           >
@@ -102,7 +110,7 @@ const Countdown = ({ animate, loading, timeLeft, endDate, title, color }) => {
             Personaliza o contador com o teu objetivo pós-pandemia e partilha-o.
           </p>
           <button
-            onClick={() => {}}
+            onClick={() => setShowModal(true)}
             className="focus:outline-none w-full sm:w-auto border border-black bg-accent-blue text-white hover:border-white hover:text-white hover:bg-black py-1 px-12"
           >
             Personalizar Contador
@@ -115,7 +123,7 @@ const Countdown = ({ animate, loading, timeLeft, endDate, title, color }) => {
           Personaliza o contador com o teu objetivo pós-pandemia e partilha-o.
         </p>
         <button
-          onClick={() => {}}
+          onClick={() => setShowModal(true)}
           className="focus:outline-none w-full sm:w-auto border border-black bg-accent-blue text-white hover:border-white hover:text-white hover:bg-black py-1 px-12"
         >
           Personalizar Contador
@@ -131,6 +139,7 @@ Countdown.propTypes = {
   endDate: PropTypes.string.isRequired,
   loading: PropTypes.bool.isRequired,
   animate: PropTypes.bool.isRequired,
+  setShowModal: PropTypes.func.isRequired,
   timeLeft: PropTypes.arrayOf(PropTypes.shape({})),
 };
 

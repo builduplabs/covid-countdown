@@ -22,7 +22,7 @@ function Footer() {
 
   return (
     <footer className="bg-black">
-      <nav className="flex justify-between max-w-5xl py-6 px-12 mx-auto text-sm">
+      <nav className="flex justify-between max-w-5xl py-3 sm:py-6 px-4 sm:px-12 mx-auto text-sm">
         <div className="flex text-white text-xs items-center">
           Última atualização:
           <div className="font-bold inline ml-1">

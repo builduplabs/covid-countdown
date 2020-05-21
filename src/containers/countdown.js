@@ -5,7 +5,7 @@ import moment from 'moment';
 import Countdown from '../components/countdown';
 import Share from '../components/share';
 
-const CountdownContainer = ({ csvData, title, color, share }) => {
+const CountdownContainer = ({ csvData, title, color, share, setShowModal }) => {
   const [timeLeft, setTimeLeft] = useState([]);
   const [endDate, setEndDate] = useState('');
   const [loading, setLoading] = useState(true);
@@ -85,6 +85,7 @@ const CountdownContainer = ({ csvData, title, color, share }) => {
 
   return (
     <Countdown
+      setShowModal={setShowModal}
       title={title}
       color={color}
       animate
@@ -104,6 +105,7 @@ CountdownContainer.propTypes = {
   share: PropTypes.bool,
   title: PropTypes.string,
   color: PropTypes.string,
+  setShowModal: PropTypes.func.isRequired,
   csvData: PropTypes.shape({
     global: PropTypes.shape({
       entries: PropTypes.arrayOf(
