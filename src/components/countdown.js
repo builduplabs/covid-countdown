@@ -42,7 +42,7 @@ const Countdown = ({ animate, loading, timeLeft, endDate, title, color }) => {
 
   return (
     <div
-      className={`w-full flex flex-col h-full animate__fadeIn ${
+      className={`relative w-full flex flex-col h-full animate__fadeIn ${
         animate && 'animate__animated'
       }`}
     >
@@ -73,8 +73,8 @@ const Countdown = ({ animate, loading, timeLeft, endDate, title, color }) => {
           />
         ))}
       </div>
-      <div className="sm:w-full flex flex-1 items-center sm:items-start justify-center absolute sm:relative inset-y-0 sm:inset-auto right-0">
-        <div className="w-full max-w-vw75 flex flex-1 justify-end px-2 sm:px-8 py-12 flex-col sm:flex-row">
+      <div className="sm:w-full flex flex-1 items-end xs:items-center sm:items-start justify-center absolute sm:relative inset-y-0 sm:inset-auto right-0">
+        <div className="w-full max-w-vw70 flex flex-1 justify-end px-2 sm:px-8 py-2 sm:py-12 flex-col sm:flex-row">
           {title && (
             <h1
               className={`block sm:hidden text-4xl text-${color}-600 text-center text-right animate__fadeIn animate__delay-${
@@ -85,13 +85,41 @@ const Countdown = ({ animate, loading, timeLeft, endDate, title, color }) => {
             </h1>
           )}
           <p
-            className={`text-${color}-600 text-xl text-right animate__fadeIn animate__delay-${
+            className={`text-${color}-600 text-lg xs:text-xl text-right md:text-center animate__fadeIn animate__delay-${
               SEQUENCE ? timeLeft.length - 1 : 1
             }s ${animate && 'animate__animated'}`}
           >
-            {endDate}
+            Com base nos dados oficiais de hoje, calculamos que o fim das
+            medidas de distanciamento físico e social acontecerá no dia{' '}
+            <span className="font-bold">{endDate}</span>
           </p>
         </div>
+        <div className="hidden absolute inset-x-0 bottom-0 pb-8 xs:flex sm:hidden flex-col items-center flex-none text-right">
+          <p className="w-full text-lg">
+            O que vais fazer quando este dia chegar?
+          </p>
+          <p className="w-full text-lg pb-4">
+            Personaliza o contador com o teu objetivo pós-pandemia e partilha-o.
+          </p>
+          <button
+            onClick={() => {}}
+            className="focus:outline-none w-full sm:w-auto border border-black bg-accent-blue text-white hover:border-white hover:text-white hover:bg-black py-1 px-12"
+          >
+            Personalizar Contador
+          </button>
+        </div>
+      </div>
+      <div className="hidden absolute inset-x-0 bottom-0 pb-8 sm:flex flex-col items-center flex-none">
+        <p className="text-lg">O que vais fazer quando este dia chegar?</p>
+        <p className="text-lg pb-4">
+          Personaliza o contador com o teu objetivo pós-pandemia e partilha-o.
+        </p>
+        <button
+          onClick={() => {}}
+          className="focus:outline-none w-full sm:w-auto border border-black bg-accent-blue text-white hover:border-white hover:text-white hover:bg-black py-1 px-12"
+        >
+          Personalizar Contador
+        </button>
       </div>
     </div>
   );

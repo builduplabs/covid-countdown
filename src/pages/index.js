@@ -58,11 +58,11 @@ function IndexPage() {
       <SEO keywords={[`gatsby`, `tailwind`, `react`, `tailwindcss`]} />
       {/* <ModeToggle /> */}
       <div className="absolute right-0 sm:right-auto w-3/4 sm:w-full text-right sm:text-center p-4 sm:left-0">
-        <h1 className="animate__animated animate__fadeIn animate__delay-5s text-2xl uppercase font-bold sm:text-3xl">
+        <h1 className="animate__animated animate__fadeIn animate__delay-5s text-4xl uppercase font-bold sm:text-6xl text-accent-blue">
           Covid Countdown
         </h1>
-        <h2 className="text-sm sm:text-base animate__animated animate__fadeIn animate__delay-5s">
-          Esta pandemia tem os dias contados
+        <h2 className="text-lg sm:text-2xl animate__animated animate__fadeIn animate__delay-5s">
+          Quanto tempo falta para isto acabar?
         </h2>
       </div>
       <div className="h-screen w-full flex flex-col justify-center">
@@ -70,7 +70,7 @@ function IndexPage() {
       </div>
       <div className="w-full flex flex-col justify-center py-16">
         <h2 className="text-3xl font-black text-center py-2 pb-8 px-1 sm:px-4">
-          Quantos dias faltam para estarmos juntos outra vez?
+          Esta pandemia tem os dias contados
         </h2>
         <p className="text-sm text-grey-dark text-justify px-1 sm:px-4 py-1">
           Há uma pergunta que todos temos na cabeça:{' '}
