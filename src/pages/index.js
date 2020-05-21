@@ -27,9 +27,9 @@ const COLORS = [
 
 const buildUrl = (title, color, bg) => {
   if (typeof window === 'undefined')
-    return 'https://covid-countdown.netlify.app/share/';
+    return 'https://covidcountdown.today/share/';
 
-  const url = new URL('https://covid-countdown.netlify.app/share/');
+  const url = new URL('https://covidcountdown.today/share/');
 
   if (title) {
     url.searchParams.append('title', title);

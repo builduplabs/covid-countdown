@@ -8,6 +8,8 @@ module.exports = {
     title: `Covid Countdown`,
     description: `Contador de Covid-19 Portugal`,
     author: `COMON Group`,
+    siteUrl: `https://covidcountdown.today/`,
+    siteImg: `https://covidcountdown.today/images/share_img.jpeg`,
   },
   plugins: [
     `gatsby-plugin-eslint`,
@@ -21,7 +23,7 @@ module.exports = {
         background_color: fullConfig.theme.colors.white,
         theme_color: fullConfig.theme.colors.gray['400'],
         display: `minimal-ui`,
-        // icon: `src/images/tailwind-icon.png`,
+        icon: `src/images/favicon.png`,
       },
     },
     {
