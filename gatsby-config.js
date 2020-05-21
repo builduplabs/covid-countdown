@@ -5,8 +5,8 @@ const fullConfig = resolveConfig(tailwindConfig);
 
 module.exports = {
   siteMetadata: {
-    title: `Covid Countdown`,
-    description: `Contador de Covid-19 Portugal`,
+    title: `Covid Countdown - Esta pandemia tem os dias contados`,
+    description: `Um contador para o fim do distanciamento social, que todos dias recalcula a data do fim das medidas, com base em diversas fontes de dados oficiais. Todos os dias teremos uma nova previsão de quanto tempo falta para podermos voltar a vibrar num estádio de futebol, gritar num concerto ou dançar numa discoteca.`,
     author: `COMON Group`,
     siteUrl: `https://covidcountdown.today/`,
     siteImg: `https://covidcountdown.today/images/share_img.jpeg`,
