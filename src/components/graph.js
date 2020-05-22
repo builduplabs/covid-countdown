@@ -60,28 +60,50 @@ Tooltip.propTypes = {
 const Graph = ({ loading, graphData, xAxisLegend, toggleLegend, maxValue }) => {
   if (loading || !graphData.length) return null;
 
-  // const mobile = window.innerWidth <= 640;
-  const mobile = true;
+  const mobile = window.innerWidth <= 640;
   const legend = {
-    anchor: mobile ? 'right' : 'top',
-    direction: mobile ? 'column' : 'row',
-    translateY: mobile ? 0 : -50,
-    translateX: mobile ? 80 : 0,
-    itemHeight: mobile ? 35 : 20,
+    anchor: 'right',
+    direction: 'column',
+    translateY: 0,
+    translateX: mobile ? 60 : 80,
+    itemHeight: 25,
+    itemWidth: mobile ? 45 : 50,
+    // anchor: mobile ? 'right' : 'top',
+    // direction: mobile ? 'column' : 'row',
+    // translateY: mobile ? 0 : -50,
+    // translateX: mobile ? 55 : 0,
+    // itemHeight: mobile ? 25 : 30,
+    // itemWidth: mobile ? 50 : 70,
   };
+  const margin = {
+    top: 40,
+    right: mobile ? 60 : 80,
+    bottom: mobile ? 50 : 80,
+    left: mobile ? 40 : 50,
+    // top: mobile ? 50 : 60,
+    // right: mobile ? 55 : 10,
+    // bottom: 50,
+    // left: mobile ? 35 : 50,
+  };
+  const fontSize = mobile ? 8 : 12;
 
   return (
     <div className="w-full flex-1 sm:h-screen flex flex-col h-full justify-center">
-      <div className="w-full flex h-px min-h-1/2 max-h-1/2 sm:max-h-3/4">
+      <div className="w-full flex h-px min-h-1/2 landscape:min-h-3/4 max-h-1/2 sm:max-h-3/4">
         <ResponsiveLine
           colors={{ scheme: 'category10' }}
-          data={graphData}
-          margin={{
-            top: mobile ? 50 : 60,
-            right: mobile ? 80 : 10,
-            bottom: 50,
-            left: 50,
+          theme={{
+            fontSize,
+            axis: {
+              legend: {
+                text: {
+                  fontSize,
+                },
+              },
+            },
           }}
+          data={graphData}
+          margin={margin}
           axisTop={null}
           axisRight={null}
           yScale={{
@@ -105,7 +127,7 @@ const Graph = ({ loading, graphData, xAxisLegend, toggleLegend, maxValue }) => {
             tickSize: 0,
             tickPadding: 10,
             legend: 'Rt',
-            legendOffset: -40,
+            legendOffset: mobile ? -30 : -40,
             legendPosition: 'middle',
           }}
           enableGridX={false}
@@ -151,14 +173,13 @@ const Graph = ({ loading, graphData, xAxisLegend, toggleLegend, maxValue }) => {
               onClick: (d) => {
                 toggleLegend(d.id);
               },
-              ...legend,
               justify: false,
               itemsSpacing: 0,
               itemDirection: 'right-to-left',
-              itemWidth: 70,
               itemOpacity: 0.75,
-              symbolSize: 12,
+              symbolSize: 10,
               symbolShape: 'circle',
+              ...legend,
             },
           ]}
         />

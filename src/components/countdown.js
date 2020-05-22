@@ -17,11 +17,11 @@ const Block = ({ value, type, index, animate, color }) => {
 
   return (
     <div
-      className={`text-${color}-700 py-4 sm:py-2 sm:flex-1 flex sm:items-center flex-col animate__fadeIn animate__delay-${
+      className={`text-${color}-700 py-4 sm:py-2 landscape:py-0 sm:flex-1 flex sm:items-center flex-col animate__fadeIn animate__delay-${
         SEQUENCE ? index : 1
       }s ${animate && 'animate__animated'}`}
     >
-      <p className="leading-10 sm:leading-none text-4xl xxs:text-5xl xs:text-5.5xl sm:text-6xl md:text-7xl lg:text-8xl font-black">
+      <p className="leading-10 sm:leading-none text-4xl xxs:text-5xl xs:text-5.5xl landscape:text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black">
         {addZero(value)}
       </p>
       <p className="text-sm">{name}</p>
@@ -51,17 +51,19 @@ const Countdown = ({
   return (
     <div className="relative w-full flex flex-col h-full">
       <div
-        className={`w-full max-w-vw65 xxs:max-w-vw70 text-right sm:text-center justify-center flex flex-col flex-1 absolute right-0 xxs:mt-16 sm:mt-auto sm:relative sm:max-w-none animate__fadeIn animate__delay-${
+        className={`w-full max-w-vw65 xxs:max-w-vw70 text-right sm:text-center justify-center flex flex-col flex-1 absolute right-0 xxs:mt-16 landscape:mt-2 sm:mt-auto sm:relative sm:max-w-none animate__fadeIn animate__delay-${
           SEQUENCE ? timeLeft.length - 1 : 1
         }s ${animate && 'animate__animated'}`}
       >
-        <h1 className="text-3xl xs:text-4xl sm:text-6xl uppercase font-bold text-accent-blue">
+        <h1 className="text-3xl xs:text-4xl sm:text-6xl landscape:text-3xl uppercase font-bold text-accent-blue">
           Covid Countdown
         </h1>
         {title ? (
-          <h2 className="text-base xs:text-xl sm:text-2xl">{title}</h2>
+          <h2 className="text-base xs:text-xl landscape:text-lg sm:text-2xl">
+            {title}
+          </h2>
         ) : (
-          <h2 className="text-base xs:text-xl sm:text-2xl">
+          <h2 className="text-base xs:text-xl landscape:text-lg sm:text-2xl">
             Quanto tempo falta para isto acabar?
           </h2>
         )}
@@ -80,7 +82,7 @@ const Countdown = ({
           ))}
         </div>
         <p
-          className={`text-${color}-600 absolute sm:relative max-w-vw65 xxs:max-w-vw70 sm:max-w-none right-0 sm:right-auto text-xs xxs:text-base xs:text-xl text-right sm:text-center animate__fadeIn animate__delay-${
+          className={`text-${color}-600 absolute sm:relative max-w-vw65 xxs:max-w-vw70 sm:max-w-none right-0 sm:right-auto text-xs xxs:text-base xs:text-xl landscape:text-sm text-right sm:text-center animate__fadeIn animate__delay-${
             SEQUENCE ? timeLeft.length - 1 : 1
           }s ${animate && 'animate__animated'}`}
         >
@@ -94,15 +96,15 @@ const Countdown = ({
           SEQUENCE ? timeLeft.length - 1 : 1
         }s ${animate && 'animate__animated'}`}
       >
-        <p className="text-xs xxs:text-base xs:text-xl">
+        <p className="text-xs xxs:text-base xs:text-xl landscape:text-sm">
           O que vais fazer quando este dia chegar?
         </p>
-        <p className="text-xs xxs:text-base xs:text-xl pb-4">
+        <p className="text-xs xxs:text-base xs:text-xl landscape:text-sm pb-4">
           Personaliza o contador com o teu objetivo pós-pandemia e partilha-o.
         </p>
         <button
           onClick={() => setShowModal(true)}
-          className="text-xs xxs:text-base xs:text-xl focus:outline-none w-auto border border-black bg-accent-blue text-white hover:border-white hover:text-white hover:bg-black py-1 px-3 xs:px-12 mb-2 xxs:mb-16"
+          className="text-xs xxs:text-base xs:text-xl landscape:text-sm focus:outline-none w-auto border border-black bg-accent-blue text-white hover:border-white hover:text-white hover:bg-black py-1 px-3 xs:px-12 mb-2 xxs:mb-16 landscape:mb-2"
         >
           Personalizar Contador
         </button>

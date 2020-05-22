@@ -10,6 +10,7 @@ module.exports = {
     extend: {
       screens: {
         dark: { raw: '(prefers-color-scheme: dark)' },
+        landscape: { raw: '(orientation: landscape)' },
       },
       fontFamily: {
         grotesk: ['SpaceGrotesk', 'Helvetica', 'Arial', 'sans'],
