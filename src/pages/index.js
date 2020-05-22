@@ -249,7 +249,7 @@ function IndexPage() {
         <h2 className="text-sm font-bold font-black text-left pt-3 px-1 sm:px-4">
           Ficheiros de dados
         </h2>
-        <ul className="list-disc ml-6 sm:ml-12 pb-8">
+        <ul className="list-disc ml-6 sm:ml-12">        
           <li className="text-xs text-grey-dark pr-4 py-1">
             <a
               className="underline"
@@ -281,11 +281,10 @@ function IndexPage() {
             </a>
           </li>
         </ul>
-
-        <h2 className="text-sm font-bold font-black text-left pt-16 px-1 sm:px-4">
+        <h2 className="text-sm font-bold font-black text-left pt-3 px-1 sm:px-4">        
           Queres contribuir?
         </h2>
-        <ul className="list-disc ml-6 sm:ml-12">
+        <ul className="list-disc ml-6 sm:ml-12 pb-8">
           <li className="text-xs text-grey-dark pr-4 py-1">
             Deixa os teus comentátios, sugestões, otimizações, críticas, correções, etc em:{' '}
             <a
