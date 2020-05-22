@@ -243,7 +243,7 @@ function IndexPage() {
           <li className="text-xs text-grey-dark pr-4 py-1">
             Por cada variação do Rt, a data de regresso é ajustada, de forma
             positiva ou negativa, sendo que por cada 0,01 que o valor aumenta ou
-            diminui, a data varia 5h.
+            diminui, a data varia 1h.
           </li>
         </ul>
         <h2 className="text-sm font-bold font-black text-left pt-3 px-1 sm:px-4">
@@ -281,6 +281,24 @@ function IndexPage() {
             </a>
           </li>
         </ul>
+
+        <h2 className="text-sm font-bold font-black text-left pt-16 px-1 sm:px-4">
+          Queres contribuir?
+        </h2>
+        <ul className="list-disc ml-6 sm:ml-12">
+          <li className="text-xs text-grey-dark pr-4 py-1">
+            Deixa os teus comentátios, sugestões, otimizações, críticas, correções, etc em:{' '}
+            <a
+              href="https://github.com/builduplabs/covid-countdown/issues"
+              rel="noopener noreferrer"
+              target="_blank"
+              className="underline"
+            >
+              https://github.com/builduplabs/covid-countdown/issues
+            </a>
+          </li>
+        </ul>
+
       </div>
       {showModal && (
         <>
