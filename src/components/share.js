@@ -58,7 +58,7 @@ const Iframe = ({ animate, loading, timeLeft, endDate, title, color }) => {
       }`}
     >
       {title ? (
-        <div className="flex w-full flex-1 justify-around items-end">
+        <div className="flex w-full flex-1 justify-around items-end mb-2">
           <h1
             style={{ fontSize: 'min(7vw, 12vh, 55px)' }}
             className={`${textColor} text-center font-bold py-1 px-4 leading-tight`}
@@ -85,10 +85,10 @@ const Iframe = ({ animate, loading, timeLeft, endDate, title, color }) => {
           />
         ))}
       </div>
-      <div className="w-full flex flex-1 items-start justify-center relative right-0">
-        <div className="w-full flex flex-1 justify-end px-2 py-1 flex-row">
+      <div className="w-full flex flex-1 items-start justify-center relative right-0 mt-2">
+        <div className="w-full flex flex-1 justify-end px-2 py-1 xs:pr-4 sm:pr-8 md:pr-12 flex-row">
           <p
-            style={{ fontSize: 'min(5vw, 8vh, 24px)' }}
+            style={{ fontSize: 'min(4vw, 7vh, 24px)' }}
             className={`${textColor} text-right font-thin animate__fadeIn animate__delay-${
               SEQUENCE ? timeLeft.length - 1 : 1
             }s ${animate && 'animate__animated'}`}

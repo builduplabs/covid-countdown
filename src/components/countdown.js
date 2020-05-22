@@ -21,7 +21,7 @@ const Block = ({ value, type, index, animate, color }) => {
         SEQUENCE ? index : 1
       }s ${animate && 'animate__animated'}`}
     >
-      <p className="text-5.5xl leading-10 sm:leading-none sm:text-6xl md:text-7xl lg:text-8xl font-black">
+      <p className="leading-10 sm:leading-none text-4xl xxs:text-5xl xs:text-5.5xl sm:text-6xl md:text-7xl lg:text-8xl font-black">
         {addZero(value)}
       </p>
       <p className="text-sm">{name}</p>
@@ -49,101 +49,58 @@ const Countdown = ({
   if (loading) return null;
 
   return (
-    <div
-      className={`relative w-full flex flex-col h-full animate__fadeIn ${
-        animate && 'animate__animated'
-      }`}
-    >
-      {title && (
-        <div
-          className={`hidden sm:flex w-full flex-1 justify-center sm:justify-around items-start sm:items-end`}
-        >
-          <h1
-            className={`text-7xl text-${color}-600 text-center py-2 px-4 leading-tight`}
-          >
+    <div className="relative w-full flex flex-col h-full">
+      <div className="w-full max-w-vw65 xxs:max-w-vw70 text-right sm:text-center justify-center flex flex-col flex-1 absolute right-0 xxs:mt-16 sm:mt-auto sm:relative sm:max-w-none">
+        <h1 className="animate__animated animate__fadeIn animate__delay-5s text-3xl xs:text-4xl sm:text-6xl uppercase font-bold text-accent-blue">
+          Covid Countdown
+        </h1>
+        {title ? (
+          <h2 className="text-base xs:text-xl sm:text-2xl animate__animated animate__fadeIn animate__delay-5s">
             {title}
-          </h1>
-        </div>
-      )}
-      <div
-        className={`w-full flex flex-1 flex-col sm:flex-row justify-center sm:justify-around items-start sm:items-end ${
-          title && 'sm:flex-none'
-        }`}
-      >
-        {timeLeft.map(({ type, value }, index) => (
-          <Block
-            animate={animate}
-            color={color}
-            key={type}
-            index={index}
-            value={value}
-            type={type}
-          />
-        ))}
+          </h2>
+        ) : (
+          <h2 className="text-base xs:text-xl sm:text-2xl animate__animated animate__fadeIn animate__delay-5s">
+            Quanto tempo falta para isto acabar?
+          </h2>
+        )}
       </div>
-      <div className="sm:w-full flex flex-1 items-end xs:items-center sm:items-start justify-center absolute sm:relative inset-y-0 sm:inset-auto right-0">
-        <div className="w-full max-w-vw60 xxs:max-w-vw70 sm:max-w-full flex flex-1 justify-end sm:px-8 pb-8 xxs:py-16 xxs:pb-20 flex-col sm:flex-row">
-          {title && (
-            <h1
-              className={`block sm:hidden text-4xl text-${color}-600 text-right animate__fadeIn animate__delay-${
-                SEQUENCE ? timeLeft.length - 1 : 1
-              }s ${animate && 'animate__animated'}`}
-            >
-              {title}
-            </h1>
-          )}
-          <p
-            className={`text-${color}-600 text-base xs:text-xl text-right sm:text-center animate__fadeIn animate__delay-${
-              SEQUENCE ? timeLeft.length - 1 : 1
-            }s ${animate && 'animate__animated'}`}
-          >
-            Com base nos dados oficiais de hoje, calculamos que o fim das
-            medidas de distanciamento físico e social acontecerá no dia{' '}
-            <span className="font-bold">{endDate}</span>
-            <div className="xs:hidden mt-4 flex-col items-center flex-none text-right">
-              <p className="text-sm w-full">
-                O que vais fazer quando este dia chegar?
-              </p>
-              <p className="text-sm w-full pb-3">
-                Personaliza o contador com o teu objetivo pós-pandemia e
-                partilha-o.
-              </p>
-              <button
-                onClick={() => setShowModal(true)}
-                className="text-sm focus:outline-none w-auto border border-black bg-accent-blue text-white hover:border-white hover:text-white hover:bg-black py-1 px-3"
-              >
-                Personalizar Contador
-              </button>
-            </div>
-          </p>
+      <div className="w-full flex flex-1 flex-col justify-center">
+        <div className="flex flex-col sm:flex-row justify-center sm:justify-around items-start sm:items-end">
+          {timeLeft.map(({ type, value }, index) => (
+            <Block
+              animate={animate}
+              color={color}
+              key={type}
+              index={index}
+              value={value}
+              type={type}
+            />
+          ))}
         </div>
-        <div className="hidden absolute inset-x-0 bottom-0 pb-8 xs:flex sm:hidden flex-col items-center flex-none text-right">
-          <p className="w-full text-lg">
-            O que vais fazer quando este dia chegar?
-          </p>
-          <p className="w-full text-lg pb-4">
-            Personaliza o contador com o teu objetivo pós-pandemia e partilha-o.
-          </p>
-          <button
-            onClick={() => setShowModal(true)}
-            className="focus:outline-none w-full sm:w-auto border border-black bg-accent-blue text-white hover:border-white hover:text-white hover:bg-black py-1 px-12"
-          >
-            Personalizar Contador
-          </button>
-        </div>
+        <p
+          className={`text-${color}-600 absolute sm:relative max-w-vw65 xxs:max-w-vw70 sm:max-w-none right-0 sm:right-auto text-xs xxs:text-base xs:text-xl text-right sm:text-center animate__fadeIn animate__delay-${
+            SEQUENCE ? timeLeft.length - 1 : 1
+          }s ${animate && 'animate__animated'}`}
+        >
+          Com base nos dados oficiais de hoje, calculamos que o fim das medidas
+          de distanciamento físico e social acontecerá no dia{' '}
+          <span className="font-bold">{endDate}</span>
+        </p>
       </div>
       <div
-        className={`hidden absolute inset-x-0 bottom-0 pb-8 sm:flex flex-col items-center flex-none animate__fadeIn animate__delay-${
+        className={`max-w-vw65 xxs:max-w-vw70 w-full flex flex-1 flex-col items-end sm:items-center justify-end text-right sm:text-center absolute bottom-0 right-0 sm:relative sm:bottom-auto sm:right-auto sm:max-w-none animate__fadeIn animate__delay-${
           SEQUENCE ? timeLeft.length - 1 : 1
         }s ${animate && 'animate__animated'}`}
       >
-        <p className="text-lg">O que vais fazer quando este dia chegar?</p>
-        <p className="text-lg pb-4">
+        <p className="text-xs xxs:text-base xs:text-xl">
+          O que vais fazer quando este dia chegar?
+        </p>
+        <p className="text-xs xxs:text-base xs:text-xl pb-4">
           Personaliza o contador com o teu objetivo pós-pandemia e partilha-o.
         </p>
         <button
           onClick={() => setShowModal(true)}
-          className="focus:outline-none w-full sm:w-auto border border-black bg-accent-blue text-white hover:border-white hover:text-white hover:bg-black py-1 px-12"
+          className="text-xs xxs:text-base xs:text-xl focus:outline-none w-auto border border-black bg-accent-blue text-white hover:border-white hover:text-white hover:bg-black py-1 px-3 xs:px-12 mb-2 xxs:mb-16"
         >
           Personalizar Contador
         </button>

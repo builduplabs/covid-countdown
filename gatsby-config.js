@@ -12,6 +12,13 @@ module.exports = {
     siteImg: `https://covidcountdown.today/images/share_img.jpeg`,
   },
   plugins: [
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: 'UA-29763534-8',
+        head: true,
+      },
+    },
     `gatsby-plugin-eslint`,
     `gatsby-plugin-react-helmet`,
     {

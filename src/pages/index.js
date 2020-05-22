@@ -57,14 +57,6 @@ function IndexPage() {
     <Layout>
       <SEO />
       {/* <ModeToggle /> */}
-      <div className="absolute xxs:pt-32 right-0 sm:right-auto w-3/4 sm:w-full text-right sm:text-center p-4 sm:left-0">
-        <h1 className="animate__animated animate__fadeIn animate__delay-5s text-3xl xs:text-4xl uppercase font-bold sm:text-6xl text-accent-blue">
-          Covid Countdown
-        </h1>
-        <h2 className="text-base hidden xxs:block xs:text-xl sm:text-2xl animate__animated animate__fadeIn animate__delay-5s">
-          Quanto tempo falta para isto acabar?
-        </h2>
-      </div>
       <div className="h-screen w-full flex flex-col justify-center">
         <Countdown setShowModal={setShowModal} />
       </div>
@@ -320,18 +312,19 @@ function IndexPage() {
                     </span>
                   </button>
                   <div className="mb-4">
-                    <label className="block text-xs xs:text-sm font-bold mb-2">
-                      Título
+                    <label className="block text-xs xs:text-sm font-bold mb-2 mr-4 xs:mr-0">
+                      Título: o que vais fazer quando o contador chegar ao fim e
+                      a pandemia acabar?
                     </label>
                     <input
                       onChange={(event) => {
                         setTitle(event.target.value);
                         setCopied(false);
                       }}
-                      className="text-xs xs:text-sm appearance-none border border-black w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+                      className="text-xxs xs:text-xs appearance-none border border-black w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
                       id="title"
                       type="text"
-                      placeholder="Texto acima do contador"
+                      placeholder="Como vai ser o primeiro dia do resto da tua vida? Ir ao futebol, a um concerto ou a uma discoteca?"
                     />
                   </div>
                   <div className="mb-4">
