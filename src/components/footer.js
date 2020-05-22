@@ -24,11 +24,13 @@ function Footer() {
     <footer className="bg-black">
       <nav className="flex flex-col max-w-5xl py-3 sm:py-6 px-4 sm:px-12 mx-auto text-xs text-white font-thin">
         <div className="w-full flex flex-col items-center">
-          <img
-            className="w-16 h-auto mb-8"
-            src="../../images/comon_logo.png"
-            alt="COMON"
-          />
+          <a href="http://comon.pt/" target="_blank" rel="noopener noreferrer">
+            <img
+              className="w-16 h-auto mb-8"
+              src="../../images/comon_logo.png"
+              alt="COMON"
+            />
+          </a>
           <p className="text-center">
             Este contador foi criado com agilidade e boa vontade pela equipa de
             Data Science da COMON, uma agência independente que quebra
@@ -50,18 +52,23 @@ function Footer() {
           </p>
         </div>
         <div className="flex flex-1 flex-col md:flex-row w-full justify-between mt-8">
-          <div className="flex-1 space-x-3 items-center text-center md:text-left py-1">
+          <div className="hidden sm:block flex-1 space-x-3 items-center text-center md:text-left py-1">
             Última atualização:
             <div className="font-bold inline ml-1">
               {` ${moment(lastUpdateDate).format('HH:mm DD/MM')}`}
             </div>
           </div>
-          <a
-            className="flex-1 text-center py-1"
-            href="mailto:marketing@comon.pt"
-          >
-            marketing@comon.pt
-          </a>
+          <div className="flex-1 flex flex-col text-center py-1">
+            <a
+              className="pb-2"
+              href="http://comon.pt/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              COMON
+            </a>
+            <a href="mailto:marketing@comon.pt">marketing@comon.pt</a>
+          </div>
           <a
             className="flex-1 text-center md:text-right py-1"
             href="https://github.com/builduplabs/covid-countdown"
@@ -70,6 +77,12 @@ function Footer() {
           >
             Github
           </a>
+          <div className="block sm:hidden flex-1 space-x-3 items-center text-center md:text-left py-1">
+            Última atualização:
+            <div className="font-bold inline ml-1">
+              {` ${moment(lastUpdateDate).format('HH:mm DD/MM')}`}
+            </div>
+          </div>
         </div>
       </nav>
     </footer>
