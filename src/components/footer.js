@@ -24,7 +24,7 @@ function Footer() {
     <footer className="bg-black">
       <nav className="flex flex-col max-w-5xl py-3 sm:py-6 px-4 sm:px-12 mx-auto text-xs text-white font-thin">
         <div className="w-full flex flex-col items-center">
-          <a href="http://comon.pt/" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.comon.pt/" target="_blank" rel="noopener noreferrer">
             <img
               className="w-16 h-auto mb-8"
               src="../../images/comon_logo.png"
@@ -61,7 +61,7 @@ function Footer() {
           <div className="flex-1 flex flex-col text-center py-1">
             <a
               className="pb-2"
-              href="http://comon.pt/"
+              href="https://www.comon.pt/"
               target="_blank"
               rel="noopener noreferrer"
             >
