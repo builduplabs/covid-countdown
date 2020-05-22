@@ -50,16 +50,18 @@ const Countdown = ({
 
   return (
     <div className="relative w-full flex flex-col h-full">
-      <div className="w-full max-w-vw65 xxs:max-w-vw70 text-right sm:text-center justify-center flex flex-col flex-1 absolute right-0 xxs:mt-16 sm:mt-auto sm:relative sm:max-w-none">
-        <h1 className="animate__animated animate__fadeIn animate__delay-5s text-3xl xs:text-4xl sm:text-6xl uppercase font-bold text-accent-blue">
+      <div
+        className={`w-full max-w-vw65 xxs:max-w-vw70 text-right sm:text-center justify-center flex flex-col flex-1 absolute right-0 xxs:mt-16 sm:mt-auto sm:relative sm:max-w-none animate__fadeIn animate__delay-${
+          SEQUENCE ? timeLeft.length - 1 : 1
+        }s ${animate && 'animate__animated'}`}
+      >
+        <h1 className="text-3xl xs:text-4xl sm:text-6xl uppercase font-bold text-accent-blue">
           Covid Countdown
         </h1>
         {title ? (
-          <h2 className="text-base xs:text-xl sm:text-2xl animate__animated animate__fadeIn animate__delay-5s">
-            {title}
-          </h2>
+          <h2 className="text-base xs:text-xl sm:text-2xl">{title}</h2>
         ) : (
-          <h2 className="text-base xs:text-xl sm:text-2xl animate__animated animate__fadeIn animate__delay-5s">
+          <h2 className="text-base xs:text-xl sm:text-2xl">
             Quanto tempo falta para isto acabar?
           </h2>
         )}
