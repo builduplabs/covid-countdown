@@ -55,7 +55,7 @@ const Countdown = ({
           SEQUENCE ? timeLeft.length - 1 : 1
         }s ${animate && 'animate__animated'}`}
       >
-        <h1 className="text-3xl xs:text-4xl sm:text-6xl landscape:text-3xl uppercase font-bold text-accent-blue">
+        <h1 className="text-3xl xs:text-4xl sm:text-6xl landscape:text-3xl uppercase font-bold text-accent">
           Covid Countdown
         </h1>
         {title ? (
@@ -88,7 +88,7 @@ const Countdown = ({
         >
           Com base nos dados oficiais de hoje, calculamos que o fim das medidas
           de distanciamento físico e social acontecerá no dia{' '}
-          <span className="font-bold">{endDate}</span>
+          <span className="font-bold">{endDate}</span>.
         </p>
       </div>
       <div
@@ -104,7 +104,7 @@ const Countdown = ({
         </p>
         <button
           onClick={() => setShowModal(true)}
-          className="text-xs xxs:text-base xs:text-xl landscape:text-sm focus:outline-none w-auto border border-black bg-accent-blue text-white hover:border-white hover:text-white hover:bg-black py-1 px-3 xs:px-12 mb-2 xxs:mb-16 landscape:mb-2"
+          className="text-xs xxs:text-base xs:text-xl landscape:text-sm focus:outline-none w-auto border border-black bg-accent text-white hover:border-white hover:text-white hover:bg-black py-1 px-3 xs:px-12 mb-2 xxs:mb-16 landscape:mb-2"
         >
           Personalizar Contador
         </button>

@@ -10,6 +10,7 @@ module.exports = {
     author: `COMON Group`,
     siteUrl: `https://covidcountdown.today/`,
     siteImg: `https://covidcountdown.today/images/share_img.jpeg`,
+    animated: true,
   },
   plugins: [
     {

@@ -3,22 +3,25 @@ import React from 'react';
 
 // import Header from './header';
 import Footer from './footer';
-import MinimalFooter from './minimal_footer';
+// import MinimalFooter from './minimal_footer';
 
 const INDIVIDUAL_COLORS = ['black', 'white'];
 
-function Layout({ children, share, color, background }) {
-  const backgroundColor =
-    INDIVIDUAL_COLORS.indexOf(background) !== -1
-      ? `bg-${background}`
-      : `bg-${background}-500`;
-  const textColor =
-    INDIVIDUAL_COLORS.indexOf(color) !== -1
-      ? `text-${color}`
-      : `text-${color}-700`;
+function Layout({ children, share, background }) {
+  let backgroundColor = 'bg-background';
+  if (background) {
+    backgroundColor =
+      INDIVIDUAL_COLORS.indexOf(background) !== -1
+        ? `bg-${background}`
+        : `bg-${background}-500`;
+  }
+  // const textColor =
+  //   INDIVIDUAL_COLORS.indexOf(color) !== -1
+  //     ? `text-${color}`
+  //     : `text-${color}-700`;
   return (
     <div
-      className={`flex flex-col min-h-screen font-grotesk text-gray-900 ${backgroundColor}`}
+      className={`flex flex-col min-h-screen font-montserrat text-gray-900 ${backgroundColor}`}
     >
       {/* <Header /> */}
 
@@ -30,7 +33,8 @@ function Layout({ children, share, color, background }) {
         {children}
       </main>
 
-      {share ? <MinimalFooter color={textColor} /> : <Footer />}
+      {!share && <Footer />}
+      {/* {share ? <MinimalFooter color={textColor} /> : <Footer />} */}
     </div>
   );
 }

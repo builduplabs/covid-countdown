@@ -94,10 +94,12 @@ const Graph = ({ loading, graphData, xAxisLegend, toggleLegend, maxValue }) => {
           colors={{ scheme: 'category10' }}
           theme={{
             fontSize,
+            fontFamily: 'Montserrat',
             axis: {
               legend: {
                 text: {
                   fontSize,
+                  fontFamily: 'Montserrat',
                 },
               },
             },

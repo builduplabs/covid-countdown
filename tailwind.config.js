@@ -16,11 +16,14 @@ module.exports = {
       },
       fontFamily: {
         grotesk: ['SpaceGrotesk', 'Helvetica', 'Arial', 'sans'],
+        montserrat: ['Montserrat', 'Helvetica', 'Arial', 'sans'],
         source: ['SourceSansPro', 'Helvetica', 'Arial', 'sans-serif'],
       },
       colors: {
         'accent-red': '#E74536',
         'accent-blue': '#3F43AD',
+        background: '#F6F6F6',
+        accent: '#FD664C',
         'gray-dark': '#808285',
         'gray-normal': '#A7A9AC',
         'gray-light': '#D1D3D4',

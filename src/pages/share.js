@@ -33,15 +33,19 @@ class Share extends Component {
 
   render() {
     const { color, background, title, urlTitle } = this.state;
+    console.log(background);
 
     return (
       <Layout key={title} share color={color} background={background}>
-        <SEO
-          title={title}
-          keywords={[`gatsby`, `tailwind`, `react`, `tailwindcss`]}
-        />
+        <SEO title={title} />
         <div className="h-screen w-full flex flex-col justify-center">
-          <Countdown key={title} title={urlTitle} color={color} share />
+          <Countdown
+            key={title}
+            title={urlTitle}
+            color={color}
+            background={background}
+            share
+          />
         </div>
       </Layout>
     );

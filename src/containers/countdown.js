@@ -5,15 +5,27 @@ import moment from 'moment';
 import Countdown from '../components/countdown';
 import Share from '../components/share';
 
-const CountdownContainer = ({ csvData, title, color, share, setShowModal }) => {
+const CountdownContainer = ({
+  data,
+  title,
+  color,
+  background,
+  share,
+  setShowModal,
+}) => {
   const [timeLeft, setTimeLeft] = useState([]);
   const [endDate, setEndDate] = useState('');
   const [loading, setLoading] = useState(true);
+  const [animated, setAnimated] = useState(true);
 
   useEffect(() => {
     const {
-      global: { entries },
-    } = csvData;
+      csvData: { entries },
+      site: {
+        siteMetadata: { animated },
+      },
+    } = data;
+    setAnimated(animated);
     const { date } = entries[0];
     const end = moment(date);
 
@@ -75,7 +87,8 @@ const CountdownContainer = ({ csvData, title, color, share, setShowModal }) => {
       <Share
         title={title}
         color={color}
-        animate
+        background={background}
+        animate={animated}
         timeLeft={timeLeft}
         loading={loading}
         endDate={endDate}
@@ -88,7 +101,7 @@ const CountdownContainer = ({ csvData, title, color, share, setShowModal }) => {
       setShowModal={setShowModal}
       title={title}
       color={color}
-      animate
+      animate={animated}
       timeLeft={timeLeft}
       loading={loading}
       endDate={endDate}
@@ -99,20 +112,27 @@ const CountdownContainer = ({ csvData, title, color, share, setShowModal }) => {
 CountdownContainer.defaultProps = {
   share: false,
   color: 'black',
+  background: 'white',
 };
 
 CountdownContainer.propTypes = {
   share: PropTypes.bool,
   title: PropTypes.string,
   color: PropTypes.string,
+  background: PropTypes.string,
   setShowModal: PropTypes.func.isRequired,
-  csvData: PropTypes.shape({
-    global: PropTypes.shape({
+  data: PropTypes.shape({
+    csvData: PropTypes.shape({
       entries: PropTypes.arrayOf(
         PropTypes.shape({
           date: PropTypes.string,
         })
       ),
+    }),
+    site: PropTypes.shape({
+      siteMetadata: PropTypes.shape({
+        animated: PropTypes.bool,
+      }),
     }),
   }).isRequired,
 };
@@ -122,7 +142,7 @@ export default function Timer(props) {
     <StaticQuery
       query={graphql`
         query {
-          global: allPredictionCsv(
+          csvData: allPredictionCsv(
             sort: { order: DESC, fields: Date }
             filter: { Region: { eq: "Portugal" }, Prediction_Date: { nin: "" } }
             limit: 1
@@ -131,9 +151,14 @@ export default function Timer(props) {
               date: Prediction_Date
             }
           }
+          site {
+            siteMetadata {
+              animated
+            }
+          }
         }
       `}
-      render={(data) => <CountdownContainer csvData={data} {...props} />}
+      render={(data) => <CountdownContainer data={data} {...props} />}
     />
   );
 }
