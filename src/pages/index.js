@@ -204,7 +204,7 @@ function IndexPage() {
           <li className="text-xs text-grey-dark pr-4 py-1">
             Por cada variação do Rt, a data de regresso é ajustada, de forma
             positiva ou negativa, sendo que por cada 0,01 que o valor aumenta ou
-            diminui, a data varia 1h.
+            diminui, a data varia 3h.
           </li>
         </ul>
         <h2 className="text-sm font-bold font-black text-left pt-3 px-1 sm:px-4">
