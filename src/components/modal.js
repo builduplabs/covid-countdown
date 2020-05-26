@@ -114,7 +114,7 @@ function Modal({ show, setShowModal }) {
                           setCopied(false);
                         }}
                         key={color}
-                        className={`focus:outline-none opacity-75 w-6 h-6 md:w-8 md:h-8 rounded-full mr-2 mb-2 bg-${finalColor} text-${finalColor} ${
+                        className={`focus:outline-none opacity-75 w-6 h-6 md:w-8 md:h-8 rounded-full mr-2 mb-2 bg-${finalColor} text-${finalColor} hover:text-${finalColor} ${
                           color === 'white' ? 'border-black border' : ''
                         } ${textColor === color ? 'opacity-100' : ''}`}
                       />
@@ -144,7 +144,7 @@ function Modal({ show, setShowModal }) {
                           setCopied(false);
                         }}
                         key={color}
-                        className={`focus:outline-none opacity-75 w-6 h-6 md:w-8 md:h-8 rounded-full mr-2 mb-2 bg-${finalColor} text-${finalColor} ${
+                        className={`focus:outline-none opacity-75 w-6 h-6 md:w-8 md:h-8 rounded-full mr-2 mb-2 bg-${finalColor} text-${finalColor} hover:text-${finalColor} ${
                           color === 'white' ? 'border-black border' : ''
                         } ${backgroundColor === color ? 'opacity-100' : ''}`}
                       />
