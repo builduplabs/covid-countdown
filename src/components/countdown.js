@@ -63,9 +63,9 @@ const Countdown = ({
             {title}
           </h2>
         ) : (
-          <h2 className="text-base xs:text-xl landscape:text-lg sm:text-2xl">
+          <h3 className="text-base xs:text-xl landscape:text-lg sm:text-2xl hidden xs:block">
             Quanto tempo falta para isto acabar?
-          </h2>
+          </h3>
         )}
       </div>
       <div className="w-full flex flex-1 flex-col justify-center">

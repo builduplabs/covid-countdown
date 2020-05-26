@@ -25,7 +25,7 @@ function IndexPage() {
         <h2 className="text-3xl font-black text-left py-2 pb-8 px-1 sm:px-4">
           Esta pandemia tem os dias contados
         </h2>
-        <p className="text-sm text-grey-dark text-justify px-1 sm:px-4 py-1 hidden xs:block">
+        <p className="text-sm text-grey-dark text-justify px-1 sm:px-4 py-1">
           Há uma pergunta que todos temos na cabeça:{' '}
           <span className="font-black">
             quanto tempo falta para isto acabar?
