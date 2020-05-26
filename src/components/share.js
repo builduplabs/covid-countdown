@@ -50,6 +50,7 @@ const Iframe = ({
   endDate,
   title,
   color,
+  url,
   background,
 }) => {
   if (loading) return null;
@@ -132,7 +133,7 @@ const Iframe = ({
           Criar o meu contador
         </a>
         <a
-          href="https://www.facebook.com/sharer/sharer.php?u=https://covidcountdown.today/"
+          href={`https://www.facebook.com/sharer/sharer.php?u=${url}`}
           target="_blank"
           rel="noopener noreferrer"
           style={{ fontSize: 'min(4vw, 5vh, 17px)' }}
@@ -141,7 +142,7 @@ const Iframe = ({
           Partilhar Facebook
         </a>
         <a
-          href="https://twitter.com/intent/tweet?url=https://covidcountdown.today/"
+          href={`https://twitter.com/intent/tweet?url=${url}`}
           target="_blank"
           rel="noopener noreferrer"
           style={{ fontSize: 'min(4vw, 5vh, 17px)' }}
@@ -155,6 +156,7 @@ const Iframe = ({
 };
 
 Iframe.propTypes = {
+  url: PropTypes.string,
   color: PropTypes.string,
   background: PropTypes.string,
   title: PropTypes.string,

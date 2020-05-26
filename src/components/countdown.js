@@ -55,7 +55,7 @@ const Countdown = ({
           SEQUENCE ? timeLeft.length - 1 : 1
         }s ${animate && 'animate__animated'}`}
       >
-        <h1 className="text-3xl xs:text-4xl sm:text-6xl landscape:text-3xl uppercase font-bold text-accent">
+        <h1 className="text-3xl xs:text-4xl sm:text-6xl landscape:text-3xl uppercase font-black text-accent">
           Covid Countdown
         </h1>
         {title ? (
@@ -96,7 +96,7 @@ const Countdown = ({
           SEQUENCE ? timeLeft.length - 1 : 1
         }s ${animate && 'animate__animated'}`}
       >
-        <p className="text-xs xxs:text-base xs:text-xl landscape:text-sm">
+        <p className="text-xs xxs:text-base xs:text-xl landscape:text-sm hidden xs:block">
           O que vais fazer quando este dia chegar?
         </p>
         <p className="text-xs xxs:text-base xs:text-xl landscape:text-sm pb-4">

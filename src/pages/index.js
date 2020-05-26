@@ -22,10 +22,10 @@ function IndexPage() {
         <Countdown setShowModal={setShowModal} />
       </div>
       <div className="w-full flex flex-col justify-center py-16">
-        <h2 className="text-3xl font-black text-center py-2 pb-8 px-1 sm:px-4">
+        <h2 className="text-3xl font-black text-left py-2 pb-8 px-1 sm:px-4">
           Esta pandemia tem os dias contados
         </h2>
-        <p className="text-sm text-grey-dark text-justify px-1 sm:px-4 py-1">
+        <p className="text-sm text-grey-dark text-justify px-1 sm:px-4 py-1 hidden xs:block">
           Há uma pergunta que todos temos na cabeça:{' '}
           <span className="font-black">
             quanto tempo falta para isto acabar?
@@ -93,12 +93,12 @@ function IndexPage() {
       </div>
       <div className="w-full flex flex-col justify-center">
         <h2 className="text-2xl font-black text-left py-2 px-1 sm:px-4">
-          Como é feita a previsão
+          Como é feita a previsão?
         </h2>
         <p className="text-sm text-grey-dark text-justify px-1 sm:px-4 py-1">
           Por vezes ouvimos nas notícias ou briefings da DGS, o termo R0.
         </p>
-        <p className="text-base font-bold text-grey-dark text-center px-1 sm:px-4 md:px-24 py-3">
+        <p className="text-base font-bold text-grey-dark text-left px-1 sm:px-4 py-3">
           O R0 é o número básico de reprodução de uma epidemia, é definido como
           o número de infeções secundárias produzidas por uma única pessoa
           infetada, se o R0 for maior que 1, a epidemia espalha-se rapidamente,

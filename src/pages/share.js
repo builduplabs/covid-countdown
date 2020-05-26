@@ -13,6 +13,7 @@ class Share extends Component {
     background: 'white',
     title: '',
     urlTitle: 'Covid Countdown',
+    url: 'https://covidcountdown.today/',
   };
 
   componentDidMount() {
@@ -26,14 +27,14 @@ class Share extends Component {
       const title = urlTitle
         ? `Covid Countdown | ${urlTitle}`
         : 'Covid Countdown';
+      const url = window.location.href;
 
-      this.setState({ color, background, title, urlTitle });
+      this.setState({ color, background, title, urlTitle, url });
     }
   }
 
   render() {
-    const { color, background, title, urlTitle } = this.state;
-    console.log(background);
+    const { color, background, title, urlTitle, url } = this.state;
 
     return (
       <Layout key={title} share color={color} background={background}>
@@ -44,6 +45,7 @@ class Share extends Component {
             title={urlTitle}
             color={color}
             background={background}
+            url={url}
             share
           />
         </div>

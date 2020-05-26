@@ -9,6 +9,7 @@ const CountdownContainer = ({
   data,
   title,
   color,
+  url,
   background,
   share,
   setShowModal,
@@ -85,6 +86,7 @@ const CountdownContainer = ({
   if (share) {
     return (
       <Share
+        url={url}
         title={title}
         color={color}
         background={background}
@@ -118,7 +120,8 @@ CountdownContainer.defaultProps = {
 CountdownContainer.propTypes = {
   share: PropTypes.bool,
   title: PropTypes.string,
-  color: PropTypes.string,
+  url: PropTypes.string,
+  color: PropTypes.string.isRequired,
   background: PropTypes.string,
   setShowModal: PropTypes.func.isRequired,
   data: PropTypes.shape({

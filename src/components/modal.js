@@ -100,8 +100,8 @@ function Modal({ show, setShowModal }) {
                   {COLORS.map((color) => {
                     const finalColor =
                       INDIVIDUAL_COLORS.indexOf(color) !== -1
-                        ? `bg-${color}`
-                        : `bg-${color}-700`;
+                        ? `${color}`
+                        : `${color}-700`;
 
                     return (
                       <button
@@ -114,7 +114,7 @@ function Modal({ show, setShowModal }) {
                           setCopied(false);
                         }}
                         key={color}
-                        className={`focus:outline-none opacity-50 w-6 h-6 md:w-8 md:h-8 rounded-full mr-2 mb-2 ${finalColor} ${
+                        className={`focus:outline-none opacity-75 w-6 h-6 md:w-8 md:h-8 rounded-full mr-2 mb-2 bg-${finalColor} text-${finalColor} ${
                           color === 'white' ? 'border-black border' : ''
                         } ${textColor === color ? 'opacity-100' : ''}`}
                       />
@@ -130,8 +130,8 @@ function Modal({ show, setShowModal }) {
                   {COLORS.map((color) => {
                     const finalColor =
                       INDIVIDUAL_COLORS.indexOf(color) !== -1
-                        ? `bg-${color}`
-                        : `bg-${color}-700`;
+                        ? `${color}`
+                        : `${color}-700`;
 
                     return (
                       <button
@@ -144,7 +144,7 @@ function Modal({ show, setShowModal }) {
                           setCopied(false);
                         }}
                         key={color}
-                        className={`focus:outline-none opacity-50 w-6 h-6 md:w-8 md:h-8 rounded-full mr-2 mb-2 ${finalColor} ${
+                        className={`focus:outline-none opacity-75 w-6 h-6 md:w-8 md:h-8 rounded-full mr-2 mb-2 bg-${finalColor} text-${finalColor} ${
                           color === 'white' ? 'border-black border' : ''
                         } ${backgroundColor === color ? 'opacity-100' : ''}`}
                       />
@@ -195,7 +195,7 @@ function Modal({ show, setShowModal }) {
                 >
                   {!copied ? 'Copiar URL' : 'Copiado!'}
                 </button>
-                <a
+                {/* <a
                   href={`https://www.facebook.com/sharer/sharer.php?u=${url}`}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -210,6 +210,14 @@ function Modal({ show, setShowModal }) {
                   className="flex items-center text-xs focus:outline-none sm:w-auto border hover:border-black border-white text-white hover:bg-accent bg-black py-1 px-3 sm:text-base"
                 >
                   Twitter
+                </a> */}
+                <a
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center ml-2 mr-2 text-xs focus:outline-none sm:w-auto border hover:border-black border-white text-white hover:bg-accent bg-black py-1 px-3 sm:text-base"
+                >
+                  Ver contador
                 </a>
               </div>
             </div>
