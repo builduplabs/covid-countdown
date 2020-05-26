@@ -3,7 +3,7 @@ module.exports = {
   purge: {
     content: ['./src/**/*.js'],
     options: {
-      whitelistPatterns: [/^bg-/, /^text-/],
+      whitelistPatterns: [/^bg-/, /^text-/, /^hover:text-/],
     },
   },
   theme: {
