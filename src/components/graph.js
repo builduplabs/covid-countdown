@@ -30,6 +30,11 @@ const Tooltip = ({ slice }) => {
           2ª fase de desconfinamento
         </div>
       )}
+      {(date === 'Junho 01' || date === 'junho 01') && (
+        <div className="text-xs font-bold mb-2 text-center">
+          3ª fase de desconfinamento
+        </div>
+      )}
       {slice.points.map((point) => (
         <div
           key={point.id}
@@ -167,6 +172,16 @@ const Graph = ({ loading, graphData, xAxisLegend, toggleLegend, maxValue }) => {
             {
               axis: 'x',
               value: 'Maio 18',
+              lineStyle: { stroke: 'black', strokeWidth: 1 },
+            },
+            {
+              axis: 'x',
+              value: 'Junho 01',
+              lineStyle: { stroke: '#bdbdbd', strokeWidth: 1 },
+            },
+            {
+              axis: 'x',
+              value: 'junho 01',
               lineStyle: { stroke: 'black', strokeWidth: 1 },
             },
           ]}
