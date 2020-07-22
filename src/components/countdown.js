@@ -8,11 +8,11 @@ const SEQUENCE = true;
 const Block = ({ value, type, index, animate, color }) => {
   let name = type;
 
-  if (
-    (type === 'meses' || type === 'dias' || type === 'horas') &&
-    value === 1
-  ) {
+  if ((type === 'dias' || type === 'horas') && value === 1) {
     name = type.slice(0, -1);
+  }
+  if (type === 'meses' && value === 1) {
+    name = type.slice(0, -2);
   }
 
   return (
