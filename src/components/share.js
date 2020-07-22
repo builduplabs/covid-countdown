@@ -13,7 +13,7 @@ const Block = ({ value, type, index, animate, color }) => {
     name = type.slice(0, -1);
   }
   if (type === 'meses' && value === 1) {
-    name = type.slice(0, -2);
+    name = 'mês';
   }
 
   return (
