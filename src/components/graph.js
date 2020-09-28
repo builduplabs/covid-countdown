@@ -35,6 +35,13 @@ const Tooltip = ({ slice }) => {
           3ª fase de desconfinamento
         </div>
       )}
+      {(date === 'Setembro 15' || date === 'setembro 15') && (
+        <div className="text-xs font-bold mb-2 text-center">Portugal entra em Situação de Contingência</div>
+      )}
+      {(date === 'Setembro 24' || date === 'setembro 24') && (
+        <div className="text-xs font-bold mb-2 text-center">Nova Data baseline</div>
+      )}
+
       {slice.points.map((point) => (
         <div
           key={point.id}
@@ -177,12 +184,32 @@ const Graph = ({ loading, graphData, xAxisLegend, toggleLegend, maxValue }) => {
             {
               axis: 'x',
               value: 'Junho 01',
-              lineStyle: { stroke: '#bdbdbd', strokeWidth: 1 },
+              lineStyle: { stroke: 'black', strokeWidth: 1 },
             },
             {
               axis: 'x',
               value: 'junho 01',
               lineStyle: { stroke: 'black', strokeWidth: 1 },
+            },
+            {
+              axis: 'x',
+              value: 'Setembro 15',
+              lineStyle: { stroke: 'black', strokeWidth: 1 },
+            },
+            {
+              axis: 'x',
+              value: 'setembro 15',
+              lineStyle: { stroke: 'black', strokeWidth: 1 },
+            },
+            {
+              axis: 'x',
+              value: 'Setembro 24',
+              lineStyle: { stroke: '#bdbdbd', strokeWidth: 1 },
+            },
+            {
+              axis: 'x',
+              value: 'setembro 24',
+              lineStyle: { stroke: '#bdbdbd', strokeWidth: 1 },
             },
           ]}
           legends={[
