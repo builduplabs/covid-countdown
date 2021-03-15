@@ -1,2 +1,2 @@
-Date,Rt,cases_by_100k
-2021-03-14,0.79,96.95
+date,rt_real,cases_by_100k_real,rt_graph,cases_by_100k_graph
+2021-03-14,0.79,96.95,0.79,96.95
