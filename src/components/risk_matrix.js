@@ -4,23 +4,74 @@ import PropTypes from "prop-types";
 import { area } from "d3-shape";
 import { ResponsiveScatterPlot } from "@nivo/scatterplot";
 
-const RiskAreas = ({ yScale, xScale }) => {
-  const areas = [
-    { x: 0, y: 0 },
-    { x: 0, y: 120 },
-    { x: 1, y: 120 },
-    { x: 1, y: 0 },
-  ];
-  const areaGenerator = area()
-    .x((d) => xScale(d[0]))
-    .y((d) => yScale(d[1]));
+const RiskAreas = ({ yScale, xScale, height }) => {
+  const areaGenerator = (level) => {
+    const offset = 120;
+    const areaHeight = (height - offset) / (level.upper ? 2 : 1);
 
-  return <path d={areaGenerator(areas)} fill="rgba(232, 193, 160, .65)" />;
+    const generator = area()
+      .x((d) => xScale(d.x))
+      .y0(() => areaHeight)
+      .y1((d) => yScale(d.y));
+
+    return generator(level.data);
+  };
+
+  const areas = [
+    {
+      data: [
+        { x: 0.5, y: 0 },
+        { x: 0.5, y: 120 },
+        { x: 1, y: 120 },
+        { x: 1, y: 0 },
+      ],
+      color: "#01c782",
+    },
+    {
+      data: [
+        { x: 1.0, y: 0 },
+        { x: 1.0, y: 120 },
+        { x: 1.5, y: 120 },
+        { x: 1.5, y: 0 },
+      ],
+      color: "#ffaa16",
+    },
+    {
+      data: [
+        { x: 0.5, y: 120 },
+        { x: 0.5, y: 240 },
+        { x: 1, y: 240 },
+        { x: 1, y: 120 },
+      ],
+      color: "#ff9616",
+      upper: true,
+    },
+    {
+      data: [
+        { x: 1.0, y: 120 },
+        { x: 1.0, y: 240 },
+        { x: 1.5, y: 240 },
+        { x: 1.5, y: 120 },
+      ],
+      color: "#ff3f3f",
+      upper: true,
+    },
+  ];
+
+  return areas.map((level, index) => (
+    <path
+      key={index}
+      d={areaGenerator(level)}
+      fill={level.color}
+      style={{ mixBlendMode: "multiply", pointerEvents: "none" }}
+    />
+  ));
 };
 
 RiskAreas.propTypes = {
   yScale: PropTypes.func,
   xScale: PropTypes.func,
+  height: PropTypes.number,
 };
 
 const Tooltip = ({ slice }) => {
@@ -144,7 +195,7 @@ const RiskMatrix = ({
         <ResponsiveScatterPlot
           enableSlices="x"
           sliceTooltip={Tooltip}
-          colors={{ scheme: "category10" }}
+          colors={{ scheme: "pastel1" }}
           theme={{
             fontSize,
             fontFamily: "Montserrat",
