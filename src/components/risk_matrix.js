@@ -4,14 +4,23 @@ import PropTypes from "prop-types";
 import { area } from "d3-shape";
 import { ResponsiveScatterPlot } from "@nivo/scatterplot";
 
-const createRiskArea = ({ nodes }) => {
-  const areaGenerator = area();
+const RiskAreas = ({ yScale, xScale }) => {
+  const areas = [
+    { x: 0, y: 0 },
+    { x: 0, y: 120 },
+    { x: 1, y: 120 },
+    { x: 1, y: 0 },
+  ];
+  const areaGenerator = area()
+    .x((d) => xScale(d[0]))
+    .y((d) => yScale(d[1]));
 
-  return <path d={area(nodes)} fill="rgba(232, 193, 160, .65)" />;
+  return <path d={areaGenerator(areas)} fill="rgba(232, 193, 160, .65)" />;
 };
 
-createRiskArea.propTypes = {
-  nodes: PropTypes.arrayOf(PropTypes.shape({})),
+RiskAreas.propTypes = {
+  yScale: PropTypes.func,
+  xScale: PropTypes.func,
 };
 
 const Tooltip = ({ slice }) => {
@@ -118,38 +127,6 @@ const RiskMatrix = ({
     },
   ];
 
-  const riskLevels = {
-    level1: [
-      {
-        x: 0,
-        y: 0,
-      },
-      {
-        x: 1,
-        y: 120,
-      },
-    ],
-    level2: [
-      {
-        x: 1,
-        y: 0,
-      },
-      {
-        x: 2,
-        y: 120,
-      },
-    ],
-  };
-
-  const riskAreas = [
-    createRiskArea([
-      { x: 0, y: 0 },
-      { x: 0, y: 120 },
-      { x: 1, y: 120 },
-      { x: 1, y: 0 },
-    ]),
-  ];
-
   const margin = {
     top: 40,
     right: mobile ? 60 : 80,
@@ -164,9 +141,9 @@ const RiskMatrix = ({
   return (
     <div className="w-full flex-1 sm:h-screen flex flex-col h-full justify-center">
       <div className="w-full flex h-px min-h-1/2 landscape:min-h-3/4 max-h-1/2 sm:max-h-3/4">
-        {riskAreas[0]}
         <ResponsiveScatterPlot
-          tooltip={Tooltip}
+          enableSlices="x"
+          sliceTooltip={Tooltip}
           colors={{ scheme: "category10" }}
           theme={{
             fontSize,
@@ -229,7 +206,15 @@ const RiskMatrix = ({
               ...legend,
             },
           ]}
-          layers={["grid", "axes", "nodes", "markers", "mesh", "legends"]}
+          layers={[
+            "grid",
+            "axes",
+            RiskAreas,
+            "nodes",
+            "markers",
+            "mesh",
+            "legends",
+          ]}
         />
       </div>
     </div>
