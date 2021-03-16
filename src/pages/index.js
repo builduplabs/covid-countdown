@@ -119,6 +119,7 @@ function IndexPage() {
         <h2 className="text-xl font-black text-left px-1 sm:px-4">
           Evolução Rt
         </h2>
+        <Graph />
         <p className="text-sm text-grey-dark text-justify px-1 sm:px-4 py-1 pt-8">
           Como humanos, somos adaptáveis, o nosso comportamento muda, e isso
           altera o valor efetivo do R a qualquer momento. Como o valor muda tão
