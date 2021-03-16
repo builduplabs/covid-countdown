@@ -8,7 +8,7 @@ import SEO from "../components/seo";
 import Countdown from "../containers/countdown";
 import Modal from "../components/modal";
 import Graph from "../containers/graph";
-import RiskMatrix from "../components/risk_matrix";
+import RiskMatrix from "../containers/risk_matrix";
 //import RiskMatrix from "../components/risk_matrix";
 // import ModeToggle from '../components/mode_toggle';
 
