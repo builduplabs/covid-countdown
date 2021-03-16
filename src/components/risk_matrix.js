@@ -146,8 +146,6 @@ const RiskMatrix = ({
 }) => {
   if (loading) return null;
 
-  console.log(graphData);
-
   const mobile = window.innerWidth <= 640;
   const legend = {
     anchor: "right",
@@ -166,18 +164,6 @@ const RiskMatrix = ({
 
   const fontSize = mobile ? 8 : 12;
 
-  const data = [
-    {
-      id: "Today",
-      data: [
-        {
-          x: 0.83,
-          y: 96,
-        },
-      ],
-    },
-  ];
-
   const margin = {
     top: 40,
     right: mobile ? 60 : 80,
@@ -195,7 +181,7 @@ const RiskMatrix = ({
         <ResponsiveScatterPlot
           enableSlices="x"
           sliceTooltip={Tooltip}
-          colors={{ scheme: "pastel1" }}
+          colors={{ scheme: "dark2" }}
           theme={{
             fontSize,
             fontFamily: "Montserrat",
@@ -208,7 +194,7 @@ const RiskMatrix = ({
               },
             },
           }}
-          data={data}
+          data={graphData}
           margin={margin}
           useMesh
           animate
