@@ -1,19 +1,20 @@
-import React from 'react';
-import moment from 'moment';
-import 'moment/locale/pt';
-import 'animate.css';
+import React from "react";
+import moment from "moment";
+import "moment/locale/pt";
+import "animate.css";
 
-import Layout from '../components/layout';
-import SEO from '../components/seo';
-import Countdown from '../containers/countdown';
-import Graph from '../containers/graph';
-import Modal from '../components/modal';
+import Layout from "../components/layout";
+import SEO from "../components/seo";
+import Countdown from "../containers/countdown";
+//import Graph from "../containers/graph";
+import Modal from "../components/modal";
+import RiskMatrix from "../components/risk_matrix";
 // import ModeToggle from '../components/mode_toggle';
 
 function IndexPage() {
   const [showModal, setShowModal] = React.useState(false);
 
-  moment.locale('pt');
+  moment.locale("pt");
   return (
     <Layout>
       <SEO />
@@ -26,7 +27,7 @@ function IndexPage() {
           Esta pandemia tem os dias contados
         </h2>
         <p className="text-sm text-grey-dark text-justify px-1 sm:px-4 py-1">
-          Há uma pergunta que todos temos na cabeça:{' '}
+          Há uma pergunta que todos temos na cabeça:{" "}
           <span className="font-black">
             quanto tempo falta para isto acabar?
           </span>
@@ -44,13 +45,13 @@ function IndexPage() {
         <p className="text-sm text-grey-dark text-justify px-1 sm:px-4 py-1">
           É mais difícil sermos optimistas se não sabemos quando as coisas
           voltarão ao normal. É certo que nem tudo vai ser como dantes, e que
-          este normal será um{' '}
+          este normal será um{" "}
           <span className="italic">&quot;novo normal&quot;</span>. Ainda assim,
           precisamos de uma luz ao fundo do túnel, por mais pequena e simbólica
           que seja.
         </p>
         <p className="text-sm text-grey-dark text-justify px-1 sm:px-4 py-1">
-          Foi por isso que nasceu o{' '}
+          Foi por isso que nasceu o{" "}
           <span className="font-black">COVID COUNTDOWN</span>. Um contador para
           o fim do distanciamento social, que todos dias recalcula a data final,
           com base em diversas fontes de dados oficiais. Todos os dias teremos
@@ -60,7 +61,7 @@ function IndexPage() {
         <p className="text-sm text-grey-dark text-justify px-1 sm:px-4 py-1">
           Apesar de ter sido desenvolvida por aspirantes a Data Scientists, esta
           ideia não pretende ser uma previsão 100% certa, mas sim uma
-          aproximação do dia pelo qual todos ansiamos. Um{' '}
+          aproximação do dia pelo qual todos ansiamos. Um{" "}
           <span className="italic">&quot;bitaite&quot;</span> bem informado que
           passa uma mensagem de esperança e optimismo, que nos ajuda olhar para
           as oportunidades do futuro e não só para os problemas de hoje. Porque
@@ -92,6 +93,12 @@ function IndexPage() {
         </div>
       </div>
       <div className="w-full flex flex-col justify-center">
+        <h2 className="text-xl font-black text-left px-1 sm:px-4">
+          Matriz de Risco
+        </h2>
+        <RiskMatrix loading={false} />
+      </div>
+      <div className="w-full flex flex-col justify-center">
         <h2 className="text-2xl font-black text-left py-2 px-1 sm:px-4">
           Como é feita a previsão?
         </h2>
@@ -111,7 +118,6 @@ function IndexPage() {
         <h2 className="text-xl font-black text-left px-1 sm:px-4">
           Evolução Rt
         </h2>
-        <Graph />
         <p className="text-sm text-grey-dark text-justify px-1 sm:px-4 py-1 pt-8">
           Como humanos, somos adaptáveis, o nosso comportamento muda, e isso
           altera o valor efetivo do R a qualquer momento. Como o valor muda tão
@@ -124,7 +130,7 @@ function IndexPage() {
         <p className="text-sm text-grey-dark text-justify px-1 sm:px-4 py-1">
           Para tentarmos calcular o Rt para cada região de Portugal, estamos a
           utilizar uma adaptação do método específico que Bettencourt & Ribeiro
-          descreveram no seu artigo de 2008:{' '}
+          descreveram no seu artigo de 2008:{" "}
           <a
             href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0002185"
             rel="noopener noreferrer"
@@ -133,8 +139,8 @@ function IndexPage() {
           >
             &quot;Real Time Bayesian Estimation of the Epidemic Potential of
             Emerging Infectious Diseases&quot;
-          </a>{' '}
-          e que está descrito neste{' '}
+          </a>{" "}
+          e que está descrito neste{" "}
           <a
             href="http://systrom.com/blog/the-metric-we-need-to-manage-covid-19/"
             rel="noopener noreferrer"
@@ -142,8 +148,8 @@ function IndexPage() {
             className="underline"
           >
             post
-          </a>{' '}
-          no blog de{' '}
+          </a>{" "}
+          no blog de{" "}
           <a
             href="http://systrom.com/"
             rel="noopener noreferrer"
@@ -155,7 +161,7 @@ function IndexPage() {
           , co-fundador do Instagram.
         </p>
         <p className="text-sm text-grey-dark text-justify px-1 sm:px-4 py-1">
-          Utilizámos o{' '}
+          Utilizámos o{" "}
           <a
             href="https://github.com/k-sys/covid-19/blob/master/Realtime%20R0.ipynb"
             rel="noopener noreferrer"
@@ -163,7 +169,7 @@ function IndexPage() {
             className="underline"
           >
             Jupiter Notebook
-          </a>{' '}
+          </a>{" "}
           de Kevin Systrom.
         </p>
         <h2 className="text-sm font-bold font-black text-left pt-16 px-1 sm:px-4">
@@ -172,7 +178,7 @@ function IndexPage() {
         <ul className="list-disc ml-6 sm:ml-12">
           <li className="text-xs text-grey-dark pr-4 py-1">
             Utilizámos como fonte de dados o dataset covid19pt-data da Data
-            Science for Social Good Portugal:{' '}
+            Science for Social Good Portugal:{" "}
             <a
               href="https://github.com/dssg-pt/covid19pt-data/blob/master/data.csv"
               rel="noopener noreferrer"
@@ -202,12 +208,11 @@ function IndexPage() {
             feito pelo Governo neste dia.
           </li>
           <li className="text-xs text-grey-dark pr-4 py-1">
-            Nova data &quot;baseline&quot;, 1 de Janeiro 2021, com o
-            Rt do dia 24 de Setembro de 2020, tendo em conta o anúncio do prolongamento do
+            Nova data &quot;baseline&quot;, 1 de Janeiro 2021, com o Rt do dia
+            24 de Setembro de 2020, tendo em conta o anúncio do prolongamento do
             cancelamento dos Festivais de Música até 31 de Dezembro de 2020,
             feito pelo Governo neste dia.
           </li>
-		  
           <li className="text-xs text-grey-dark pr-4 py-1">
             Por cada variação do Rt, a data de regresso é ajustada, de forma
             positiva ou negativa, sendo que por cada 0,01 que o valor aumenta ou
@@ -255,7 +260,7 @@ function IndexPage() {
         <ul className="list-disc ml-6 sm:ml-12 pb-8">
           <li className="text-xs text-grey-dark pr-4 py-1">
             Deixa os teus comentátios, sugestões, otimizações, críticas,
-            correções, etc em:{' '}
+            correções, etc em:{" "}
             <a
               href="https://github.com/builduplabs/covid-countdown/issues"
               rel="noopener noreferrer"
