@@ -151,9 +151,9 @@ const RiskMatrix = ({
     anchor: "right",
     direction: "column",
     translateY: 0,
-    translateX: mobile ? 60 : 80,
+    translateX: mobile ? 60 : 95,
     itemHeight: 25,
-    itemWidth: mobile ? 45 : 50,
+    itemWidth: mobile ? 45 : 80,
     // anchor: mobile ? 'right' : 'top',
     // direction: mobile ? 'column' : 'row',
     // translateY: mobile ? 0 : -50,
@@ -166,7 +166,7 @@ const RiskMatrix = ({
 
   const margin = {
     top: 40,
-    right: mobile ? 60 : 80,
+    right: mobile ? 60 : 95,
     bottom: mobile ? 50 : 80,
     left: mobile ? 40 : 50,
     // top: mobile ? 50 : 60,
