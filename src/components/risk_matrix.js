@@ -160,7 +160,7 @@ const CustomNode = ({
   onMouseLeave,
   onClick,
 }) => {
-  if (node.data.serieId === "Most Recent") {
+  if (node.data.serieId === "Atual") {
     return (
       <g transform={`translate(${x},${y}) rotate(45)`}>
         <rect
