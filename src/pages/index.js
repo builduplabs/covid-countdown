@@ -1,19 +1,21 @@
-import React from 'react';
-import moment from 'moment';
-import 'moment/locale/pt';
-import 'animate.css';
+import React from "react";
+import moment from "moment";
+import "moment/locale/pt";
+import "animate.css";
 
-import Layout from '../components/layout';
-import SEO from '../components/seo';
-import Countdown from '../containers/countdown';
-import Graph from '../containers/graph';
-import Modal from '../components/modal';
+import Layout from "../components/layout";
+import SEO from "../components/seo";
+import Countdown from "../containers/countdown";
+import Modal from "../components/modal";
+import Graph from "../containers/graph";
+import RiskMatrix from "../containers/risk_matrix";
+//import RiskMatrix from "../components/risk_matrix";
 // import ModeToggle from '../components/mode_toggle';
 
 function IndexPage() {
   const [showModal, setShowModal] = React.useState(false);
 
-  moment.locale('pt');
+  moment.locale("pt");
   return (
     <Layout>
       <SEO />
@@ -26,7 +28,7 @@ function IndexPage() {
           Esta pandemia tem os dias contados
         </h2>
         <p className="text-sm text-grey-dark text-justify px-1 sm:px-4 py-1">
-          Há uma pergunta que todos temos na cabeça:{' '}
+          Há uma pergunta que todos temos na cabeça:{" "}
           <span className="font-black">
             quanto tempo falta para isto acabar?
           </span>
@@ -44,13 +46,13 @@ function IndexPage() {
         <p className="text-sm text-grey-dark text-justify px-1 sm:px-4 py-1">
           É mais difícil sermos optimistas se não sabemos quando as coisas
           voltarão ao normal. É certo que nem tudo vai ser como dantes, e que
-          este normal será um{' '}
+          este normal será um{" "}
           <span className="italic">&quot;novo normal&quot;</span>. Ainda assim,
           precisamos de uma luz ao fundo do túnel, por mais pequena e simbólica
           que seja.
         </p>
         <p className="text-sm text-grey-dark text-justify px-1 sm:px-4 py-1">
-          Foi por isso que nasceu o{' '}
+          Foi por isso que nasceu o{" "}
           <span className="font-black">COVID COUNTDOWN</span>. Um contador para
           o fim do distanciamento social, que todos dias recalcula a data final,
           com base em diversas fontes de dados oficiais. Todos os dias teremos
@@ -60,7 +62,7 @@ function IndexPage() {
         <p className="text-sm text-grey-dark text-justify px-1 sm:px-4 py-1">
           Apesar de ter sido desenvolvida por aspirantes a Data Scientists, esta
           ideia não pretende ser uma previsão 100% certa, mas sim uma
-          aproximação do dia pelo qual todos ansiamos. Um{' '}
+          aproximação do dia pelo qual todos ansiamos. Um{" "}
           <span className="italic">&quot;bitaite&quot;</span> bem informado que
           passa uma mensagem de esperança e optimismo, que nos ajuda olhar para
           as oportunidades do futuro e não só para os problemas de hoje. Porque
@@ -90,6 +92,71 @@ function IndexPage() {
             Partilhar Twitter
           </a>
         </div>
+      </div>
+      <div className="w-full flex flex-col justify-center">
+        <h2 className="text-xl font-black text-left px-1 sm:px-4">
+          Matriz de Risco
+        </h2>
+        <RiskMatrix />
+
+        <h2 className="text-2xl font-black text-left py-2 px-1 sm:px-4">
+          O que é a matriz de risco?
+        </h2>
+        <p className="text-sm text-grey-dark text-justify px-1 sm:px-4 py-1 pt-8">
+          Quando foi anunciado o desconfinamento a 11 de março de 2021, foi
+          introduzida uma matriz de risco que serve como papel fundamental para
+          o processo de desconfinamento. Esta matriz é composta por dois
+          indicadores, o famoso R(t) indicado no eixo (x) e a média de novos
+          casos por 100 mil habitantes a 14 dias.
+        </p>
+
+        <p className="text-sm text-grey-dark text-justify px-1 sm:px-4 py-1 pt-2">
+          Por sua vez, a matriz encontra-se dívidia em 4 secções, em que cada
+          uma representa um determinado nível, sendo esta divisão feita de
+          acordo com os valores de Incidência e R(t) como demonstrado de
+          seguida:
+        </p>
+
+        <ul className="text-sm text-grey-dark text-justify px-1 sm:px-4 py-1 pt-3 mx-10 list-decimal flex flex-wrap">
+          <li className="flex-1 font-bold">
+            Nível
+            <ul className="mx-2 font-normal">
+              <li>Rt: [0, 1]</li>
+              <li>Incidência: [0, 120]</li>
+            </ul>
+          </li>
+          <li className="flex-1 font-bold">
+            Nível:
+            <ul className="mx-2 font-normal">
+              <li>Rt: [1, 2]</li>
+              <li>Incidência: [0, 120]</li>
+            </ul>
+          </li>
+          <li className="flex-1 font-bold">
+            Nível:
+            <ul className="mx-2 font-normal">
+              <li>Rt: [0, 1]</li>
+              <li>Incidência: [120, 240]</li>
+            </ul>
+          </li>
+          <li className="flex-1 font-bold">
+            Nível:
+            <ul className="mx-2 font-normal">
+              <li>Rt: [1, 2]</li>
+              <li>Incidência: [120, 240]</li>
+            </ul>
+          </li>
+        </ul>
+
+        <p className="text-sm text-grey-dark text-justify px-1 sm:px-4 py-1 pt-2">
+          Cada nível dará a possibilidade ao governo de estabelecer medidas
+          relativas ao desconfinamento, estas medidas podem ser tanto de avanço
+          ou de recuo, isto é, caso nos encontremos no nível 1 o desconfinamento
+          poderá prosseguir como planeado, caso por exemplo, nos encontremos no
+          nível 4 o desconfinamento terá de ser parado e terão de ser colocadas
+          medidas em pratica que vise a redução dos casos e da
+          transmissibilidade.
+        </p>
       </div>
       <div className="w-full flex flex-col justify-center">
         <h2 className="text-2xl font-black text-left py-2 px-1 sm:px-4">
@@ -124,7 +191,7 @@ function IndexPage() {
         <p className="text-sm text-grey-dark text-justify px-1 sm:px-4 py-1">
           Para tentarmos calcular o Rt para cada região de Portugal, estamos a
           utilizar uma adaptação do método específico que Bettencourt & Ribeiro
-          descreveram no seu artigo de 2008:{' '}
+          descreveram no seu artigo de 2008:{" "}
           <a
             href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0002185"
             rel="noopener noreferrer"
@@ -133,8 +200,8 @@ function IndexPage() {
           >
             &quot;Real Time Bayesian Estimation of the Epidemic Potential of
             Emerging Infectious Diseases&quot;
-          </a>{' '}
-          e que está descrito neste{' '}
+          </a>{" "}
+          e que está descrito neste{" "}
           <a
             href="http://systrom.com/blog/the-metric-we-need-to-manage-covid-19/"
             rel="noopener noreferrer"
@@ -142,8 +209,8 @@ function IndexPage() {
             className="underline"
           >
             post
-          </a>{' '}
-          no blog de{' '}
+          </a>{" "}
+          no blog de{" "}
           <a
             href="http://systrom.com/"
             rel="noopener noreferrer"
@@ -155,7 +222,7 @@ function IndexPage() {
           , co-fundador do Instagram.
         </p>
         <p className="text-sm text-grey-dark text-justify px-1 sm:px-4 py-1">
-          Utilizámos o{' '}
+          Utilizámos o{" "}
           <a
             href="https://github.com/k-sys/covid-19/blob/master/Realtime%20R0.ipynb"
             rel="noopener noreferrer"
@@ -163,7 +230,7 @@ function IndexPage() {
             className="underline"
           >
             Jupiter Notebook
-          </a>{' '}
+          </a>{" "}
           de Kevin Systrom.
         </p>
         <h2 className="text-sm font-bold font-black text-left pt-16 px-1 sm:px-4">
@@ -172,7 +239,7 @@ function IndexPage() {
         <ul className="list-disc ml-6 sm:ml-12">
           <li className="text-xs text-grey-dark pr-4 py-1">
             Utilizámos como fonte de dados o dataset covid19pt-data da Data
-            Science for Social Good Portugal:{' '}
+            Science for Social Good Portugal:{" "}
             <a
               href="https://github.com/dssg-pt/covid19pt-data/blob/master/data.csv"
               rel="noopener noreferrer"
@@ -254,7 +321,7 @@ function IndexPage() {
         <ul className="list-disc ml-6 sm:ml-12 pb-8">
           <li className="text-xs text-grey-dark pr-4 py-1">
             Deixa os teus comentátios, sugestões, otimizações, críticas,
-            correções, etc em:{' '}
+            correções, etc em:{" "}
             <a
               href="https://github.com/builduplabs/covid-countdown/issues"
               rel="noopener noreferrer"
