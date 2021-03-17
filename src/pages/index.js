@@ -202,12 +202,11 @@ function IndexPage() {
             feito pelo Governo neste dia.
           </li>
           <li className="text-xs text-grey-dark pr-4 py-1">
-            Nova data &quot;baseline&quot;, 1 de Janeiro 2021, com o
-            Rt do dia 24 de Setembro de 2020, tendo em conta o anúncio do prolongamento do
+            Nova data &quot;baseline&quot;, 1 de Janeiro 2021, com o Rt do dia
+            24 de Setembro de 2020, tendo em conta o anúncio do prolongamento do
             cancelamento dos Festivais de Música até 31 de Dezembro de 2020,
             feito pelo Governo neste dia.
           </li>
-		  
           <li className="text-xs text-grey-dark pr-4 py-1">
             Por cada variação do Rt, a data de regresso é ajustada, de forma
             positiva ou negativa, sendo que por cada 0,01 que o valor aumenta ou

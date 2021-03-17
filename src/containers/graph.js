@@ -45,7 +45,7 @@ const GraphContainer = ({ csvData }) => {
 
     const all = grouped.map(({ region, values }) => ({
       id: region,
-      data: values.map(({ r, date }) => ({
+      data: values.reverse().map(({ r, date }) => ({
         x: date,
         y: isNaN(r) ? null : Number(r).toFixed(2),
       })),
@@ -62,6 +62,7 @@ const GraphContainer = ({ csvData }) => {
     const regions = INITIAL_FILTER;
 
     const xAxisLegend = values
+      .reverse()
       .map(({ date }, index) => {
         if (index % Math.floor(selected[0].data.length / 10) === 0) return date;
 
@@ -100,16 +101,16 @@ GraphContainer.propTypes = {
             PropTypes.shape({
               r: PropTypes.string,
               date: PropTypes.string,
-            })
+            }),
           ),
-        })
+        }),
       ),
     }),
     dates: PropTypes.shape({
       values: PropTypes.arrayOf(
         PropTypes.shape({
           date: PropTypes.string,
-        })
+        }),
       ),
     }),
   }).isRequired,
@@ -120,8 +121,8 @@ export default function GraphData(props) {
     <StaticQuery
       query={graphql`
         query {
-          data: allPredictionCsv(sort: { fields: Date, order: ASC }) {
-            grouped: group(field: Region) {
+          data: allPredictionCsv(sort: { fields: Date, order: DESC }) {
+            grouped: group(field: Region, limit: 270) {
               region: fieldValue
               values: nodes {
                 r: ML
@@ -130,8 +131,9 @@ export default function GraphData(props) {
             }
           }
           dates: allPredictionCsv(
-            sort: { fields: Date, order: ASC }
+            sort: { fields: Date, order: DESC }
             filter: { Region: { eq: "Portugal" } }
+            limit: 270
           ) {
             values: nodes {
               date: Date(locale: "pt", formatString: "MMMM DD")

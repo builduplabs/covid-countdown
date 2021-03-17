@@ -36,10 +36,14 @@ const Tooltip = ({ slice }) => {
         </div>
       )}
       {(date === 'Setembro 15' || date === 'setembro 15') && (
-        <div className="text-xs font-bold mb-2 text-center">Portugal entra em Situação de Contingência</div>
+        <div className="text-xs font-bold mb-2 text-center">
+          Portugal entra em Situação de Contingência
+        </div>
       )}
       {(date === 'Setembro 24' || date === 'setembro 24') && (
-        <div className="text-xs font-bold mb-2 text-center">Nova Data baseline</div>
+        <div className="text-xs font-bold mb-2 text-center">
+          Nova Data baseline
+        </div>
       )}
 
       {slice.points.map((point) => (
@@ -64,14 +68,13 @@ Tooltip.propTypes = {
         data: PropTypes.shape({
           x: PropTypes.string,
         }),
-      })
+      }),
     ),
   }).isRequired,
 };
 
 const Graph = ({ loading, graphData, xAxisLegend, toggleLegend, maxValue }) => {
   if (loading || !graphData.length) return null;
-
   const mobile = window.innerWidth <= 640;
   const legend = {
     anchor: 'right',

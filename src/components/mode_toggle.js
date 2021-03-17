@@ -14,7 +14,6 @@ class ModeToggle extends Component {
   }
 
   toggleMode = () => {
-    console.log('toggleMode');
     const { mode } = this.state;
     switch (mode) {
       case 'light':
