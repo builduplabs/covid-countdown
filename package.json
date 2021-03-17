@@ -1,8 +1,8 @@
 {
-  "name": "gatsby-starter-tailwind",
-  "description": "Gatsby starter styled with Tailwind",
-  "version": "4.0.0",
-  "author": "Taylor Bryant <taylor@bryant.io>",
+  "name": "covid-countdown",
+  "description": "Portugal Covid Countdown",
+  "version": "1.0.0",
+  "author": "COMON GROUP <whocares@comon.pt>",
   "dependencies": {
     "@nivo/bar": "^0.61.1",
     "@nivo/line": "^0.61.1",
@@ -60,9 +60,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/taylorbryant/gatsby-starter-tailwind"
+    "url": "https://github.com/builduplabs/covid-countdown"
   },
   "bugs": {
-    "url": "https://github.com/taylorbryant/gatsby-starter-tailwind/issues"
+    "url": "https://github.com/builduplabs/covid-countdown/issues"
   }
 }
