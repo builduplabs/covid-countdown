@@ -98,6 +98,65 @@ function IndexPage() {
           Matriz de Risco
         </h2>
         <RiskMatrix />
+
+        <h2 className="text-2xl font-black text-left py-2 px-1 sm:px-4">
+          O que é a matriz de risco?
+        </h2>
+        <p className="text-sm text-grey-dark text-justify px-1 sm:px-4 py-1 pt-8">
+          Quando foi anunciado o desconfinamento a 11 de março de 2021, foi
+          introduzida uma matriz de risco que serve como papel fundamental para
+          o processo de desconfinamento. Esta matriz é composta por dois
+          indicadores, o famoso R(t) indicado no eixo (x) e a média de novos
+          casos por 100 mil habitantes a 14 dias.
+        </p>
+
+        <p className="text-sm text-grey-dark text-justify px-1 sm:px-4 py-1 pt-2">
+          Por sua vez, a matriz encontra-se dívidia em 4 secções, em que cada
+          uma representa um determinado nível, sendo esta divisão feita de
+          acordo com os valores de Incidência e R(t) como demonstrado de
+          seguida:
+        </p>
+
+        <ul className="text-sm text-grey-dark text-justify px-1 sm:px-4 py-1 pt-3 mx-10 list-decimal flex flex-wrap">
+          <li className="flex-1 font-bold">
+            Nível
+            <ul className="mx-2 font-normal">
+              <li>Rt: [0, 1]</li>
+              <li>Incidência: [0, 120]</li>
+            </ul>
+          </li>
+          <li className="flex-1 font-bold">
+            Nível:
+            <ul className="mx-2 font-normal">
+              <li>Rt: [1, 2]</li>
+              <li>Incidência: [0, 120]</li>
+            </ul>
+          </li>
+          <li className="flex-1 font-bold">
+            Nível:
+            <ul className="mx-2 font-normal">
+              <li>Rt: [0, 1]</li>
+              <li>Incidência: [120, 240]</li>
+            </ul>
+          </li>
+          <li className="flex-1 font-bold">
+            Nível:
+            <ul className="mx-2 font-normal">
+              <li>Rt: [1, 2]</li>
+              <li>Incidência: [120, 240]</li>
+            </ul>
+          </li>
+        </ul>
+
+        <p className="text-sm text-grey-dark text-justify px-1 sm:px-4 py-1 pt-2">
+          Cada nível dará a possibilidade ao governo de estabelecer medidas
+          relativas ao desconfinamento, estas medidas podem ser tanto de avanço
+          ou de recuo, isto é, caso nos encontremos no nível 1 o desconfinamento
+          poderá prosseguir como planeado, caso por exemplo, nos encontremos no
+          nível 4 o desconfinamento terá de ser parado e terão de ser colocadas
+          medidas em pratica que vise a redução dos casos e da
+          transmissibilidade.
+        </p>
       </div>
       <div className="w-full flex flex-col justify-center">
         <h2 className="text-2xl font-black text-left py-2 px-1 sm:px-4">

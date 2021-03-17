@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import { StaticQuery, graphql } from 'gatsby';
-import moment from 'moment';
-import Countdown from '../components/countdown';
-import Share from '../components/share';
+import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
+import { StaticQuery, graphql } from "gatsby";
+import moment from "moment";
+import Countdown from "../components/countdown";
+import Share from "../components/share";
 
 const CountdownContainer = ({
   data,
@@ -15,9 +15,10 @@ const CountdownContainer = ({
   setShowModal,
 }) => {
   const [timeLeft, setTimeLeft] = useState([]);
-  const [endDate, setEndDate] = useState('');
+  const [endDate, setEndDate] = useState("");
   const [loading, setLoading] = useState(true);
   const [animated, setAnimated] = useState(true);
+  const [lastUpdateDate, setLastUpdateDate] = useState("");
 
   useEffect(() => {
     const {
@@ -25,7 +26,21 @@ const CountdownContainer = ({
       site: {
         siteMetadata: { animated },
       },
+      allFile: { edges },
     } = data;
+
+    const modifiedTime = edges[0].node.modifiedTime;
+
+    setLastUpdateDate(() => {
+      const today = moment().diff(modifiedTime, "days") === 0;
+
+      return today
+        ? "hoje"
+        : moment(modifiedTime)
+            .format("DD \\d\\e MMMM \\d\\e YYYY")
+            .toLowerCase();
+    });
+
     setAnimated(animated);
     const { date } = entries[0];
     const end = moment(date);
@@ -44,32 +59,32 @@ const CountdownContainer = ({
 
         const timeLeft = [];
 
-        const months = end.diff(now, 'months');
+        const months = end.diff(now, "months");
         if (months) {
           timeLeft.push({
             value: months,
-            type: 'meses',
+            type: "meses",
           });
         }
-        const days = end.subtract(months, 'months').diff(now, 'days');
+        const days = end.subtract(months, "months").diff(now, "days");
         timeLeft.push({
           value: days,
-          type: 'dias',
+          type: "dias",
         });
-        const hours = end.subtract(days, 'days').diff(now, 'hours');
+        const hours = end.subtract(days, "days").diff(now, "hours");
         timeLeft.push({
           value: hours,
-          type: 'horas',
+          type: "horas",
         });
-        const minutes = end.subtract(hours, 'hours').diff(now, 'minutes');
+        const minutes = end.subtract(hours, "hours").diff(now, "minutes");
         timeLeft.push({
           value: minutes,
-          type: 'minutos',
+          type: "minutos",
         });
-        const seconds = end.subtract(minutes, 'minutes').diff(now, 'seconds');
+        const seconds = end.subtract(minutes, "minutes").diff(now, "seconds");
         timeLeft.push({
           value: seconds,
-          type: 'segundos',
+          type: "segundos",
         });
 
         return timeLeft;
@@ -78,7 +93,7 @@ const CountdownContainer = ({
         setLoading(false);
       }
     }, 1000);
-    setEndDate(moment(date).format('DD [de] MMMM [de] YYYY'));
+    setEndDate(moment(date).format("DD [de] MMMM [de] YYYY"));
 
     return () => clearInterval(interval);
   }, [timeLeft]);
@@ -107,14 +122,15 @@ const CountdownContainer = ({
       timeLeft={timeLeft}
       loading={loading}
       endDate={endDate}
+      lastUpdateDate={lastUpdateDate}
     />
   );
 };
 
 CountdownContainer.defaultProps = {
   share: false,
-  color: 'black',
-  background: 'white',
+  color: "black",
+  background: "white",
 };
 
 CountdownContainer.propTypes = {
@@ -137,6 +153,13 @@ CountdownContainer.propTypes = {
         animated: PropTypes.bool,
       }),
     }),
+    allFile: PropTypes.shape({
+      edges: PropTypes.arrayOf({
+        node: PropTypes.shape({
+          modifiedTime: PropTypes.string,
+        }),
+      }),
+    }),
   }).isRequired,
 };
 
@@ -157,6 +180,14 @@ export default function Timer(props) {
           site {
             siteMetadata {
               animated
+            }
+          }
+          allFile(filter: { name: { eq: "prediction" } }) {
+            edges {
+              node {
+                modifiedTime
+                name
+              }
             }
           }
         }
