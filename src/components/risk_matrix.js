@@ -74,66 +74,39 @@ RiskAreas.propTypes = {
   height: PropTypes.number,
 };
 
-const Tooltip = ({ slice }) => {
-  const { points } = slice;
-  const date = points[0].data.x;
+const Tooltip = ({ node }) => {
+  const {
+    data: { serieId: date, formattedX: rt, formattedY: cases_by_100k },
+  } = node;
 
   return (
     <div className="bg-white p-2 border">
-      <div className="text-sm text-center">{date}</div>
-      {(date === "Maio 04" || date === "maio 04") && (
-        <div className="text-xs font-bold mb-2 text-center">
-          1ª fase de desconfinamento
-        </div>
-      )}
-      {(date === "Maio 07" || date === "maio 07") && (
-        <div className="text-xs font-bold mb-2 text-center">Data baseline</div>
-      )}
-      {(date === "Maio 18" || date === "maio 18") && (
-        <div className="text-xs font-bold mb-2 text-center">
-          2ª fase de desconfinamento
-        </div>
-      )}
-      {(date === "Junho 01" || date === "junho 01") && (
-        <div className="text-xs font-bold mb-2 text-center">
-          3ª fase de desconfinamento
-        </div>
-      )}
-      {(date === "Setembro 15" || date === "setembro 15") && (
-        <div className="text-xs font-bold mb-2 text-center">
-          Portugal entra em Situação de Contingência
-        </div>
-      )}
-      {(date === "Setembro 24" || date === "setembro 24") && (
-        <div className="text-xs font-bold mb-2 text-center">
-          Nova Data baseline
-        </div>
-      )}
+      <div className="text-xs text-center">{date}</div>
 
-      {slice.points.map((point) => (
-        <div
-          key={point.id}
-          className="py-1"
-          style={{ color: point.serieColor }}
-        >
-          <p className="text-sm">
-            <strong>Rt {point.serieId}:</strong> {point.data.yFormatted}
-          </p>
-        </div>
-      ))}
+      <div className="py-1" style={{ color: node.style.color }}>
+        <p className="text-xs">
+          <strong>Rt:</strong> {rt}
+        </p>
+      </div>
+      <div className="py-1" style={{ color: node.style.color }}>
+        <p className="text-xs">
+          <strong>Incidência:</strong> {cases_by_100k}
+        </p>
+      </div>
     </div>
   );
 };
 
 Tooltip.propTypes = {
-  slice: PropTypes.shape({
-    points: PropTypes.arrayOf(
-      PropTypes.shape({
-        data: PropTypes.shape({
-          x: PropTypes.string,
-        }),
-      })
-    ),
+  node: PropTypes.shape({
+    data: PropTypes.shape({
+      formattedX: PropTypes.number,
+      formattedY: PropTypes.number,
+      serieId: PropTypes.string,
+    }),
+    style: PropTypes.shape({
+      color: PropTypes.string,
+    }),
   }).isRequired,
 };
 
@@ -179,8 +152,6 @@ const RiskMatrix = ({
     <div className="w-full flex-1 sm:h-screen flex flex-col h-full justify-center">
       <div className="w-full flex h-px min-h-1/2 landscape:min-h-3/4 max-h-1/2 sm:max-h-3/4">
         <ResponsiveScatterPlot
-          enableSlices="x"
-          sliceTooltip={Tooltip}
           colors={{ scheme: "dark2" }}
           theme={{
             fontSize,
@@ -194,6 +165,7 @@ const RiskMatrix = ({
               },
             },
           }}
+          tooltip={Tooltip}
           data={graphData}
           margin={margin}
           useMesh
