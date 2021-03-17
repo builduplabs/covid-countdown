@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
 import PropTypes from "prop-types";
-import { area } from "d3-shape";
+import { area, line } from "d3-shape";
 import { ResponsiveScatterPlot } from "@nivo/scatterplot";
 
 const RiskAreas = ({ yScale, xScale, height }) => {
@@ -17,11 +17,26 @@ const RiskAreas = ({ yScale, xScale, height }) => {
     return generator(level.data);
   };
 
+  const lineGenerator = (start, end) => {
+    const scaleValues = (arr) => {
+      if (arr.length > 2) return arr;
+
+      return arr.map((value, index) =>
+        index % 2 ? yScale(value) : xScale(value)
+      );
+    };
+
+    start = scaleValues(start);
+    end = scaleValues(end);
+
+    return line()([start, end]);
+  };
+
   const areas = [
     {
       data: [
-        { x: 0.5, y: 0 },
-        { x: 0.5, y: 120 },
+        { x: 0, y: 0 },
+        { x: 0, y: 120 },
         { x: 1, y: 120 },
         { x: 1, y: 0 },
       ],
@@ -31,15 +46,15 @@ const RiskAreas = ({ yScale, xScale, height }) => {
       data: [
         { x: 1.0, y: 0 },
         { x: 1.0, y: 120 },
-        { x: 1.5, y: 120 },
-        { x: 1.5, y: 0 },
+        { x: 2, y: 120 },
+        { x: 2, y: 0 },
       ],
       color: "#ffaa16",
     },
     {
       data: [
-        { x: 0.5, y: 120 },
-        { x: 0.5, y: 240 },
+        { x: 0, y: 120 },
+        { x: 0, y: 240 },
         { x: 1, y: 240 },
         { x: 1, y: 120 },
       ],
@@ -50,22 +65,45 @@ const RiskAreas = ({ yScale, xScale, height }) => {
       data: [
         { x: 1.0, y: 120 },
         { x: 1.0, y: 240 },
-        { x: 1.5, y: 240 },
-        { x: 1.5, y: 120 },
+        { x: 2, y: 240 },
+        { x: 2, y: 120 },
       ],
       color: "#ff3f3f",
       upper: true,
     },
   ];
 
-  return areas.map((level, index) => (
-    <path
-      key={index}
-      d={areaGenerator(level)}
-      fill={level.color}
-      style={{ mixBlendMode: "multiply", pointerEvents: "none" }}
-    />
-  ));
+  const lines = [
+    {
+      start: [0, 120],
+      end: [2, 120],
+    },
+    {
+      start: [1, 0],
+      end: [1, 240],
+    },
+  ];
+
+  return (
+    <>
+      {lines.map((line, index) => (
+        <path
+          key={`line-${index}`}
+          d={lineGenerator(line.start, line.end)}
+          fill="none"
+          stroke="black"
+        />
+      ))}
+      {areas.map((level, index) => (
+        <path
+          key={index}
+          d={areaGenerator(level)}
+          fill={level.color}
+          style={{ mixBlendMode: "multiply", pointerEvents: "none" }}
+        />
+      ))}
+    </>
+  );
 };
 
 RiskAreas.propTypes = {
@@ -76,19 +114,19 @@ RiskAreas.propTypes = {
 
 const Tooltip = ({ node }) => {
   const {
-    data: { serieId: date, formattedX: rt, formattedY: cases_by_100k },
+    data: { date, formattedX: rt, formattedY: cases_by_100k },
   } = node;
 
   return (
     <div className="bg-white p-2 border">
       <div className="text-xs text-center">{date}</div>
 
-      <div className="py-1" style={{ color: node.style.color }}>
+      <div className="py-1">
         <p className="text-xs">
           <strong>Rt:</strong> {rt}
         </p>
       </div>
-      <div className="py-1" style={{ color: node.style.color }}>
+      <div className="py-1">
         <p className="text-xs">
           <strong>Incidência:</strong> {cases_by_100k}
         </p>
@@ -102,12 +140,75 @@ Tooltip.propTypes = {
     data: PropTypes.shape({
       formattedX: PropTypes.number,
       formattedY: PropTypes.number,
-      serieId: PropTypes.string,
+      date: PropTypes.string,
     }),
     style: PropTypes.shape({
       color: PropTypes.string,
     }),
   }).isRequired,
+};
+
+const CustomNode = ({
+  node,
+  x,
+  y,
+  size,
+  color,
+  blendMode,
+  onMouseEnter,
+  onMouseMove,
+  onMouseLeave,
+  onClick,
+}) => {
+  if (node.data.serieId === "Most Recent") {
+    return (
+      <g transform={`translate(${x},${y}) rotate(45)`}>
+        <rect
+          x={size * -0.5}
+          y={size * -0.5}
+          width={size}
+          height={size}
+          fill={color}
+          style={{ mixBlendMode: blendMode }}
+          onMouseEnter={onMouseEnter}
+          onMouseMove={onMouseMove}
+          onMouseLeave={onMouseLeave}
+          onClick={onClick}
+        />
+      </g>
+    );
+  }
+
+  return (
+    <g transform={`translate(${x},${y})`}>
+      <circle
+        r={size / 2}
+        fill={color}
+        style={{ mixBlendMode: blendMode }}
+        onMouseEnter={onMouseEnter}
+        onMouseMove={onMouseMove}
+        onMouseLeave={onMouseLeave}
+        onClick={onClick}
+      />
+    </g>
+  );
+};
+
+CustomNode.propTypes = {
+  node: PropTypes.shape({
+    data: PropTypes.shape({
+      serieId: PropTypes.string,
+    }),
+  }),
+  x: PropTypes.number,
+  y: PropTypes.number,
+  size: PropTypes.number,
+  color: PropTypes.string,
+  blendMode: PropTypes.string,
+  onMouseEnter: PropTypes.func,
+  onMouseMove: PropTypes.func,
+  onMouseLeave: PropTypes.func,
+  onClick: PropTypes.func,
 };
 
 const RiskMatrix = ({
@@ -124,9 +225,9 @@ const RiskMatrix = ({
     anchor: "right",
     direction: "column",
     translateY: 0,
-    translateX: mobile ? 60 : 80,
+    translateX: mobile ? 60 : 10,
     itemHeight: 25,
-    itemWidth: mobile ? 45 : 50,
+    itemWidth: mobile ? 45 : 0,
     // anchor: mobile ? 'right' : 'top',
     // direction: mobile ? 'column' : 'row',
     // translateY: mobile ? 0 : -50,
@@ -139,7 +240,7 @@ const RiskMatrix = ({
 
   const margin = {
     top: 40,
-    right: mobile ? 60 : 80,
+    right: mobile ? 60 : 100,
     bottom: mobile ? 50 : 80,
     left: mobile ? 40 : 50,
     // top: mobile ? 50 : 60,
@@ -150,9 +251,9 @@ const RiskMatrix = ({
 
   return (
     <div className="w-full flex-1 sm:h-screen flex flex-col h-full justify-center">
-      <div className="w-full flex h-px min-h-1/2 landscape:min-h-3/4 max-h-1/2 sm:max-h-3/4">
+      <div className="w-full flex h-px min-h-1/2 landscape:min-h-1/2 max-h-1/2 sm:max-h-3/4">
         <ResponsiveScatterPlot
-          colors={{ scheme: "dark2" }}
+          colors={["#e0e0e0", "black"]}
           theme={{
             fontSize,
             fontFamily: "Montserrat",
@@ -168,6 +269,8 @@ const RiskMatrix = ({
           tooltip={Tooltip}
           data={graphData}
           margin={margin}
+          enableGridX={false}
+          enableGridY={false}
           useMesh
           animate
           axisTop={null}
@@ -181,7 +284,7 @@ const RiskMatrix = ({
           xFormat={(e) => e}
           xScale={{
             type: "linear",
-            min: 0.5,
+            min: 0,
             max: maxXValue,
           }}
           axisLeft={{
@@ -208,7 +311,7 @@ const RiskMatrix = ({
               },
               justify: false,
               itemsSpacing: 0,
-              itemDirection: "right-to-left",
+              itemDirection: "left-to-right",
               itemOpacity: 0.75,
               symbolSize: 10,
               symbolShape: "circle",
@@ -224,6 +327,7 @@ const RiskMatrix = ({
             "mesh",
             "legends",
           ]}
+          renderNode={CustomNode}
         />
       </div>
     </div>
@@ -234,7 +338,7 @@ RiskMatrix.defaultProps = {
   graphData: [],
   xAxisLegend: [],
   maxYValue: 240,
-  maxXValue: 1.5,
+  maxXValue: 2,
 };
 
 RiskMatrix.propTypes = {

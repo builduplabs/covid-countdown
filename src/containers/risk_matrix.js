@@ -37,7 +37,30 @@ const GraphContainer = ({ csvData }) => {
       data: { values: data },
     } = csvData;
 
-    const all = data.map((entry) => ({
+    const dataPoints = data.slice(1).map((entry) => ({
+      x: entry.rt_real,
+      y: entry.cases_by_100k_real,
+      date: entry.date,
+    }));
+
+    const all = [
+      {
+        id: "Histórico",
+        data: dataPoints,
+      },
+      {
+        id: "Atual",
+        data: [
+          {
+            x: data[0].rt_real,
+            y: data[0].cases_by_100k_real,
+            date: data[0].date,
+          },
+        ],
+      },
+    ];
+
+    /* const all = data.map((entry, index) => ({
       id: entry.date,
       data: [
         {
@@ -45,7 +68,7 @@ const GraphContainer = ({ csvData }) => {
           y: entry.cases_by_100k_real,
         },
       ],
-    }));
+    })); */
 
     const selected = all;
 
@@ -84,7 +107,7 @@ export default function RiskMatrix(props) {
         query {
           data: allQuadranteCsv(
             filter: {
-              rt_real: { gte: 0.5, lte: 1.5 }
+              rt_real: { gte: 0, lte: 2 }
               cases_by_100k_real: { lte: 240 }
             }
             sort: { fields: date, order: DESC }
