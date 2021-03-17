@@ -117,18 +117,22 @@ const Tooltip = ({ node }) => {
     data: { date, formattedX: rt, formattedY: cases_by_100k },
   } = node;
 
+  const roundBy = (number, decimal) =>
+    Math.round((number + Number.EPSILON) * Math.pow(10, decimal)) /
+    Math.pow(10, decimal);
+
   return (
     <div className="bg-white p-2 border">
       <div className="text-xs text-center">{date}</div>
 
       <div className="py-1">
         <p className="text-xs">
-          <strong>Rt:</strong> {rt}
+          <strong>Rt:</strong> {roundBy(rt, 3)}
         </p>
       </div>
       <div className="py-1">
         <p className="text-xs">
-          <strong>Incidência:</strong> {cases_by_100k}
+          <strong>Incidência:</strong> {roundBy(cases_by_100k, 2)}
         </p>
       </div>
     </div>
@@ -160,7 +164,7 @@ const CustomNode = ({
   onMouseLeave,
   onClick,
 }) => {
-  if (node.data.serieId === "Most Recent") {
+  if (node.data.serieId === "Atual") {
     return (
       <g transform={`translate(${x},${y}) rotate(45)`}>
         <rect
