@@ -5,8 +5,9 @@ import { area, line } from "d3-shape";
 import { ResponsiveScatterPlot } from "@nivo/scatterplot";
 
 const RiskAreas = ({ yScale, xScale, height }) => {
+  const mobile = window.innerWidth <= 640;
   const areaGenerator = (level) => {
-    const offset = 120;
+    const offset = mobile ? 90 : 120;
     const areaHeight = (height - offset) / (level.upper ? 2 : 1);
 
     const generator = area()
@@ -229,7 +230,7 @@ const RiskMatrix = ({
     anchor: "right",
     direction: "column",
     translateY: 0,
-    translateX: mobile ? 60 : 10,
+    translateX: mobile ? 50 : 10,
     itemHeight: 25,
     itemWidth: mobile ? 45 : 0,
     // anchor: mobile ? 'right' : 'top',
@@ -244,7 +245,7 @@ const RiskMatrix = ({
 
   const margin = {
     top: 40,
-    right: mobile ? 60 : 100,
+    right: mobile ? 80 : 100,
     bottom: mobile ? 50 : 80,
     left: mobile ? 40 : 50,
     // top: mobile ? 50 : 60,
