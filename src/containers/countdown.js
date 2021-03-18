@@ -21,25 +21,31 @@ const CountdownContainer = ({
   const [lastUpdateDate, setLastUpdateDate] = useState("");
 
   useEffect(() => {
-    const {
-      csvData: { entries },
-      site: {
-        siteMetadata: { animated },
-      },
-      allFile: { edges },
-    } = data;
-
-    const modifiedTime = edges[0].node.modifiedTime;
-
     setLastUpdateDate(() => {
-      const today = moment().diff(modifiedTime, "days") === 0;
+      const {
+        allFile: { edges },
+      } = data;
 
-      return today
+      const modifiedTime = moment(edges[0].node.modifiedTime).startOf("day");
+      const today = moment().startOf("day");
+
+      const wasUpdatedToday = today.diff(modifiedTime, "days") === 0;
+
+      return wasUpdatedToday
         ? "hoje"
         : moment(modifiedTime)
             .format("DD \\d\\e MMMM \\d\\e YYYY")
             .toLowerCase();
     });
+  }, [lastUpdateDate]);
+
+  useEffect(() => {
+    const {
+      csvData: { entries },
+      site: {
+        siteMetadata: { animated },
+      },
+    } = data;
 
     setAnimated(animated);
     const { date } = entries[0];
