@@ -21,25 +21,33 @@ const CountdownContainer = ({
   const [lastUpdateDate, setLastUpdateDate] = useState("");
 
   useEffect(() => {
-    const {
-      csvData: { entries },
-      site: {
-        siteMetadata: { animated },
-      },
-      allFile: { edges },
-    } = data;
-
-    const modifiedTime = edges[0].node.modifiedTime;
-
     setLastUpdateDate(() => {
-      const today = moment().diff(modifiedTime, "days") === 0;
+      const {
+        lastPredictionUpdate: {
+          fields: { modifiedMs },
+        },
+      } = data;
 
-      return today
+      const modifiedTime = moment(modifiedMs).startOf("day");
+      const today = moment().startOf("day");
+
+      const wasUpdatedToday = today.diff(modifiedTime, "days") === 0;
+
+      return wasUpdatedToday
         ? "hoje"
         : moment(modifiedTime)
             .format("DD \\d\\e MMMM \\d\\e YYYY")
             .toLowerCase();
     });
+  }, [lastUpdateDate]);
+
+  useEffect(() => {
+    const {
+      csvData: { entries },
+      site: {
+        siteMetadata: { animated },
+      },
+    } = data;
 
     setAnimated(animated);
     const { date } = entries[0];
@@ -153,11 +161,9 @@ CountdownContainer.propTypes = {
         animated: PropTypes.bool,
       }),
     }),
-    allFile: PropTypes.shape({
-      edges: PropTypes.arrayOf({
-        node: PropTypes.shape({
-          modifiedTime: PropTypes.string,
-        }),
+    lastPredictionUpdate: PropTypes.shape({
+      fields: PropTypes.shape({
+        modifiedMs: PropTypes.number,
       }),
     }),
   }).isRequired,
@@ -182,12 +188,9 @@ export default function Timer(props) {
               animated
             }
           }
-          allFile(filter: { name: { eq: "prediction" } }) {
-            edges {
-              node {
-                modifiedTime
-                name
-              }
+          lastPredictionUpdate: predictionCsv {
+            fields {
+              modifiedMs
             }
           }
         }
