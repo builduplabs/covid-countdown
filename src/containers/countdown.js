@@ -23,10 +23,12 @@ const CountdownContainer = ({
   useEffect(() => {
     setLastUpdateDate(() => {
       const {
-        allFile: { edges },
+        lastPredictionUpdate: {
+          fields: { modifiedMs },
+        },
       } = data;
 
-      const modifiedTime = moment(edges[0].node.modifiedTime).startOf("day");
+      const modifiedTime = moment(modifiedMs).startOf("day");
       const today = moment().startOf("day");
 
       const wasUpdatedToday = today.diff(modifiedTime, "days") === 0;
@@ -159,11 +161,9 @@ CountdownContainer.propTypes = {
         animated: PropTypes.bool,
       }),
     }),
-    allFile: PropTypes.shape({
-      edges: PropTypes.arrayOf({
-        node: PropTypes.shape({
-          modifiedTime: PropTypes.string,
-        }),
+    lastPredictionUpdate: PropTypes.shape({
+      fields: PropTypes.shape({
+        modifiedMs: PropTypes.number,
       }),
     }),
   }).isRequired,
@@ -188,12 +188,9 @@ export default function Timer(props) {
               animated
             }
           }
-          allFile(filter: { name: { eq: "prediction" } }) {
-            edges {
-              node {
-                modifiedTime
-                name
-              }
+          lastPredictionUpdate: predictionCsv {
+            fields {
+              modifiedMs
             }
           }
         }

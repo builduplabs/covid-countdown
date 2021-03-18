@@ -1,24 +1,32 @@
-import { graphql, useStaticQuery } from 'gatsby';
-import React from 'react';
-import moment from 'moment';
+import { graphql, useStaticQuery } from "gatsby";
+import React from "react";
+import moment from "moment";
 
 function Footer() {
   const {
-    allFile: { edges },
+    allDataUpdates: [
+      {
+        fields: { modifiedMs },
+      },
+    ],
   } = useStaticQuery(graphql`
     query {
-      allFile(filter: { name: { eq: "prediction" } }) {
-        edges {
-          node {
-            modifiedTime
-            name
+      allDataUpdates {
+        ... on QuadranteCsv {
+          fields {
+            modifiedMs
+          }
+        }
+        ... on PredictionCsv {
+          fields {
+            modifiedMs
           }
         }
       }
     }
   `);
 
-  const lastUpdateDate = edges[0].node.modifiedTime;
+  const lastUpdateDate = modifiedMs;
 
   return (
     <footer className="bg-accent">
@@ -37,7 +45,7 @@ function Footer() {
           </a>
           <p className="text-center">
             Este contador foi criado com agilidade e boa vontade pela equipa de
-            Data Science da{' '}
+            Data Science da{" "}
             <a
               className="font-bold hover:underline"
               href="https://www.comon.pt/"
@@ -45,8 +53,8 @@ function Footer() {
               rel="noopener noreferrer"
             >
               COMON
-            </a>{' '}
-            no âmbito do projeto{' '}
+            </a>{" "}
+            no âmbito do projeto{" "}
             <a
               className="font-bold hover:underline"
               href="https://covid.who-cares.pt/"
@@ -58,7 +66,7 @@ function Footer() {
             , cuja missão é aumentar a empatia no marketing através de estudos,
             conteúdos e eventos. Desde março que funciona como comunidade
             digital onde gestores e marketeers partilham conhecimento sobre o
-            impacto da COVID-19 nas marcas e no comportamento do consumidor.{' '}
+            impacto da COVID-19 nas marcas e no comportamento do consumidor.{" "}
             <a
               className="underline font-bold block"
               href="https://covid.who-cares.pt/"
@@ -73,7 +81,7 @@ function Footer() {
           <div className="hidden sm:block flex-1 space-x-3 items-center text-center md:text-left py-1">
             Última atualização:
             <div className="font-bold inline ml-1">
-              {` ${moment(lastUpdateDate).format('HH:mm DD/MM')}`}
+              {` ${moment(lastUpdateDate).format("HH:mm DD/MM")}`}
             </div>
           </div>
           <div className="flex-1 flex flex-col text-center py-1">
@@ -95,7 +103,7 @@ function Footer() {
           <div className="block sm:hidden flex-1 space-x-3 items-center text-center md:text-left py-1">
             Última atualização:
             <div className="font-bold inline ml-1">
-              {` ${moment(lastUpdateDate).format('HH:mm DD/MM')}`}
+              {` ${moment(lastUpdateDate).format("HH:mm DD/MM")}`}
             </div>
           </div>
         </div>

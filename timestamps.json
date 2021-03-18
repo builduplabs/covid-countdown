@@ -1,0 +1,18 @@
+{
+  "src/data/cases.csv": {
+    "created": 1588805857,
+    "modified": 1616005778
+  },
+  "src/data/notebook.ipynb": {
+    "created": 1589816097,
+    "modified": 1591190822
+  },
+  "src/data/prediction.csv": {
+    "created": 1588805857,
+    "modified": 1616005778
+  },
+  "src/data/quadrante.csv": {
+    "created": 1615760078,
+    "modified": 1616006203
+  }
+}
