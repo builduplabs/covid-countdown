@@ -117,29 +117,29 @@ function IndexPage() {
           seguida:
         </p>
 
-        <ul className="text-sm text-grey-dark text-justify px-1 sm:px-4 py-1 pt-3 mx-10 list-decimal flex flex-wrap">
-          <li className="flex-1 font-bold">
+        <ul className="text-sm text-grey-dark text-justify px-1 sm:px-4 py-1 mx-10 list-decimal flex flex-wrap">
+          <li className="flex-1 font-bold mt-4">
             Nível
             <ul className="mx-2 font-normal">
               <li>Rt: [0, 1]</li>
               <li>Incidência: [0, 120]</li>
             </ul>
           </li>
-          <li className="flex-1 font-bold">
+          <li className="flex-1 font-bold mt-4">
             Nível:
             <ul className="mx-2 font-normal">
               <li>Rt: [1, 2]</li>
               <li>Incidência: [0, 120]</li>
             </ul>
           </li>
-          <li className="flex-1 font-bold">
+          <li className="flex-1 font-bold mt-4">
             Nível:
             <ul className="mx-2 font-normal">
               <li>Rt: [0, 1]</li>
               <li>Incidência: [120, 240]</li>
             </ul>
           </li>
-          <li className="flex-1 font-bold">
+          <li className="flex-1 font-bold mt-4">
             Nível:
             <ul className="mx-2 font-normal">
               <li>Rt: [1, 2]</li>
@@ -148,7 +148,7 @@ function IndexPage() {
           </li>
         </ul>
 
-        <p className="text-sm text-grey-dark text-justify px-1 sm:px-4 py-1 pt-2">
+        <p className="text-sm text-grey-dark text-justify px-1 sm:px-4 py-1 pt-2 pb-6">
           Cada nível dará a possibilidade ao governo de estabelecer medidas
           relativas ao desconfinamento, estas medidas podem ser tanto de avanço
           ou de recuo, isto é, caso nos encontremos no nível 1 o desconfinamento
