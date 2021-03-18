@@ -5,7 +5,7 @@ import Graph from "../components/risk_matrix";
 
 const reset = (data) => data.map(({ x }) => ({ x, y: null }));
 
-const GraphContainer = ({ csvData }) => {
+const GraphContainer = ({ csvData, share }) => {
   const [graph, setData] = useState({
     all: [],
     selected: [],
@@ -82,7 +82,12 @@ const GraphContainer = ({ csvData }) => {
 
   const { selected } = graph;
   return (
-    <Graph loading={loading} graphData={selected} toggleLegend={toggleLegend} />
+    <Graph
+      share={share}
+      loading={loading}
+      graphData={selected}
+      toggleLegend={toggleLegend}
+    />
   );
 };
 
@@ -98,6 +103,7 @@ GraphContainer.propTypes = {
       ),
     }),
   }),
+  share: PropTypes.bool,
 };
 
 export default function RiskMatrix(props) {

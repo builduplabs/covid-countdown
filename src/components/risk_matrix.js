@@ -222,6 +222,7 @@ const RiskMatrix = ({
   maxYValue,
   maxXValue,
   toggleLegend,
+  share,
 }) => {
   if (loading) return null;
 
@@ -255,7 +256,11 @@ const RiskMatrix = ({
   };
 
   return (
-    <div className="w-full flex-1 sm:h-screen flex flex-col h-full justify-center">
+    <div
+      className={`w-full flex-1 ${share ? "" : "sm:h-screen"} flex flex-col ${
+        share ? "" : "h-full"
+      } justify-center`}
+    >
       <div className="w-full flex h-px min-h-1/2 landscape:min-h-1/2 max-h-1/2 sm:max-h-3/4">
         <ResponsiveScatterPlot
           colors={["#e0e0e0", "black"]}
@@ -353,6 +358,7 @@ RiskMatrix.propTypes = {
   loading: PropTypes.bool,
   maxYValue: PropTypes.number,
   maxXValue: PropTypes.number,
+  share: PropTypes.bool,
 };
 
 export default RiskMatrix;
