@@ -1,59 +1,66 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import moment from 'moment';
-import 'moment/locale/pt';
-import 'animate.css';
+import React from "react";
+import PropTypes from "prop-types";
+import moment from "moment";
+import "moment/locale/pt";
+import "animate.css";
 
-const INDIVIDUAL_COLORS = ['black', 'white'];
+const INDIVIDUAL_COLORS = ["black", "white"];
 const COLORS = [
-  'black',
-  'white',
-  'gray',
-  'red',
-  'orange',
-  'yellow',
-  'green',
-  'teal',
-  'blue',
-  'indigo',
-  'purple',
-  'pink',
+  "black",
+  "white",
+  "gray",
+  "red",
+  "orange",
+  "yellow",
+  "green",
+  "teal",
+  "blue",
+  "indigo",
+  "purple",
+  "pink",
 ];
 
-const buildUrl = (title, color, bg) => {
-  if (typeof window === 'undefined')
-    return 'https://covidcountdown.today/share/';
+const buildUrl = (title, color, bg, type) => {
+  const page = type === "countdown" ? "countdown" : "matrix";
 
-  const url = new URL('https://covidcountdown.today/share/');
+  if (typeof window === "undefined")
+    return `https://covidcountdown.today/${page}/`;
+
+  const url = new URL(`https://covidcountdown.today/${page}/`);
 
   if (title) {
-    url.searchParams.append('title', title);
+    url.searchParams.append("title", title);
   }
   if (color) {
-    url.searchParams.append('color', color);
+    url.searchParams.append("color", color);
   }
   if (bg) {
-    url.searchParams.append('bg', bg);
+    url.searchParams.append("bg", bg);
   }
 
   return url.href;
 };
 
-function Modal({ show, setShowModal }) {
+function Modal({ show, setShowModal, type }) {
   const [copied, setCopied] = React.useState(false);
   const [title, setTitle] = React.useState(null);
   const [textColor, setTextColor] = React.useState(null);
   const [backgroundColor, setBackgroundColor] = React.useState(null);
+
+  const isCountdown = type === "countdown";
+
   if (!show) return null;
-  const url = buildUrl(title, textColor, backgroundColor);
-  moment.locale('pt');
+  const url = buildUrl(title, textColor, backgroundColor, type);
+  moment.locale("pt");
   return (
     <>
       <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
         <div className="relative my-6 w-11/12 sm:w-4/6 lg:w-1/2 max-w-5xl">
           <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
             <div className="hidden xs:flex items-start justify-between p-5 border-b border-solid border-gray-300 rounded-t">
-              <h3 className="text-2xl font-semibold">Criar Contador</h3>
+              <h3 className="text-2xl font-semibold">
+                Criar {isCountdown ? "Contador" : "Matriz"}
+              </h3>
               <button
                 className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
                 onClick={() => setShowModal(false)}
@@ -78,8 +85,9 @@ function Modal({ show, setShowModal }) {
               </button>
               <div className="mb-4">
                 <label className="block text-xs xs:text-sm font-bold mb-2 mr-4 xs:mr-0">
-                  Título: o que vais fazer quando o contador chegar ao fim e a
-                  pandemia acabar?
+                  {isCountdown
+                    ? "Título: o que vais fazer quando o contador chegar ao fim e a pandemia acabar?"
+                    : "Título da matriz"}
                 </label>
                 <input
                   onChange={(event) => {
@@ -89,7 +97,11 @@ function Modal({ show, setShowModal }) {
                   className="text-xxs xs:text-xs appearance-none border border-black w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
                   id="title"
                   type="text"
-                  placeholder="Como vai ser o primeiro dia do resto da tua vida? Ir ao futebol, a um concerto ou a uma discoteca?"
+                  placeholder={
+                    isCountdown
+                      ? "Como vai ser o primeiro dia do resto da tua vida? Ir ao futebol, a um concerto ou a uma discoteca?"
+                      : "Dá um nome à tua matriz"
+                  }
                 />
               </div>
               <div className="mb-4">
@@ -107,7 +119,7 @@ function Modal({ show, setShowModal }) {
                       <button
                         onClick={() => {
                           if (textColor === color) {
-                            setTextColor('');
+                            setTextColor("");
                           } else {
                             setTextColor(color);
                           }
@@ -115,8 +127,8 @@ function Modal({ show, setShowModal }) {
                         }}
                         key={color}
                         className={`focus:outline-none opacity-75 w-6 h-6 md:w-8 md:h-8 rounded-full mr-2 mb-2 bg-${finalColor} ${
-                          color === 'white' ? 'border-black border' : ''
-                        } ${textColor === color ? 'opacity-100' : ''}`}
+                          color === "white" ? "border-black border" : ""
+                        } ${textColor === color ? "opacity-100" : ""}`}
                       />
                     );
                   })}
@@ -137,7 +149,7 @@ function Modal({ show, setShowModal }) {
                       <button
                         onClick={() => {
                           if (backgroundColor === color) {
-                            setBackgroundColor('');
+                            setBackgroundColor("");
                           } else {
                             setBackgroundColor(color);
                           }
@@ -145,8 +157,8 @@ function Modal({ show, setShowModal }) {
                         }}
                         key={color}
                         className={`focus:outline-none opacity-75 w-6 h-6 md:w-8 md:h-8 rounded-full mr-2 mb-2 bg-${finalColor} ${
-                          color === 'white' ? 'border-black border' : ''
-                        } ${backgroundColor === color ? 'opacity-100' : ''}`}
+                          color === "white" ? "border-black border" : ""
+                        } ${backgroundColor === color ? "opacity-100" : ""}`}
                       />
                     );
                   })}
@@ -159,16 +171,16 @@ function Modal({ show, setShowModal }) {
                 <p className="text-sm">{url}</p>
                 <button
                   className={`${
-                    !copied ? 'hover:border-black hover:bg-accent' : ''
+                    !copied ? "hover:border-black hover:bg-accent" : ""
                   } mt-2 focus:outline-none w-auto border font-bold border-white bg-black text-white py-1 px-3 text-xs`}
                   type="button"
-                  style={{ transition: 'all .15s ease' }}
+                  style={{ transition: "all .15s ease" }}
                   onClick={() => {
                     navigator.clipboard.writeText(url);
                     setCopied(true);
                   }}
                 >
-                  {!copied ? 'Copiar URL' : 'Copiado!'}
+                  {!copied ? "Copiar URL" : "Copiado!"}
                 </button>
               </div>
             </div>
@@ -176,7 +188,7 @@ function Modal({ show, setShowModal }) {
               <button
                 className="hidden xs:flex background-transparent font-bold px-3 py-1 outline-none focus:outline-none mr-1 hover:underline text-xs sm:text-base"
                 type="button"
-                style={{ transition: 'all .15s ease' }}
+                style={{ transition: "all .15s ease" }}
                 onClick={() => setShowModal(false)}
               >
                 Fechar
@@ -184,16 +196,16 @@ function Modal({ show, setShowModal }) {
               <div className="w-full xs:w-auto flex flex-row justify-center justify-center">
                 <button
                   className={`${
-                    !copied ? 'hover:border-black hover:bg-accent' : ''
+                    !copied ? "hover:border-black hover:bg-accent" : ""
                   } xs:hidden focus:outline-none w-auto border font-bold border-white bg-black text-white py-1 px-3 text-xs`}
                   type="button"
-                  style={{ transition: 'all .15s ease' }}
+                  style={{ transition: "all .15s ease" }}
                   onClick={() => {
                     navigator.clipboard.writeText(url);
                     setCopied(true);
                   }}
                 >
-                  {!copied ? 'Copiar URL' : 'Copiado!'}
+                  {!copied ? "Copiar URL" : "Copiado!"}
                 </button>
                 {/* <a
                   href={`https://www.facebook.com/sharer/sharer.php?u=${url}`}
@@ -217,7 +229,7 @@ function Modal({ show, setShowModal }) {
                   rel="noopener noreferrer"
                   className="flex items-center ml-2 mr-2 text-xs focus:outline-none sm:w-auto border hover:border-black border-white text-white hover:bg-accent bg-black py-1 px-3 sm:text-base"
                 >
-                  Ver contador
+                  Ver {isCountdown ? "contador" : "matriz"}
                 </a>
               </div>
             </div>
@@ -232,11 +244,13 @@ function Modal({ show, setShowModal }) {
 Modal.defaultProps = {
   show: false,
   setShowModal: () => {},
+  type: "countdown",
 };
 
 Modal.propTypes = {
   show: PropTypes.bool,
   setShowModal: PropTypes.func,
+  type: PropTypes.string,
 };
 
 export default Modal;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import moment from "moment";
 import "moment/locale/pt";
 import "animate.css";
@@ -13,15 +13,53 @@ import RiskMatrix from "../containers/risk_matrix";
 // import ModeToggle from '../components/mode_toggle';
 
 function IndexPage() {
-  const [showModal, setShowModal] = React.useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [modalType, setModalType] = useState("");
+
+  const handleOpenModal = (value, type) => {
+    setModalType(type);
+    setShowModal(value);
+  };
+
+  const scrollToRiskMatrix = (e) => {
+    e.preventDefault();
+
+    const getOffset = (el) => {
+      const rect = el.getBoundingClientRect();
+      return {
+        left: rect.left + window.scrollX,
+        top: rect.top + window.scrollY,
+      };
+    };
+
+    const element = document.getElementById("riskMatrix");
+    const offset = 50;
+
+    window.scrollTo({
+      top: getOffset(element).top - offset,
+      behavior: "smooth",
+    });
+  };
 
   moment.locale("pt");
   return (
     <Layout>
       <SEO />
       {/* <ModeToggle /> */}
+
+      <div className="flex justify-center items-center m-1 font-medium mt-10 py-1 px-2 bg-white rounded-md text-red-700 bg-red-100 border border-accent">
+        <div className="text-sm font-normal text-accent max-w-full flex-initial">
+          Adicionamos a nova matriz de risco, clica{" "}
+          <a href="#" className="underline" onClick={scrollToRiskMatrix}>
+            aqui
+          </a>{" "}
+          para visualizares.
+        </div>
+      </div>
       <div className="h-screen w-full flex flex-col justify-center">
-        <Countdown setShowModal={setShowModal} />
+        <Countdown
+          setShowModal={(value) => handleOpenModal(value, "countdown")}
+        />
       </div>
       <div className="w-full flex flex-col justify-center py-16">
         <h2 className="text-3xl font-black text-left py-2 pb-8 px-1 sm:px-4">
@@ -93,13 +131,22 @@ function IndexPage() {
           </a>
         </div>
       </div>
-      <div className="w-full flex flex-col justify-center">
+      <div id="riskMatrix" className="w-full flex flex-col justify-center">
         <h2 className="text-xl font-black text-left px-1 sm:px-4">
           Matriz de Risco
         </h2>
         <RiskMatrix />
-
-        <h2 className="text-2xl font-black text-left py-2 px-1 sm:px-4">
+        <div
+          className={`max-w-vw65 xxs:max-w-vw70 w-full flex flex-1 flex-col items-end sm:items-center justify-end text-right sm:text-center absolute bottom-0 right-0 sm:relative sm:bottom-auto sm:right-auto sm:max-w-none animate__fadeIn animate__delay-1s animate__animated`}
+        >
+          <button
+            onClick={() => handleOpenModal(true, "matrix")}
+            className="text-xs xxs:text-base xs:text-xl landscape:text-sm focus:outline-none w-auto border border-black bg-accent text-white hover:border-white hover:text-white hover:bg-black py-1 px-3 mt-2 xs:px-12 mb-0 xxs:mb-16 landscape:mb-0"
+          >
+            Personalizar Matriz
+          </button>
+        </div>
+        <h2 className="text-2xl font-black text-left py-0 px-1 sm:px-4">
           O que é a matriz de risco?
         </h2>
         <p className="text-sm text-grey-dark text-justify px-1 sm:px-4 py-1 pt-8">
@@ -333,7 +380,7 @@ function IndexPage() {
           </li>
         </ul>
       </div>
-      <Modal show={showModal} setShowModal={setShowModal} />
+      <Modal show={showModal} setShowModal={setShowModal} type={modalType} />
     </Layout>
   );
 }

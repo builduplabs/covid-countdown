@@ -3,6 +3,48 @@ import React from "react";
 import PropTypes from "prop-types";
 import { area, line } from "d3-shape";
 import { ResponsiveScatterPlot } from "@nivo/scatterplot";
+import moment from "moment";
+
+const areas = [
+  {
+    data: [
+      { x: 0, y: 0 },
+      { x: 0, y: 120 },
+      { x: 1, y: 120 },
+      { x: 1, y: 0 },
+    ],
+    color: "#01c782",
+  },
+  {
+    data: [
+      { x: 1.0, y: 0 },
+      { x: 1.0, y: 120 },
+      { x: 2, y: 120 },
+      { x: 2, y: 0 },
+    ],
+    color: "#ffaa16",
+  },
+  {
+    data: [
+      { x: 0, y: 120 },
+      { x: 0, y: 240 },
+      { x: 1, y: 240 },
+      { x: 1, y: 120 },
+    ],
+    color: "#ff9616",
+    upper: true,
+  },
+  {
+    data: [
+      { x: 1.0, y: 120 },
+      { x: 1.0, y: 240 },
+      { x: 2, y: 240 },
+      { x: 2, y: 120 },
+    ],
+    color: "#ff3f3f",
+    upper: true,
+  },
+];
 
 const RiskAreas = ({ yScale, xScale, height }) => {
   const mobile = window.innerWidth <= 640;
@@ -32,47 +74,6 @@ const RiskAreas = ({ yScale, xScale, height }) => {
 
     return line()([start, end]);
   };
-
-  const areas = [
-    {
-      data: [
-        { x: 0, y: 0 },
-        { x: 0, y: 120 },
-        { x: 1, y: 120 },
-        { x: 1, y: 0 },
-      ],
-      color: "#01c782",
-    },
-    {
-      data: [
-        { x: 1.0, y: 0 },
-        { x: 1.0, y: 120 },
-        { x: 2, y: 120 },
-        { x: 2, y: 0 },
-      ],
-      color: "#ffaa16",
-    },
-    {
-      data: [
-        { x: 0, y: 120 },
-        { x: 0, y: 240 },
-        { x: 1, y: 240 },
-        { x: 1, y: 120 },
-      ],
-      color: "#ff9616",
-      upper: true,
-    },
-    {
-      data: [
-        { x: 1.0, y: 120 },
-        { x: 1.0, y: 240 },
-        { x: 2, y: 240 },
-        { x: 2, y: 120 },
-      ],
-      color: "#ff3f3f",
-      upper: true,
-    },
-  ];
 
   const lines = [
     {
@@ -165,6 +166,10 @@ const CustomNode = ({
   onMouseLeave,
   onClick,
 }) => {
+  const age = moment().diff(moment(node.data.date), "days");
+
+  const opacity = -1 * Math.pow(age / 20, 2) + 1;
+
   if (node.data.serieId === "Atual") {
     return (
       <g transform={`translate(${x},${y}) rotate(45)`}>
@@ -174,7 +179,7 @@ const CustomNode = ({
           width={size}
           height={size}
           fill={color}
-          style={{ mixBlendMode: blendMode }}
+          style={{ mixBlendMode: blendMode, opacity }}
           onMouseEnter={onMouseEnter}
           onMouseMove={onMouseMove}
           onMouseLeave={onMouseLeave}
@@ -189,7 +194,7 @@ const CustomNode = ({
       <circle
         r={size / 2}
         fill={color}
-        style={{ mixBlendMode: blendMode }}
+        style={{ mixBlendMode: blendMode, opacity }}
         onMouseEnter={onMouseEnter}
         onMouseMove={onMouseMove}
         onMouseLeave={onMouseLeave}
@@ -203,6 +208,7 @@ CustomNode.propTypes = {
   node: PropTypes.shape({
     data: PropTypes.shape({
       serieId: PropTypes.string,
+      date: PropTypes.string,
     }),
   }),
   x: PropTypes.number,
@@ -223,6 +229,7 @@ const RiskMatrix = ({
   maxXValue,
   toggleLegend,
   share,
+  textColor,
 }) => {
   if (loading) return null;
 
@@ -253,6 +260,64 @@ const RiskMatrix = ({
     // right: mobile ? 55 : 10,
     // bottom: 50,
     // left: mobile ? 35 : 50,
+  };
+
+  const getCurrentLevel = () => {
+    const entry = graphData[1];
+
+    const mapArea = (area) => {
+      const min = [],
+        max = [];
+      area.forEach((point, index) => {
+        if (index === 0) {
+          min.push(point.x, point.y);
+          max.push(point.x, point.y);
+        } else {
+          if (point.x < min[0] && point.x < max[0]) {
+            min[0] = point.x;
+          } else if (point.x > max[0] && point.x > min[0]) {
+            max[0] = point.x;
+          }
+
+          if (point.y < min[1] && point.y < max[1]) {
+            min[1] = point.y;
+          } else if (point.y > max[1] && point.y > min[1]) {
+            max[1] = point.y;
+          }
+        }
+      });
+
+      return {
+        min,
+        max,
+      };
+    };
+
+    const isInArea = (point, area) => {
+      const {
+        max: [maxX, maxY],
+        min: [minX, minY],
+      } = area;
+
+      const [x, y] = point;
+
+      console.log(point);
+
+      return x >= minX && y >= minY && x <= maxX && y <= maxY;
+    };
+
+    let level = 0;
+
+    for (let i = 0; i < areas.length; i++) {
+      if (
+        isInArea([entry.data[0].x, entry.data[0].y], mapArea(areas[i].data))
+      ) {
+        level = i + 1;
+        break;
+      }
+    }
+
+    return level;
   };
 
   return (
@@ -340,6 +405,24 @@ const RiskMatrix = ({
           renderNode={CustomNode}
         />
       </div>
+      {share && (
+        <div className="w-full flex flex-1 items-start justify-center relative">
+          <div className="w-full flex flex-1 justify-end px-2 py-1 xs:pr-4 sm:pr-8 md:pr-12 flex-row">
+            <p
+              style={{ fontSize: "min(4vw, 7vh, 24px)" }}
+              className={`${textColor} text-center font-thin animate__fadeIn animate__animated`}
+            >
+              De acordo com os dados do{" "}
+              <a className="underline" href="https://covidcountdown.today">
+                Covid Countdown
+              </a>
+              {", "}
+              encontramos-nos atualmente no nível {getCurrentLevel()} da matriz
+              de risco.
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
@@ -349,16 +432,29 @@ RiskMatrix.defaultProps = {
   xAxisLegend: [],
   maxYValue: 240,
   maxXValue: 2,
+  textColor: "black",
 };
 
 RiskMatrix.propTypes = {
   toggleLegend: PropTypes.func,
   xAxisLegend: PropTypes.arrayOf(PropTypes.string),
-  graphData: PropTypes.arrayOf(PropTypes.shape({})),
+  graphData: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      data: PropTypes.arrayOf(
+        PropTypes.shape({
+          x: PropTypes.number,
+          y: PropTypes.number,
+          date: PropTypes.string,
+        })
+      ),
+    })
+  ),
   loading: PropTypes.bool,
   maxYValue: PropTypes.number,
   maxXValue: PropTypes.number,
   share: PropTypes.bool,
+  textColor: PropTypes.string,
 };
 
 export default RiskMatrix;
