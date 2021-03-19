@@ -3,6 +3,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { area, line } from "d3-shape";
 import { ResponsiveScatterPlot } from "@nivo/scatterplot";
+import moment from "moment";
 
 const RiskAreas = ({ yScale, xScale, height }) => {
   const mobile = window.innerWidth <= 640;
@@ -165,6 +166,12 @@ const CustomNode = ({
   onMouseLeave,
   onClick,
 }) => {
+  const age = moment().diff(moment(node.data.date), "days");
+
+  const opacity = -1 * Math.pow(age / 20, 2) + 1;
+
+  console.log("opacity = ", opacity);
+
   if (node.data.serieId === "Atual") {
     return (
       <g transform={`translate(${x},${y}) rotate(45)`}>
@@ -174,7 +181,7 @@ const CustomNode = ({
           width={size}
           height={size}
           fill={color}
-          style={{ mixBlendMode: blendMode }}
+          style={{ mixBlendMode: blendMode, opacity }}
           onMouseEnter={onMouseEnter}
           onMouseMove={onMouseMove}
           onMouseLeave={onMouseLeave}
@@ -189,7 +196,7 @@ const CustomNode = ({
       <circle
         r={size / 2}
         fill={color}
-        style={{ mixBlendMode: blendMode }}
+        style={{ mixBlendMode: blendMode, opacity }}
         onMouseEnter={onMouseEnter}
         onMouseMove={onMouseMove}
         onMouseLeave={onMouseLeave}
@@ -203,6 +210,7 @@ CustomNode.propTypes = {
   node: PropTypes.shape({
     data: PropTypes.shape({
       serieId: PropTypes.string,
+      date: PropTypes.string,
     }),
   }),
   x: PropTypes.number,
