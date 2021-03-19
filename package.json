@@ -49,10 +49,10 @@
     "dates": "git-date-extractor --outputToFile --onlyIn ./src/data/"
   },
   "husky": {
-    "hooks": {
-      "pre-commit": "git diff --cached --name-only --diff-filter=ACMRTUXB -z | xargs -0 node update-stamps.js"
-    }
-  },
+		"hooks": {
+			"pre-commit": "git diff --cached --name-only --diff-filter=ACMRTUXB -z | xargs -0 node update-stamps.js"
+		}
+	},
   "devDependencies": {
     "@tailwindcss/custom-forms": "0.2.1",
     "autoprefixer": "9.7.6",
