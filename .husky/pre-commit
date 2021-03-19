@@ -1,0 +1,4 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+git diff --cached --name-only --diff-filter=ACMRTUXB -z | xargs -0 node update-stamps.js
