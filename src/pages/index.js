@@ -21,11 +21,41 @@ function IndexPage() {
     setShowModal(value);
   };
 
+  const scrollToRiskMatrix = (e) => {
+    e.preventDefault();
+
+    const getOffset = (el) => {
+      const rect = el.getBoundingClientRect();
+      return {
+        left: rect.left + window.scrollX,
+        top: rect.top + window.scrollY,
+      };
+    };
+
+    const element = document.getElementById("riskMatrix");
+    const offset = 50;
+
+    window.scrollTo({
+      top: getOffset(element).top - offset,
+      behavior: "smooth",
+    });
+  };
+
   moment.locale("pt");
   return (
     <Layout>
       <SEO />
       {/* <ModeToggle /> */}
+
+      <div className="flex justify-center items-center m-1 font-medium mt-10 py-1 px-2 bg-white rounded-md text-red-700 bg-red-100 border border-accent">
+        <div className="text-sm font-normal text-accent max-w-full flex-initial">
+          Adicionamos a nova matriz de risco, clica{" "}
+          <a href="#" className="underline" onClick={scrollToRiskMatrix}>
+            aqui
+          </a>{" "}
+          para visualizares.
+        </div>
+      </div>
       <div className="h-screen w-full flex flex-col justify-center">
         <Countdown
           setShowModal={(value) => handleOpenModal(value, "countdown")}
@@ -101,7 +131,7 @@ function IndexPage() {
           </a>
         </div>
       </div>
-      <div className="w-full flex flex-col justify-center">
+      <div id="riskMatrix" className="w-full flex flex-col justify-center">
         <h2 className="text-xl font-black text-left px-1 sm:px-4">
           Matriz de Risco
         </h2>
