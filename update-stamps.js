@@ -9,8 +9,6 @@ let filenames = process.argv.slice(2);
 // Normally, you would not have to do this - this is only because I'm using a multi-project setup, with a single git root, so filenames passed via `git diff` are prefixed with the root dir, which I want to remove
 //filenames = filenames.map((f) => f.replace(/^gatsby\//, ""));
 
-console.log(filenames);
-
 const updater = async () => {
   if (filenames.length) {
     await gitDateExtractor.getStamps({
