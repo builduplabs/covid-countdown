@@ -108,7 +108,7 @@ function Modal({ show, setShowModal, type }) {
                 <label className="block text-xs xs:text-sm font-bold mb-2">
                   Cor do texto
                 </label>
-                <div className="flex flex-row flex-wrap items-center justify-around">
+                <div className="flex flex-row flex-wrap items-center justify-start xl:justify-around">
                   {COLORS.map((color) => {
                     const finalColor =
                       INDIVIDUAL_COLORS.indexOf(color) !== -1
@@ -138,7 +138,7 @@ function Modal({ show, setShowModal, type }) {
                 <label className="block text-xs xs:text-sm font-bold mb-2">
                   Cor de fundo
                 </label>
-                <div className="flex flex-row flex-wrap items-center justify-around">
+                <div className="flex flex-row flex-wrap items-center justify-start xl:justify-around">
                   {COLORS.map((color) => {
                     const finalColor =
                       INDIVIDUAL_COLORS.indexOf(color) !== -1

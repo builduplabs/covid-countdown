@@ -168,7 +168,7 @@ const CustomNode = ({
 }) => {
   const age = moment().diff(moment(node.data.date), "days");
 
-  const opacity = -1 * Math.pow(age / 20, 2) + 1;
+  const opacity = -1 * Math.pow(age / 20, 0.75) + 1;
 
   if (node.data.serieId === "Atual") {
     return (
@@ -417,8 +417,9 @@ const RiskMatrix = ({
                 Covid Countdown
               </a>
               {", "}
-              encontramos-nos atualmente no nível {getCurrentLevel()} da matriz
-              de risco.
+              encontramos-nos atualmente no{" "}
+              <span className="font-bold">nível {getCurrentLevel()}</span> da
+              matriz de risco.
             </p>
           </div>
         </div>

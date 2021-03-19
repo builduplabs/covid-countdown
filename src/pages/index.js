@@ -137,7 +137,7 @@ function IndexPage() {
         </h2>
         <RiskMatrix />
         <div
-          className={`max-w-vw65 xxs:max-w-vw70 w-full flex flex-1 flex-col items-end sm:items-center justify-end text-right sm:text-center absolute bottom-0 right-0 sm:relative sm:bottom-auto sm:right-auto sm:max-w-none animate__fadeIn animate__delay-1s animate__animated`}
+          className={`flex flex-col xs:flex-row justify-center pt-6 justify-center text-center`}
         >
           <button
             onClick={() => handleOpenModal(true, "matrix")}
