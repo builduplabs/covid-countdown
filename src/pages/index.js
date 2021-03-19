@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import moment from "moment";
 import "moment/locale/pt";
 import "animate.css";
@@ -13,7 +13,13 @@ import RiskMatrix from "../containers/risk_matrix";
 // import ModeToggle from '../components/mode_toggle';
 
 function IndexPage() {
-  const [showModal, setShowModal] = React.useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [modalType, setModalType] = useState("");
+
+  const handleOpenModal = (value, type) => {
+    setModalType(type);
+    setShowModal(value);
+  };
 
   moment.locale("pt");
   return (
@@ -21,7 +27,9 @@ function IndexPage() {
       <SEO />
       {/* <ModeToggle /> */}
       <div className="h-screen w-full flex flex-col justify-center">
-        <Countdown setShowModal={setShowModal} />
+        <Countdown
+          setShowModal={(value) => handleOpenModal(value, "countdown")}
+        />
       </div>
       <div className="w-full flex flex-col justify-center py-16">
         <h2 className="text-3xl font-black text-left py-2 pb-8 px-1 sm:px-4">
@@ -98,8 +106,17 @@ function IndexPage() {
           Matriz de Risco
         </h2>
         <RiskMatrix />
-
-        <h2 className="text-2xl font-black text-left py-2 px-1 sm:px-4">
+        <div
+          className={`max-w-vw65 xxs:max-w-vw70 w-full flex flex-1 flex-col items-end sm:items-center justify-end text-right sm:text-center absolute bottom-0 right-0 sm:relative sm:bottom-auto sm:right-auto sm:max-w-none animate__fadeIn animate__delay-1s animate__animated`}
+        >
+          <button
+            onClick={() => handleOpenModal(true, "matrix")}
+            className="text-xs xxs:text-base xs:text-xl landscape:text-sm focus:outline-none w-auto border border-black bg-accent text-white hover:border-white hover:text-white hover:bg-black py-1 px-3 mt-2 xs:px-12 mb-0 xxs:mb-16 landscape:mb-0"
+          >
+            Personalizar Matriz
+          </button>
+        </div>
+        <h2 className="text-2xl font-black text-left py-0 px-1 sm:px-4">
           O que é a matriz de risco?
         </h2>
         <p className="text-sm text-grey-dark text-justify px-1 sm:px-4 py-1 pt-8">
@@ -333,7 +350,7 @@ function IndexPage() {
           </li>
         </ul>
       </div>
-      <Modal show={showModal} setShowModal={setShowModal} />
+      <Modal show={showModal} setShowModal={setShowModal} type={modalType} />
     </Layout>
   );
 }
