@@ -4,29 +4,21 @@ import moment from "moment";
 
 function Footer() {
   const {
-    allDataUpdates: [
-      {
-        fields: { modifiedMs },
-      },
-    ],
+    allFile: { edges },
   } = useStaticQuery(graphql`
     query {
-      allDataUpdates {
-        ... on QuadranteCsv {
-          fields {
-            modifiedMs
-          }
-        }
-        ... on PredictionCsv {
-          fields {
-            modifiedMs
+      allFile(filter: { name: { eq: "prediction" } }) {
+        edges {
+          node {
+            modifiedTime
+            name
           }
         }
       }
     }
   `);
 
-  const lastUpdateDate = modifiedMs;
+  const lastUpdateDate = edges[0].node.modifiedTime;
 
   return (
     <footer className="bg-accent">
