@@ -417,7 +417,7 @@ const RiskMatrix = ({
                 Covid Countdown
               </a>
               {", "}
-              encontramos-nos atualmente no{" "}
+              encontramo-nos atualmente no{" "}
               <span className="font-bold">nível {getCurrentLevel()}</span> da
               matriz de risco.
             </p>
