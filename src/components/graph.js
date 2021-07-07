@@ -17,13 +17,16 @@ const Tooltip = ({ slice }) => {
   return (
     <div className="bg-white p-2 border">
       <div className="text-sm text-center">{date}</div>
+      {(date === 'Julho 06' || date === 'julho 06') && (
+        <div className="text-xs font-bold mb-2 text-center">3ª Data baseline</div>
+      )}
       {(date === 'Maio 04' || date === 'maio 04') && (
         <div className="text-xs font-bold mb-2 text-center">
           1ª fase de desconfinamento
         </div>
       )}
       {(date === 'Maio 07' || date === 'maio 07') && (
-        <div className="text-xs font-bold mb-2 text-center">Data baseline</div>
+        <div className="text-xs font-bold mb-2 text-center">1ª Data baseline</div>
       )}
       {(date === 'Maio 18' || date === 'maio 18') && (
         <div className="text-xs font-bold mb-2 text-center">
@@ -42,7 +45,7 @@ const Tooltip = ({ slice }) => {
       )}
       {(date === 'Setembro 24' || date === 'setembro 24') && (
         <div className="text-xs font-bold mb-2 text-center">
-          Nova Data baseline
+          2ª Data baseline
         </div>
       )}
 

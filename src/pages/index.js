@@ -322,6 +322,12 @@ function IndexPage() {
             feito pelo Governo neste dia.
           </li>
           <li className="text-xs text-grey-dark pr-4 py-1">
+            Nova data &quot;baseline&quot;, 25 de Setembro 2021, com o Rt do dia
+            6 de Julho de 2020, tendo em conta o anúncio do alcance da imunidade de grupo na terceira semana de setembro,
+            feito pela Taskforce de vacinação neste dia.
+          </li>
+
+          <li className="text-xs text-grey-dark pr-4 py-1">
             Por cada variação do Rt, a data de regresso é ajustada, de forma
             positiva ou negativa, sendo que por cada 0,01 que o valor aumenta ou
             diminui, a data varia 3h.
