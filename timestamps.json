@@ -1,7 +1,7 @@
 {
   "src/data/cases.csv": {
     "created": 1588805857,
-    "modified": 1616776657
+    "modified": 1627310983
   },
   "src/data/notebook.ipynb": {
     "created": 1589816097,
@@ -9,11 +9,11 @@
   },
   "src/data/prediction.csv": {
     "created": 1588805857,
-    "modified": 1616776657
+    "modified": 1627310983
   },
   "src/data/quadrante.csv": {
     "created": 1615760078,
-    "modified": 1616776657
+    "modified": 1627310983
   },
   "src/data/test.md": {
     "created": 1616170285,

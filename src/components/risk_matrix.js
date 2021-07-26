@@ -27,8 +27,8 @@ const areas = [
   {
     data: [
       { x: 0, y: 120 },
-      { x: 0, y: 240 },
-      { x: 1, y: 240 },
+      { x: 0, y: 550 },
+      { x: 1, y: 550 },
       { x: 1, y: 120 },
     ],
     color: "#ff9616",
@@ -37,8 +37,8 @@ const areas = [
   {
     data: [
       { x: 1.0, y: 120 },
-      { x: 1.0, y: 240 },
-      { x: 2, y: 240 },
+      { x: 1.0, y: 550 },
+      { x: 2, y: 550 },
       { x: 2, y: 120 },
     ],
     color: "#ff3f3f",
@@ -50,7 +50,7 @@ const RiskAreas = ({ yScale, xScale, height }) => {
   const mobile = window.innerWidth <= 640;
   const areaGenerator = (level) => {
     const offset = mobile ? 90 : 120;
-    const areaHeight = (height - offset) / (level.upper ? 2 : 1);
+    const areaHeight = (height - offset) / (level.upper ? 1.275 : 1);
 
     const generator = area()
       .x((d) => xScale(d.x))
@@ -81,8 +81,16 @@ const RiskAreas = ({ yScale, xScale, height }) => {
       end: [2, 120],
     },
     {
+      start: [0, 240],
+      end: [2, 240],
+    },
+    {
+      start: [0, 480],
+      end: [2, 480],
+    },
+    {
       start: [1, 0],
-      end: [1, 240],
+      end: [1, 550],
     },
   ];
 
@@ -364,12 +372,26 @@ const RiskMatrix = ({
           }}
           axisLeft={{
             orient: "left",
-            tickValues: [0, 40, 80, 120, 160, 200, 240],
+            tickValues: [
+              0,
+              40,
+              80,
+              120,
+              160,
+              200,
+              240,
+              280,
+              320,
+              360,
+              400,
+              440,
+              480,
+            ],
             tickSize: 0,
             tickPadding: 10,
             legend: "Incidência",
             legendPosition: "middle",
-            legendOffset: mobile ? -30 : -40,
+            legendOffset: mobile ? -35 : -45,
           }}
           axisBottom={{
             orient: "middle",
@@ -431,7 +453,7 @@ const RiskMatrix = ({
 RiskMatrix.defaultProps = {
   graphData: [],
   xAxisLegend: [],
-  maxYValue: 240,
+  maxYValue: 550,
   maxXValue: 2,
   textColor: "black",
 };
