@@ -27,8 +27,8 @@ const areas = [
   {
     data: [
       { x: 0, y: 120 },
-      { x: 0, y: 550 },
-      { x: 1, y: 550 },
+      { x: 0, y: 1500 },
+      { x: 1, y: 1500 },
       { x: 1, y: 120 },
     ],
     color: "#ff9616",
@@ -37,8 +37,8 @@ const areas = [
   {
     data: [
       { x: 1.0, y: 120 },
-      { x: 1.0, y: 550 },
-      { x: 2, y: 550 },
+      { x: 1.0, y: 1500 },
+      { x: 2, y: 1500 },
       { x: 2, y: 120 },
     ],
     color: "#ff3f3f",
@@ -85,12 +85,12 @@ const RiskAreas = ({ yScale, xScale, height }) => {
       end: [2, 240],
     },
     {
-      start: [0, 480],
-      end: [2, 480],
+      start: [0, 1440],
+      end: [2, 1440],
     },
     {
       start: [1, 0],
-      end: [1, 550],
+      end: [1, 1440],
     },
   ];
 
@@ -386,6 +386,8 @@ const RiskMatrix = ({
               400,
               440,
               480,
+              960,
+              1440,
             ],
             tickSize: 0,
             tickPadding: 10,
@@ -453,7 +455,7 @@ const RiskMatrix = ({
 RiskMatrix.defaultProps = {
   graphData: [],
   xAxisLegend: [],
-  maxYValue: 550,
+  maxYValue: 1500,
   maxXValue: 2,
   textColor: "black",
 };
