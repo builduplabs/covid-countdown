@@ -114,7 +114,7 @@ export default function RiskMatrix(props) {
           data: allQuadranteCsv(
             filter: {
               rt_real: { gte: 0, lte: 3 }
-              cases_by_100k_real: { lte: 550 }
+              cases_by_100k_real: { lte: 1440 }
             }
             sort: { fields: date, order: DESC }
           ) {
