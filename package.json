@@ -9,7 +9,7 @@
     "@nivo/scatterplot": "^0.67.0",
     "@nivo/core": "^0.67.0",
     "animate.css": "^4.0.0",
-    "gatsby": "2.21.7",
+    "gatsby": "4.25.7",
     "gatsby-plugin-google-analytics": "^2.3.2",
     "gatsby-plugin-manifest": "2.4.1",
     "gatsby-plugin-offline": "3.2.0",
